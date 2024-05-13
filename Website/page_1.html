@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Research Ethics Application Form</title>
+</head>
+
+<body>
+    <h1>Research Ethics Committee</h1>
+    <h3>GENERAL DETAILS</h3>
+
+    <form id="applicationForm" action="/submit-application" method="post">
+        <!-- Section 1.1 - Project Title -->
+        <fieldset>
+            <legend>
+                <h3>Section 1</h3>
+            </legend>
+            <fieldset>
+                <legend><strong>1.1 Project Title:</strong></legend>
+                <br>
+                <input type="text" id="projectTitle" name="projectTitle"><br><br>
+            </fieldset>
+
+            <!-- Section 1.2 - Applicant Details -->
+            <fieldset>
+                <legend><strong>1.2 Applicant Details:</strong></legend>
+                <fieldset>
+                    <legend>DCU Principal Investigator(s)</legend>
+                    <p>In the case of PhD/D.Ed./Research Masters projects, the supervisor must be listed as Principal
+                        Investigator.</p>
+                    <!-- Space for at least three principal investigators -->
+                    <div>
+                        <label for="piName1">Name:</label>
+                        <input type="text" id="piName1" name="piName1"><br>
+                        <label for="schoolUnit1">School/Unit:</label>
+                        <input type="text" id="schoolUnit1" name="schoolUnit1"><br>
+                        <label for="email1">Email:</label>
+                        <input type="email" id="email1" name="email1"><br><br>
+                    </div>
+                    <div>
+                        <label for="piName2">Name:</label>
+                        <input type="text" id="piName2" name="piName2"><br>
+                        <label for="schoolUnit2">School/Unit:</label>
+                        <input type="text" id="schoolUnit2" name="schoolUnit2"><br>
+                        <label for="email2">Email:</label>
+                        <input type="email" id="email2" name="email2"><br><br>
+                    </div>
+                    <div>
+                        <label for="piName3">Name:</label>
+                        <input type="text" id="piName3" name="piName3"><br>
+                        <label for="schoolUnit3">School/Unit:</label>
+                        <input type="text" id="schoolUnit3" name="schoolUnit3"><br>
+                        <label for="email3">Email:</label>
+                        <input type="email" id="email3" name="email3"><br><br>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Other Investigators</legend>
+                    <p>Including any external to DCU</p>
+                    <!-- Space for at least three other investigators -->
+                    <div>
+                        <label for="otherName1">Name:</label>
+                        <input type="text" id="otherName1" name="otherName1"><br>
+                        <label for="otherUnit1">School/Unit/External Institution:</label>
+                        <input type="text" id="otherUnit1" name="otherUnit1"><br>
+                        <label for="otherEmail1">Email:</label>
+                        <input type="email" id="otherEmail1" name="otherEmail1"><br><br>
+                    </div>
+                    <div>
+                        <label for="otherName2">Name:</label>
+                        <input type="text" id="otherName2" name="otherName2"><br>
+                        <label for="otherUnit2">School/Unit/External Institution:</label>
+                        <input type="text" id="otherUnit2" name="otherUnit2"><br>
+                        <label for="otherEmail2">Email:</label>
+                        <input type="email" id="otherEmail2" name="otherEmail2"><br><br>
+                    </div>
+                    <div>
+                        <label for="otherName3">Name:</label>
+                        <input type="text" id="otherName3" name="otherName3"><br>
+                        <label for="otherUnit3">School/Unit/External Institution:</label>
+                        <input type="text" id="otherUnit3" name="otherUnit3"><br>
+                        <label for="otherEmail3">Email:</label>
+                        <input type="email" id="otherEmail3" name="otherEmail3"><br><br>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <!-- Dates -->
+            <fieldset>
+                <legend><strong>1.3 Key Project Dates:</strong></legend>
+                <label for="startDate">Proposed start date for data collection:</label>
+                <input type="date" id="startDate" name="startDate"><br><br>
+                <label for="endDate">Proposed end date for data collection:</label>
+                <input type="date" id="endDate" name="endDate"><br><br>
+                <label for="completionDate">Proposed project completion date:</label>
+                <input type="date" id="completionDate" name="completionDate"><br><br>
+            </fieldset>
+            <!-- Level of Review -->
+            <fieldset>
+
+                <legend><strong>1.4 Please tick the checkbox for the appropriate level of required review:</strong>
+                </legend>
+
+                <label>Consult the Level of Review advice in the Information and Guidance section of the <a
+                        href="https://www.dcu.ie/researchsupport/research-ethics" target="_blank"><strong>DCU Research
+                            Ethics webpage.</strong></a></label><br>
+
+                <input type="checkbox" id="fullCommittee" name="reviewLevel" value="Full Committee">
+                <label for="fullCommittee">Full Committee</label><br>
+                <input type="checkbox" id="expedited" name="reviewLevel" value="Expedited">
+                <label for="expedited">Expedited</label><br>
+                <input type="checkbox" id="notification" name="reviewLevel" value="Notification">
+                <label for="notification">Notification</label><br><br>
+            </fieldset>
+
+            <!-- Project for Academic Award -->
+            <fieldset>
+                <legend><strong>1.5 Please indicate if this project is for an academic award (tick N/A checkbox if
+                        not):</strong> </legend>
+                <br>
+                <input type="checkbox" id="phd" name="academicAward" value="PhD">
+                <label for="phd">PhD</label><br>
+                <input type="checkbox" id="ded" name="academicAward" value="D.Ed.">
+                <label for="ded">D.Ed.</label><br>
+                <input type="checkbox" id="researchMasters" name="academicAward" value="Research Masters">
+                <label for="researchMasters">Research Masters</label><br>
+                <input type="checkbox" id="na" name="academicAward" value="N/A">
+                <label for="na">N/A</label><br>
+
+            </fieldset>
+
+            <!-- Research Locations -->
+            <fieldset>
+                <legend><strong>1.6 Please confirm the location(s) where the research will be carried out:</strong>
+                </legend>
+                <br>
+                <label for="location">If research will be carried out abroad, you will need to address the ethical
+                    challenges raised by this
+                    in Section 3 of your application - consult the Conducting Research Abroad document in the Ethics
+                    Resources and Guidelines section of the DCU Research Ethics webpage.</label>
+                <br><br>
+                <textarea id="location" name="location"></textarea>
+            </fieldset>
+
+            <!-- Access to Participants -->
+            <fieldset>
+                <legend><strong>1.7 Please state what additional permissions may be required to access
+                        participants:</strong></legend>
+                <label>Specify from whom the permission is required (e.g. a school Board of Management), and when
+                    their written approval will be obtained</label><br><br>
+                <textarea id="permissions" name="permissions"></textarea><br>
+            </fieldset>
+
+            <!-- Review by Another Ethics Committee -->
+            <fieldset>
+                <legend><strong>1.8 Has this project has been submitted to another research ethics committee for
+                        review?</strong> </legend>
+                <br>
+                <input type="radio" id="yesReview" name="otherCommitteeReview" value="Yes">
+                <label for="yesReview">Yes</label>
+                <input type="radio" id="noReview" name="otherCommitteeReview" value="No">
+                <label for="noReview">No</label><br><br>
+
+                <div id="reviewDetails">
+                    <label for="detailsOutcome">If yes, please provide details on the outcome below:</label>
+                    <label>A copy of approval should be attached to this form.</label><br><br>
+                    <textarea id="detailsOutcome" name="detailsOutcome"></textarea><br><br>
+                </div>
+            </fieldset>
+
+        </fieldset>
+    </form>
+    <br>
+    <!-- Previous Page Button -->
+    <a href="./index.html"><button id="prevPageBtn">Previous Page</button></a>
+    <a href="./page_2.html"><button id="prevPageBtn">Next Page</button></a>
+
+    <!-- Next Page Button -->
+    <script>
+        // Function to navigate to the next page
+        function nextPage() {
+            // Add your logic to navigate to the next page
+            // For example:
+            // document.getElementById('page1').style.display = 'none';
+            // document.getElementById('page2').style.display = 'block';
+        }
+
+        // Event listener for next page button
+        document.getElementById('nextPageBtn').addEventListener('click', function () {
+            nextPage();
+        });
+    </script>
+</body>
+
+</html>

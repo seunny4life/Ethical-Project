@@ -1,0 +1,119 @@
+<fieldset>
+    <legend>Section 3 – Ethical Issues and Risk Management</legend>
+  
+    <!-- Sub-section 3.1 - Ethical Issues and Risks -->
+    <div>
+      <label for="ethicalIssues">3.1 Please identify all ethical issues which may arise in the course of this research:</label>
+      <textarea id="ethicalIssues" name="ethicalIssues" rows="4" cols="50" placeholder="Discuss potential risks (physical, psychological, social, legal, etc.) and how these will be addressed or minimized."></textarea>
+    </div><br>
+  
+    <!-- Sub-section 3.2 - Benefits -->
+    <div>
+      <label for="benefits">3.2 Please identify the potential benefits (direct and/or indirect) to those participating in this research:</label>
+      <textarea id="benefits" name="benefits" rows="3" cols="50" placeholder="Outline any potential benefits that might accrue to participants or to society."></textarea>
+    </div><br>
+  
+    <!-- Sub-section 3.3 - Unexpected Outcomes -->
+    <div>
+      <label for="unexpectedOutcomes">3.3 Please describe what measures/protocols you have put in place in the event that there are any unexpected outcomes or adverse effects to participants arising from involvement in the research:</label>
+      <textarea id="unexpectedOutcomes" name="unexpectedOutcomes" rows="3" cols="50" placeholder="Describe the protocols for handling unexpected outcomes or adverse effects."></textarea>
+    </div><br>
+  
+    <!-- Sub-section 3.4 - Payment to Participants -->
+    <div>
+      <label for="paymentParticipants">3.4 Do you intend to provide payment or incentives to participants?</label>
+      <select id="paymentParticipants" name="paymentParticipants">
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select><br>
+      <div id="paymentDetails" style="display:none;">
+        <label for="paymentDetailsText">If yes, please provide details:</label>
+        <textarea id="paymentDetailsText" name="paymentDetailsText" rows="2" cols="50" placeholder="Provide details about compensation and any relevant guidelines followed."></textarea>
+      </div>
+    </div><br>
+  
+    <!-- Sub-section 3.5 - Risks to Researchers -->
+    <div>
+      <label for="risksResearchers">3.5 Does this research raise any potential risks for the researchers themselves?</label>
+      <select id="risksResearchers" name="risksResearchers">
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select><br>
+      <div id="risksResearchersDetails" style="display:none;">
+        <label for="risksResearchersText">If yes, please describe further and explain what risk management procedures will be put in place to minimize these risks:</label>
+        <textarea id="risksResearchersText" name="risksResearchersText" rows="3" cols="50" placeholder="Detail the risks to researchers and the precautions that will be taken."></textarea>
+      </div>
+    </div><br>
+  
+    <!-- Sub-section 3.6 - Funding -->
+    <div>
+      <label>3.6 How is the research being funded?</label><br>
+      <input type="radio" id="selfFunded" name="fundingType" value="Self-funded">
+      <label for="selfFunded">Self-funded</label><br>
+      <input type="radio" id="externallyFunded" name="fundingType" value="Externally funded">
+      <label for="externallyFunded">Externally funded</label><br>
+      <div id="fundingDetails" style="display:none;">
+        <label for="fundingDetailsText">Include details of any external funding:</label>
+        <textarea id="fundingDetailsText" name="fundingDetailsText" rows="2" cols="50" placeholder="Specify the source and amount of external funding."></textarea>
+      </div>
+    </div><br>
+  
+    <!-- Sub-section 3.7 - Conflict of Interest -->
+    <div>
+      <label>3.7 Does this research raise any potential conflict of interest?</label><br>
+      <input type="radio" id="conflictYes" name="conflictInterest" value="Yes">
+      <label for="conflictYes">Yes</label>
+      <input type="radio" id="conflictNo" name="conflictInterest" value="No">
+      <label for="conflictNo">No</label><br>
+      <div id="conflictDetails" style="display:none;">
+        <label for="conflictDetailsText">If yes, identify and explain the steps being taken to address that conflict:</label>
+        <textarea id="conflictDetailsText" name="conflictDetailsText" rows="2" cols="50" placeholder="Describe the nature of the conflict and the mitigation measures."></textarea>
+      </div>
+    </div><br>
+  
+    <!-- Sub-section 3.8 - Monitoring -->
+    <div>
+      <label for="monitoringDetails">3.8 Please describe how the conduct of the research will be monitored:</label>
+      <textarea id="monitoringDetails" name="monitoringDetails" rows="3" cols="50" placeholder="Detail the regular oversight procedures, especially where several people are involved."></textarea>
+    </div><br>
+  
+
+    <script>
+      // JavaScript to handle conditional visibility based on user choices
+      document.getElementById('externallyFunded').addEventListener('change', function() {
+        document.getElementById('fundingDetails').style.display = 'block';
+      });
+      document.getElementById('selfFunded').addEventListener('change', function() {
+        document.getElementById('fundingDetails').style.display = 'none';
+      });
+  
+      document.getElementById('paymentParticipants').addEventListener('change', function() {
+        if (this.value === 'Yes') {
+          document.getElementById('paymentDetails').style.display = 'block';
+        } else {
+          document.getElementById('paymentDetails').style.display = 'none';
+        }
+      });
+  
+      document.getElementById('conflictYes').addEventListener('change', function() {
+        document.getElementById('conflictDetails').style.display = 'block';
+      });
+      document.getElementById('conflictNo').addEventListener('change', function() {
+        document.getElementById('conflictDetails').style.display = 'none';
+      });
+  
+      document.getElementById('risksResearchers').addEventListener('change', function() {
+        if (this.value === 'Yes') {
+          document.getElementById('risksResearchersDetails').style.display = 'block';
+        } else {
+          document.getElementById('risksResearchersDetails').style.display = 'none';
+        }
+      });
+    </script>
+  </fieldset>
+  
+
+  <a href="./page_2.html"><button id="prevPageBtn">Previous Page</button></a>
+  <a href="./page_4.html"><button id="prevPageBtn">Next Page</button></a>
