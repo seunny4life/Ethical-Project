@@ -6,22 +6,13 @@ body {
     min-height: 100vh; /* Set minimum height to 100% of viewport height */
     padding-left: 30px;
     padding-right: 30px;
-
 }
-
-#Research{
-    text-align: center;
-    font-size: 10px;
-
-    }
 
 header {
     border-top: 1px solid black; /* Adds a solid black border on the top of the header */
     border-bottom: 1px solid black; /* Adds a solid black border on the bottom of the header */
     background-color: rgb(203, 225, 244);
-
 }
-
 
 #head {
     display: flex; /* Use flexbox to align child elements */
@@ -33,8 +24,7 @@ header {
     text-align: start;
     padding-left: 20px;
     padding-right: 20px;
-    color: rgb(14, 65, 110);
-
+    color: rgb(0, 0, 0);
 }
 
 #right h1 {
@@ -45,12 +35,10 @@ header {
     flex: 1; /* Make the left div take up twice as much space as the right div */
     text-align: start; /* Align content to the left */
     padding-left: 10px;
-
-
 }
 
 #note {
     /* Add padding for better readability */
     font-size: 16px;
-
+   
 }

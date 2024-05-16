@@ -1,127 +1,196 @@
-<legend>
-    <h2>Submission Checklist and Researcher Declaration</h2>
-</legend>
-<fieldset>
-    <legend>Section 6</legend>
-    <!-- Sub-section 6.1 - Submission Checklist -->
-    <form action="submit_section_6.php" method="post">
-        <fieldset>
-            <legend><strong>6.1 Please confirm all required supplementary documentation to be included in this
-                    application:</strong></legend><br>
-            <input type="checkbox" id="infoSheet" name="requiredDocs" value="ParticipantInformationSheets">
-            <label for="infoSheet">Participant Information Sheet/s</label><br>
+<!DOCTYPE html>
+<html lang="en">
 
-            <input type="checkbox" id="consentForms" name="requiredDocs" value="InformedConsentForms">
-            <label for="consentForms">Informed Consent Form/s</label><br>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Submission Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Link to custom CSS -->
+    <link href="/Design/styles.css" rel="stylesheet" />
+</head>
 
-            <input type="checkbox" id="assentForms" name="requiredDocs" value="InformedAssentForms">
-            <label for="assentForms">Informed Assent Form/s</label><br>
+<body>
+    <!-- Section 6 - Submission Checklist -->
+    <div class="container">
+        <h2 class="section-heading">
+            SECTION 6 – SUBMISSION CHECKLIST AND RESEARCHER DECLARATION
+        </h2>
+        <div class="form-container">
+            <form id="submissionForm" action="submit_section_6.php" method="post" onsubmit="return validateAndRedirect()">
+                <fieldset class="fieldset">
+                    <legend>
+                        6.1 Please confirm all required supplementary documentation to be included in this application within Section 7:
+                    </legend>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Checklist – tick the relevant check box for each item</th>
+                                <th>Yes</th>
+                                <th>N/A</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Participant Information Sheet/s</td>
+                                <td>
+                                    <input type="radio" id="infoSheet_yes" name="infoSheet" value="Yes" class="infoSheet" />
+                                </td>
+                                <td>
+                                    <input type="radio" id="infoSheet_na" name="infoSheet" value="N/A" class="infoSheet" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Informed Consent Form/s</td>
+                                <td><input type="radio" id="consentForms_yes" name="consentForms" value="Yes" class="consentForms"></td>
+                                <td><input type="radio" id="consentForms_na" name="consentForms" value="N/A" class="consentForms"></td>
+                            </tr>
+                            <tr>
+                                <td>Informed Assent Form/s</td>
+                                <td><input type="radio" id="assentForms_yes" name="assentForms" value="Yes" class="assentForms"></td>
+                                <td><input type="radio" id="assentForms_na" name="assentForms" value="N/A" class="assentForms"></td>
+                            </tr>
+                            <tr>
+                                <td>Recruitment Advertisement</td>
+                                <td><input type="radio" id="recruitmentAd_yes" name="recruitmentAd" value="Yes" class="recruitmentAd"></td>
+                                <td><input type="radio" id="recruitmentAd_na" name="recruitmentAd" value="N/A" class="recruitmentAd"></td>
+                            </tr>
+                            <tr>
+                                <td>Questionnaire/Survey</td>
+                                <td><input type="radio" id="questionnaire_yes" name="questionnaire" value="Yes" class="questionnaire"></td>
+                                <td><input type="radio" id="questionnaire_na" name="questionnaire" value="N/A" class="questionnaire"></td>
+                            </tr>
+                            <tr>
+                                <td>Interview/Focus Group Questions</td>
+                                <td><input type="radio" id="interviewQuestions_yes" name="interviewQuestions" value="Yes" class="interviewQuestions"></td>
+                                <td><input type="radio" id="interviewQuestions_na" name="interviewQuestions" value="N/A" class="interviewQuestions"></td>
+                            </tr>
+                            <tr>
+                                <td>Debriefing Material</td>
+                                <td><input type="radio" id="debriefingMaterial_yes" name="debriefingMaterial" value="Yes" class="debriefingMaterial"></td>
+                                <td><input type="radio" id="debriefingMaterial_na" name="debriefingMaterial" value="N/A" class="debriefingMaterial"></td>
+                            </tr>
+                            <tr>
+                                <td>Bibliography</td>
+                                <td><input type="radio" id="bibliography_yes" name="bibliography" value="Yes" class="bibliography"></td>
+                                <td><input type="radio" id="bibliography_na" name="bibliography" value="N/A" class="bibliography"></td>
+                            </tr>
+                            <tr>
+                                <td>Approval from another Research Ethics Committee</td>
+                                <td><input type="radio" id="ethicsApproval_yes" name="ethicsApproval" value="Yes" class="ethicsApproval"></td>
+                                <td><input type="radio" id="ethicsApproval_na" name="ethicsApproval" value="N/A" class="ethicsApproval"></td>
+                            </tr>
+                            <tr>
+                                <td>Evidence of other external approvals (e.g. Board of Management letter)</td>
+                                <td><input type="radio" id="externalApprovals_yes" name="externalApprovals" value="Yes" class="externalApprovals"></td>
+                                <td><input type="radio" id="externalApprovals_na" name="externalApprovals" value="N/A" class="externalApprovals"></td>
+                            </tr>
+                            <tr>
+                                <td>Evidence of internal approvals (e.g. BSC approval review letter)</td>
+                                <td><input type="radio" id="internalApprovals_yes" name="internalApprovals" value="Yes" class="internalApprovals"></td>
+                                <td><input type="radio" id="internalApprovals_na" name="internalApprovals" value="N/A" class="internalApprovals"></td>
+                            </tr>
+                            <tr>
+                                <td>Other – provide details here:</td>
+                                <td><input type="radio" id="other_yes" name="other" value="Yes" class="other"></td>
+                                <td><input type="radio" id="other_na" name="other" value="N/A" class="other"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+                <br /><br />
 
-            <input type="checkbox" id="recruitmentAd" name="requiredDocs" value="RecruitmentAdvertisement">
-            <label for="recruitmentAd">Recruitment Advertisement</label><br>
+                <fieldset class="fieldset">
+                    <legend>6.2 Signed Declaration</legend>
+                    <p>
+                        <i>By submitting this form, the applicant (and supervisor if applicable) agree to the following:</i>
+                    </p>
+                    <p>
+                        <i>The information contained herein is to the best of my knowledge and belief accurate. I have read the University’s current research ethics guidelines and accept responsibility for the conduct of the procedures set out in the attached application in accordance with the form guidelines, the
+                            <a href="https://www.dcu.ie/researchsupport/research-ethics" target="_blank">REC guidance and resources</a>, the University’s
+                            <a href="https://www.dcu.ie/policies/conflict-interests-policy-staff-only" target="_blank">Conflict of Interest Policy</a>, its
+                            <a href="https://www.dcu.ie/policies/code-good-research-practice" target="_blank">Code of Good Research Practice</a>, and any other condition laid down by the Dublin City University Research Ethics Committee. <br />
+                            I have attempted to identify all risks related to the research that may arise in conducting this research and acknowledge my obligations and the rights of the participants.
+                        </i>
+                    </p>
+                    <p>
+                        <i>I also acknowledge my requirement to be informed as to other duties and legal obligations applying to my research and to comply with these duties and obligations – this includes being informed about DCU Data Protection guidelines for researchers, DCU Child Protection policy and procedures (where relevant), and DCU Insurance requirements.</i>
+                    </p>
+                    <br />
 
-            <input type="checkbox" id="questionnaire" name="requiredDocs" value="QuestionnaireSurvey">
-            <label for="questionnaire">Questionnaire/Survey</label><br>
+                    <fieldset class="fieldset">
+                        <legend><strong>Electronic Signature(s):</strong></legend>
+                        <br />
+                        <label for="signature">Principal Investigator(s)</label>
+                        <input type="text" id="signature" name="signature" placeholder="" required /><br /><br />
 
-            <input type="checkbox" id="interviewQuestions" name="requiredDocs" value="InterviewFocusGroupQuestions">
-            <label for="interviewQuestions">Interview/Focus Group Questions</label><br>
+                        <label for="signature2">Print Name(s) here:</label>
+                        <input type="text" id="signature2" name="signature2" placeholder="" required /><br /><br />
+                        <label for="dateSigned">Date:</label>
+                        <input type="date" id="dateSigned" name="dateSigned" required />
+                    </fieldset>
 
-            <input type="checkbox" id="debriefingMaterial" name="requiredDocs" value="DebriefingMaterial">
-            <label for="debriefingMaterial">Debriefing Material</label><br>
+                    <br />
+                    <fieldset class="fieldset">
+                        <legend><strong>For student projects:</strong></legend>
+                        <p>
+                            <b>I, the main supervisor of this research proposal, have read and approve this submission.</b>
+                        </p>
+                        <label for="supervisorSignature">Supervisor(s) Signature: </label>
+                        <input type="text" id="supervisorSignature" name="supervisorSignature" required /><br /><br />
+                        <label for="supervisorSignature2">Print Name(s) here:</label>
+                        <input type="text" id="supervisorSignature2" name="supervisorSignature2" required /><br /><br />
+                        <label for="supervisorDateSigned">Date:</label>
+                        <input type="date" id="supervisorDateSigned" name="supervisorDateSigned" required /><br />
+                    </fieldset>
+                </fieldset>
+                <br>
+                <div class="buttons">
+                    <!-- Previous Button -->
+                    <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br /><br />
 
-            <input type="checkbox" id="bibliography" name="requiredDocs" value="Bibliography">
-            <label for="bibliography">Bibliography</label><br>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-            <input type="checkbox" id="otherEthicsApproval" name="requiredDocs"
-                value="ApprovalFromAnotherEthicsCommittee">
-            <label for="otherEthicsApproval">Approval from another Research Ethics Committee</label><br>
+    <script>
+        function validateAndRedirect(event) {
+            event.preventDefault(); // Prevent default form submission
 
-            <input type="checkbox" id="externalApprovals" name="requiredDocs" value="ExternalApprovals">
-            <label for="externalApprovals">Evidence of other external approvals (e.g., Board of Management
-                letter)</label><br>
+            var rows = document.querySelectorAll('tbody tr');
+            var allValid = true;
+            var errorMessage = "Please select either 'Yes' or 'N/A' for all checklist items.";
 
-            <input type="checkbox" id="internalApprovals" name="requiredDocs" value="InternalApprovals">
-            <label for="internalApprovals">Evidence of internal approvals (e.g., Biological Safety Committee approval
-                review
-                letter)</label><br>
+            rows.forEach(function(row) {
+                var checkboxes = row.querySelectorAll('input[type="radio"]');
+                var yesChecked = checkboxes[0].checked;
+                var naChecked = checkboxes[1].checked;
 
-            <input type="checkbox" id="otherDocs" name="requiredDocs" value="OtherDocuments">
-            <label for="otherDocs">Other – provide details here</label><br>
-        </fieldset><br>
+                if (!yesChecked && !naChecked) {
+                    allValid = false;
+                }
+            });
 
-        <!-- Sub-section 6.2 - Researcher Declaration -->
-        <fieldset>
-            <legend><strong>6.2 Researcher Declaration:</strong></legend><br>
-            <p>By submitting this form, the applicant (and supervisor if applicable) agree to the following:</p>
-            <p>The information contained herein is to the best of my knowledge and belief accurate. I have read the
-                University’s current research ethics guidelines and accept responsibility for the conduct of the
-                procedures
-                set out in the attached application in accordance with the form guidelines, the <a
-                    href="https://www.dcu.ie/researchsupport/research-ethics" target="_blank">REC guidance and
-                    resources</a>, the University’s <a
-                    href="https://www.dcu.ie/policies/conflict-interests-policy-staff-only" target="_blank">Conflict of
-                    Interest Policy</a>, its
-                <a href="https://www.dcu.ie/policies/code-good-research-practice" target="_blank">Code of Good Research
-                    Practice</a>, and any other condition
-                laid down by the Dublin City University Research Ethics Committee. <br>
-                I have attempted to identify all risks
-                related to the research that may arise in conducting this research and acknowledge my obligations and
-                the
-                rights of the participants.
-            </p>
-            <p>I also acknowledge my requirement to be informed as to other duties and legal obligations applying to my
-                research and to comply with these duties and obligations – this includes being informed about DCU Data
-                Protection guidelines for researchers, DCU Child Protection policy and procedures (where relevant), and
-                DCU
-                Insurance requirements.</p>
-            <p>I and my co-investigators and/or supporting staff have the appropriate qualifications, experience, and
-                facilities to conduct the research set out in the attached application and to deal with any emergencies
-                and
-                contingencies related to the research that may arise. Research will not commence until required consents
-                and
-                approvals are in place.</p>
+            if (!allValid) {
+                alert(errorMessage);
+                return false;
+            }
 
-            <fieldset>
-                <legend><strong>Electronic Signature(s):</strong></legend><br>
-                <label for="signature">Principal Investigator(s)</label>
-                <input type="text" id="signature" name="signature" placeholder=""><br><br>
+            // If form is valid, simulate form submission
+            alert('Form submitted successfully! Redirecting to the next page...');
+            window.location.href = 'page_7.html'; // Redirect to page_7.html
+            return false;
+        }
+    </script>
+</body>
 
-                <label for="signature2">Print Name(s) here:</label>
-                <input type="text" id="signature2" name="signature2" placeholder=""><br><br>
-                <label for="dateSigned">Date:</label>
-                <input type="date" id="dateSigned" name="dateSigned">
-            </fieldset>
-            <br>
-            <fieldset>
-                <legend><strong>For student projects:</strong></legend>
-                <p><b>I, the main supervisor of this research proposal, have read and approve this submission.</b></p>
-                <label for="supervisorSignature">Supervisor(s) Signature: </label>
-                <input type="text" id="supervisorSignature" name="supervisorSignature"><br><br>
-                <label for="supervisorSignature2">Print Name(s) here:</label>
-                <input type="text" id="supervisorSignature2" name="supervisorSignature2"><br><br>
-                <label for="supervisorDateSigned">Date:</label>
-                <input type="date" id="supervisorDateSigned" name="supervisorDateSigned"><br>
-            </fieldset>
-        </fieldset>
-    </form>
-</fieldset>
-
-
-</fieldset>
-<legend>
-    <h2> SUPPLEMENTARY DOCUMENTATION</h2>
-</legend>
-<fieldset>
-    <legend>Section 7</legend>
-    <p><strong>
-            Please attach all required documentation as confirmed by you in the previous section. The
-            application should then be saved as one file in PDF format before submission via the
-            <a href="https://loop.dcu.ie/enrol/index.php?id=45490" target="_blank">Research Ethics Application
-                Portal</a> on Loop
-        </strong></p>
-</fieldset>
-<br><br>
-
-
-<a href="./page_5.html"><button id="prevPageBtn">Previous Page</button></a>
-<a href="#"><button id="submit">Submit</button></a>
+</html>

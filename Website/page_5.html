@@ -1,4 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-<a href="./page_4.html"><button id="prevPageBtn">Previous Page</button></a>
-<a href="./page_6.html"><button id="prevPageBtn">Next Page</button></a>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">PARTICIPANT INFORMATION AND INFORMED CONSENT PROCEDURES</h2>
+
+        <form id="consentForm" onsubmit="return validateForm()">
+            <fieldset class="border p-4 rounded">
+                <legend class="w-auto"><strong>Section 5.1 Please confirm that the following items have been addressed
+                        in your Participant Information Sheet:</strong></legend>
+                <p>The items should be used as headings in the information sheet. <br>Note the language used under each
+                    item must reflect the participant age group and corresponding comprehension level– if your
+                    participants have different comprehension levels (e.g. both adult and child participants) then
+                    separate sheets must be prepared for each set.</p>
+                <p>Templates are available via the <a href="https://www.dcu.ie/researchsupport/research-ethics"
+                        target="_blank">REC Forms - Applications, Templates and Amendments section</a> of the Research
+                    Ethics website.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Checklist – tick the relevant check box for each item</th>
+                            <th>Yes</th>
+                            <th>No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Additional checkbox groups -->
+                        <tr>
+                            <td>What is this research about?</td>
+                            <td><input type="checkbox" name="researchAbout_yes"
+                                    onclick="checkNoCheckbox('researchAbout_no')" ></td>
+                            <td><input type="checkbox" name="researchAbout_no"
+                                    onclick="checkNoCheckbox('researchAbout_yes')" ></td>
+                        </tr>
+                        <tr>
+                            <td>Why is this research being conducted?</td>
+                            <td><input type="checkbox" name="researchPurpose_yes"
+                                    onclick="checkNoCheckbox('researchPurpose_no')" ></td>
+                            <td><input type="checkbox" name="researchPurpose_no"
+                                    onclick="checkNoCheckbox('researchPurpose_yes')" ></td>
+                        </tr>
+                        <!-- Add more checkbox groups similarly -->
+                    </tbody>
+                </table>
+                <label><i>If you marked any item as No, please explain and justify why:</i></label>
+                <textarea class="form-control mb-3" id="location" name="location" rows="5" required></textarea>
+            </fieldset>
+
+            <fieldset class="border p-4 rounded mt-4">
+                <legend class="w-auto"><strong>Section 5.2 Informed Consent Procedures – please confirm whether written
+                        consent is to be obtained:</strong></legend>
+                <label>Will written consent be obtained?
+                    <select class="form-control w-auto" name="consentRequired" id="consentRequired"
+                        onchange="toggleConsentDetails();" required>
+                        <option value="" selected>Please select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <div id="consentDetails" style="display:none;">
+                    <label>If Yes, describe the procedures by which written consent will be obtained.</label>
+                    <textarea class="form-control mb-3" name="consentDescription" id="consentDescription"
+                        rows="5"></textarea>
+                </div>
+                <div id="noConsentDetails" style="display:none;">
+                    <label>If No, describe the procedures regarding how consent/assent will be obtained</label>
+                    <textarea class="form-control mb-3" name="noConsentDescription" id="noConsentDescription"
+                        rows="5"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="mt-4">
+                <button type="button" id="previousButton" class="btn btn-secondary"
+                    onclick="goToPreviousPage()">Previous</button>
+                <button type="submit" id="nextButton" class="btn btn-primary">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function toggleConsentDetails() {
+            var consentRequired = document.getElementById('consentRequired').value;
+            var consentDetailsDiv = document.getElementById('consentDetails');
+            var noConsentDetailsDiv = document.getElementById('noConsentDetails');
+            if (consentRequired === 'yes') {
+                consentDetailsDiv.style.display = 'block';
+                noConsentDetailsDiv.style.display = 'none';
+            } else if (consentRequired === 'no') {
+                consentDetailsDiv.style.display = 'none';
+                noConsentDetailsDiv.style.display = 'block';
+            } else {
+                consentDetailsDiv.style.display = 'none';
+                noConsentDetailsDiv.style.display = 'none';
+            }
+        }
+
+        function checkNoCheckbox(checkBoxName) {
+            var checkBox = document.getElementsByName(checkBoxName)[0];
+            if (checkBox.checked) {
+                checkBox.checked = false;
+            }
+        }
+
+        function goToPreviousPage() {
+            window.location.href = 'page_4.html';
+        }
+
+        function validateForm() {
+            var introYesChecked = document.querySelector('input[name="introStatement_yes"]:checked');
+            var introNoChecked = document.querySelector('input[name="introStatement_no"]:checked');
+            var locationFilled = document.getElementById('location').value.trim() !== '';
+            var consentRequired = document.getElementById('consentRequired').value;
+            var consentDescriptionFilled = document.getElementById('consentDescription').value.trim() !== '';
+            var noConsentDescriptionFilled = document.getElementById('noConsentDescription').value.trim() !== '';
+
+            if ((!introYesChecked && !introNoChecked) || !locationFilled || !consentRequired || (consentRequired === 'yes' && !consentDescriptionFilled) || (consentRequired === 'no' && !noConsentDescriptionFilled)) {
+                alert('Please fill out all required fields.');
+                return false;
+            }
+
+            window.location.href = 'page_6.html'; // Redirect to next page
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+
+</html>

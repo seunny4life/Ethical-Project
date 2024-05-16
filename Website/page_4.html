@@ -1,4 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DCU Research Ethics Application Form - Section 4</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Link to custom CSS -->
+    <link href="/Design/styles.css" rel="stylesheet" />
+</head>
 
-<a href="./page_3.html"><button id="prevPageBtn">Previous Page</button></a>
-<a href="./page_5.html"><button id="prevPageBtn">Next Page</button></a>
+<body>
+    <!-- Section 4 - Confidentiality and Data Management -->
+    <div class="container">
+        <h2 class="section-heading">SECTION 4 – CONFIDENTIALITY AND DATA MANAGEMENT</h2>
+        <br><br>
+        <div class="form-container">
+            <form id="confidentialityDataManagementForm" onsubmit="return validateForm()">
+
+                <!-- Section 4.1 - Personal Data -->
+                <fieldset class="fieldset">
+                    <legend>4.1 Considering your previous response in section 2.5 of the form, please confirm whether
+                        you are collecting or processing personal data in this research project:</legend>
+                    <p>Personal data is any information about a living person, where that person is either identified,
+                        or could be identified from the data itself, or when it is combined with other data. This
+                        includes paper-based, electronic and biological samples data. If your data is fully and
+                        completely anonymous, it is not personal data.</p>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="personalDataYes" name="personalData"
+                                value="Yes" onclick="toggleCompliance(true)" required>
+                            <label class="form-check-label" for="personalDataYes">Yes</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="personalDataNo" name="personalData"
+                                value="No" onclick="toggleCompliance(false)" required>
+                            <label class="form-check-label" for="personalDataNo">No</label>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div id="personalDataCompliance" style="display:none;">
+                        <p>If Yes, please confirm your compliance with the following by ticking the checkboxes:</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="dataProtectionTraining"
+                                name="dataProtectionCompliance">
+                            <label class="form-check-label" for="dataProtectionTraining">We confirm that we have
+                                completed the DCU Data Protection training module on Loop.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="dataProtectionGuidance"
+                                name="dataProtectionCompliance">
+                            <label class="form-check-label" for="dataProtectionGuidance">We confirm that we have read
+                                the “Data Protection – Key Points for DCU Researchers” guidance on the DCU Data
+                                Protection Unit (DPU) website and agree to protect and manage our data in accordance
+                                with same.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gdprRequirements"
+                                name="dataProtectionCompliance">
+                            <label class="form-check-label" for="gdprRequirements">We have assessed the degree of risk
+                                inherent in the personal data being used in the research project, and confirm that all
+                                DPU GDPR requirements have been met prior to submitting this application (e.g.
+                                completion of Data Protection questionnaire, confirmation that any survey tool being
+                                used is GDPR compliant, that required Data Processing or Sharing Agreements will be in
+                                place, etc.)</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+
+                <!-- Section 4.2 - Data Access -->
+                <fieldset class="fieldset">
+                    <legend>4.2 Data access – please confirm whether access to participant data is confined to the
+                        investigators named on this application:</legend>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="dataAccessYes" name="dataAccess"
+                                value="Yes" onclick="toggleDataAccess(false)" required>
+                            <label class="form-check-label" for="dataAccessYes">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="dataAccessNo" name="dataAccess" value="No"
+                                onclick="toggleDataAccess(true)" required>
+                            <label class="form-check-label" for="dataAccessNo">No</label>
+                        </div>
+                    </div>
+                    <div id="dataAccessDetails" style="display:none;">
+                        <label for="dataAccessDetailsText"><i>If No, please name who the other individuals are and why
+                                they need access. Any proposed transfer of data (including outside of the EU) should be
+                                detailed here:</i></label>
+                        <textarea class="form-control" id="dataAccessDetailsText" name="dataAccessDetailsText" rows="3"
+                            required></textarea>
+                    </div>
+                </fieldset>
+                <br>
+
+                <!-- Section 4.3 - Data Storage -->
+                <fieldset class="fieldset">
+                    <legend>4.3 Data storage – please confirm compliance with the following:</legend>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="mobileDevicesSecurity"
+                            name="dataStorageCompliance">
+                        <label class="form-check-label" for="mobileDevicesSecurity">Data collected on mobile devices
+                            will be protected with a strong password/passphrase at a minimum, and/or encrypted if the
+                            device supports it</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dataRemoval" name="dataStorageCompliance">
+                        <label class="form-check-label" for="dataRemoval">Data will be removed from mobile devices as
+                            soon as is practicable and stored in a secured location in DCU (on server or institutional
+                            Google Drive)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="paperBasedSecurity"
+                            name="dataStorageCompliance">
+                        <label class="form-check-label" for="paperBasedSecurity">Paper-based data will be held securely
+                            in locked cabinets in DCU, with access restricted to the named researchers</label>
+                    </div>
+                </fieldset>
+                <br>
+                <div class="form-group">
+                    <label for="biologicalSamplesArrangements">Specific arrangements in relation to biological samples
+                        should be stated here:</label>
+                    <textarea class="form-control" id="biologicalSamplesArrangements"
+                        name="biologicalSamplesArrangements" rows="2"></textarea>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="exemptionsCompliance">Any exemptions to the above compliance statements should be
+                        justified here:</label>
+                    <textarea class="form-control" id="exemptionsCompliance" name="exemptionsCompliance"
+                        rows="2"></textarea>
+                </div>
+                <br>
+
+                <!-- Section 4.4 - Data Responsibility -->
+                <fieldset class="fieldset">
+                    <legend>4.4 Please confirm who will be responsible for the secure storage of data generated by the
+                        research:</legend>
+                    <label for="dataResponsibility">Name the relevant DCU investigator/s</label>
+                    <textarea class="form-control" id="dataResponsibility" name="dataResponsibility" rows="2"
+                        required></textarea>
+                </fieldset>
+                <br>
+
+                <!-- Section 4.5 - Data Retention -->
+                <fieldset class="fieldset">
+                    <legend>4.5 Please confirm how long the data will be held for:</legend>
+                    <label for="dataRetention"><i>For personal data, consult section 15: Retention of Personal Data in
+                            the “Data Protection – Key Points for DCU Researchers” guidance on the DCU Data Protection
+                            Unit (DPU) website</i></label>
+                    <textarea class="form-control" id="dataRetention" name="dataRetention" rows="2" required></textarea>
+                </fieldset>
+                <br>
+
+                <!-- Section 4.6 - Data Disposition -->
+                <fieldset class="fieldset">
+                    <legend>4.6 Please confirm what will happen to the data collected at the end of the study:</legend>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="dataArchived" name="dataDisposition"
+                                value="Archived" required onclick="toggleDataDisposition('archived')">
+                            <label class="form-check-label" for="dataArchived">Archived</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="dataDestroyed" name="dataDisposition"
+                                value="Destroyed" required onclick="toggleDataDisposition('destroyed')">
+                            <label class="form-check-label" for="dataDestroyed">Destroyed</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="dataOther" name="dataDisposition"
+                                value="Other" required onclick="toggleDataDisposition('other')">
+                            <label class="form-check-label" for="dataOther">Other</label>
+                        </div>
+                    </div>
+                    <div id="archivedDataDetails" style="display:none;">
+                        <h3>4.6.1 Archived data</h3>
+                        <p>In line with encouraging institutional Open Research practices, please note that the use of
+                            trusted data repositories or archives is recommended. Further information is available via
+                            <a href="https://www.dcu.ie/library/open-research-fair-data">DCU Open Research Fair Data</a>
+                        </p>
+                        <label for="archivedDataStaff"><i>Name the DCU staff member responsible for archival and future
+                                use of data:</i></label>
+                        <textarea class="form-control" id="archivedDataStaff" name="archivedDataStaff"
+                            rows="2"></textarea>
+                        <label for="dataAvailability"><i>Confirm whether the data will be made available to other
+                                researchers, and if so, how?</i></label>
+                        <textarea class="form-control" id="dataAvailability" name="dataAvailability"
+                            rows="2"></textarea>
+                        <label for="dataPreparation"><i>Confirm how the data will be prepared for archive (e.g., will
+                                datasets be anonymised):</i></label>
+                        <textarea class="form-control" id="dataPreparation" name="dataPreparation" rows="2"></textarea>
+                        <label for="dataAccess"><i>Confirm where the data will be archived and who will be allowed to
+                                access it:</i></label>
+                        <textarea class="form-control" id="dataAccess" name="dataAccess" rows="2"></textarea>
+                    </div>
+                    <div id="destroyedDataDetails" style="display:none;">
+                        <h3>4.6.2 Destroyed data</h3>
+                        <p>Please provide the following details – Note: for student projects, the supervisor must take
+                            responsibility for data destruction if there is no guarantee the student will have access to
+                            the data at the time of destruction</p>
+                        <label for="dataDestructionReason"><i>Justify why the data will be destroyed:</i></label>
+                        <textarea class="form-control" id="dataDestructionReason" name="dataDestructionReason"
+                            rows="2"></textarea>
+                        <label for="dataDestructionResponsibility"><i>Name the DCU researcher responsible for
+                                destruction of data:</i></label>
+                        <textarea class="form-control" id="dataDestructionResponsibility"
+                            name="dataDestructionResponsibility" rows="2"></textarea>
+                        <label for="dataDestructionDate"><i>Confirm when the data will be destroyed (specify
+                                date):</i></label>
+                        <textarea class="form-control" id="dataDestructionDate" name="dataDestructionDate"
+                            rows="2"></textarea>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="electronicDataDestruction"
+                                name="dataDestructionMethod">
+                            <label class="form-check-label" for="electronicDataDestruction">Electronic data will be
+                                overwritten/securely deleted</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="paperDataDestruction"
+                                name="dataDestructionMethod">
+                            <label class="form-check-label" for="paperDataDestruction">Paper-based data will be
+                                confidentially shredded</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="medicalSamplesDestruction"
+                                name="dataDestructionMethod">
+                            <label class="form-check-label" for="medicalSamplesDestruction">Medical samples will be
+                                disposed in accordance with the relevant DCU approved SOP</label>
+                        </div>
+                    </div>
+                    <div id="otherDataDetails" style="display:none;">
+                        <h3>4.6.3 Other</h3>
+                        <label for="otherDataDetailsText"><i>Please explain what will happen to the data if not being
+                                archived or destroyed:</i></label>
+                        <textarea class="form-control" id="otherDataDetailsText" name="otherDataDetailsText"
+                            rows="2"></textarea>
+                    </div>
+                </fieldset>
+                <br>
+
+                <div class="buttons">
+                    <!-- Previous Button -->
+                    <button type="button" class="btn btn-primary"
+                        onclick="window.location.href='page_3.html'">Previous</button>
+                    <!-- Next Page Button -->
+                    <button type="submit" class="btn btn-primary">Next Page</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br /><br />
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/Javascript/scripts.js"></script>
+    <script>
+        function toggleCompliance(isYes) {
+            const complianceDiv = document.getElementById('personalDataCompliance');
+            if (isYes) {
+                complianceDiv.style.display = 'block';
+            } else {
+                complianceDiv.style.display = 'none';
+            }
+        }
+
+        function toggleDataAccess(isNo) {
+            const dataAccessDiv = document.getElementById('dataAccessDetails');
+            if (isNo) {
+                dataAccessDiv.style.display = 'block';
+            } else {
+                dataAccessDiv.style.display = 'none';
+            }
+        }
+
+        function toggleDataDisposition(value) {
+            const archivedDataDiv = document.getElementById('archivedDataDetails');
+            const destroyedDataDiv = document.getElementById('destroyedDataDetails');
+            const otherDataDiv = document.getElementById('otherDataDetails');
+            if (value === 'archived') {
+                archivedDataDiv.style.display = 'block';
+                destroyedDataDiv.style.display = 'none';
+                otherDataDiv.style.display = 'none';
+            } else if (value === 'destroyed') {
+                archivedDataDiv.style.display = 'none';
+                destroyedDataDiv.style.display = 'block';
+                otherDataDiv.style.display = 'none';
+            } else if (value === 'other') {
+                archivedDataDiv.style.display = 'none';
+                destroyedDataDiv.style.display = 'none';
+                otherDataDiv.style.display = 'block';
+            }
+        }
+
+        function validateForm() {
+            const form = document.getElementById('confidentialityDataManagementForm');
+
+            // Validate section 4.1 radio buttons and checkboxes
+            const personalDataYes = document.getElementById('personalDataYes').checked;
+            const personalDataNo = document.getElementById('personalDataNo').checked;
+            if (!personalDataYes && !personalDataNo) {
+                alert('Please select Yes or No in Section 4.1');
+                return false;
+            }
+
+            if (personalDataYes) {
+                const dataProtectionCheckboxes = document.querySelectorAll('input[name="dataProtectionCompliance"]');
+                let isDataProtectionChecked = false;
+                dataProtectionCheckboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        isDataProtectionChecked = true;
+                    }
+                });
+
+                if (!isDataProtectionChecked) {
+                    alert('Please select at least one option in Section 4.1');
+                    return false;
+                }
+            }
+
+            // Validate section 4.2 radio buttons
+            const dataAccessYes = document.getElementById('dataAccessYes').checked;
+            const dataAccessNo = document.getElementById('dataAccessNo').checked;
+            if (!dataAccessYes && !dataAccessNo) {
+                alert('Please select Yes or No in Section 4.2');
+                return false;
+            }
+
+            // Validate section 4.3 checkboxes
+            const dataStorageCheckboxes = document.querySelectorAll('input[name="dataStorageCompliance"]');
+            let isDataStorageChecked = false;
+            dataStorageCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    isDataStorageChecked = true;
+                }
+            });
+
+            if (!isDataStorageChecked) {
+                alert('Please select at least one option in Section 4.3');
+                return false;
+            }
+
+            if (form.checkValidity()) {
+                window.location.href = 'page_5.html';
+                return false; // Prevent default form submission
+            }
+
+            form.reportValidity(); // Show validation errors if form is not valid
+            return false; // Prevent default form submission
+        }
+    </script>
+</body>
+
+</html>

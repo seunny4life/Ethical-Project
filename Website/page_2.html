@@ -1,200 +1,364 @@
-<h2>PROJECT DESIGN AND METHODOLOGY</h2>
-<h4 style="text-align: center;">
-    Research Overview - ( Please respect the indicated word counts in the following sections and explain
-    all acronyms in full text the first time they appear ).
-</h4>
+<!DOCTYPE html>
+<html lang="en">
 
-<form id="applicationForm" action="/submit-application" method="post">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DCU Research Ethics Application Form - Section 2</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Link to custom CSS -->
+    <link href="/Design/styles.css" rel="stylesheet" />
+</head>
 
-    <fieldset>
-        <legend> Section 2 </legend>
-        <!-- Sub-section 2.1 - Research Description -->
-        <fieldset>
-            <legend><strong>2.1 Provide a brief description of the research (max 250 words):</strong></legend>
-            <br>
-            <label for="">Please use lay language, include the scientific/theoretical background of study and a
-                justification as
-                to why this research project should proceed in that context
-            </label><br>
-            <textarea id="researchDescription" name="researchDescription" rows="4" cols="50"></textarea>
-        </fieldset><br>
+<body>
+    <!-- Section 2 - Project Design and Methodology -->
+    <div class="container">
+        <h2 class="section-heading">
+            SECTION 2 – PROJECT DESIGN AND METHODOLOGY
+        </h2>
+        <h4 style="text-align: center;">
+            Research Overview - ( Please respect the indicated word counts in the following sections and explain
+            all acronyms in full text the first time they appear ).
+        </h4>
+        <br><br>
+        <div class="form-container">
+            <form id="designMethodologyForm" onsubmit="return validateForm()">
+                <!-- Section 2.1 - Research Description -->
+                <fieldset class="fieldset">
+                    <legend>2.1 Provide a brief description of the research (max 250 words):</legend>
+                    <div class="form-group">
+                        <label><i>Please use lay language, include the scientific/theoretical
+                                background of study and a
+                                justification as
+                                to why this research project should proceed in that context.</i></label>
+                        <textarea class="form-control" id="research-description" name="research-description" rows="4"
+                            required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-        <!-- Sub-section 2.2 - Aims and Objectives -->
-        <fieldset>
-            <legend><strong>2.2 Please state the aims and objectives of the research project (max 200 words):</strong>
-            </legend>
-            <br>
-            <textarea id="aimsObjectives" name="aimsObjectives" rows="4" cols="50"
-                placeholder="Clearly outline the main aims and objectives."></textarea>
-        </fieldset><br>
+                <!-- Section 2.2 - Aims and Objectives -->
+                <fieldset class="fieldset">
+                    <legend>2.2 Please state the aims and objectives of the research project (max 200 words)</legend>
+                    <div class="form-group">
+                        <label for="aims-objectives"></label>
+                        <textarea class="form-control" id="aims-objectives" name="aims-objectives" rows="3"
+                            required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-        <!-- Sub-section 2.3 - Hypothesis/Research Question -->
-        <fieldset>
-            <legend><strong>2.3 Please state the hypothesis and/or research question (in bullet points – max 100
-                    words):</strong></legend>
-            <br>
-            <textarea id="hypothesis" name="hypothesis" rows="2" cols="50"
-                placeholder="List your hypothesis or research question in bullet points."></textarea>
-        </fieldset><br>
+                <!-- Section 2.3 - Hypothesis/Research Question -->
+                <fieldset class="fieldset">
+                    <legend>2.3 Please state the hypothesis and/or research question (in bullet points – max 100 words):
+                    </legend>
+                    <div class="form-group">
+                        <textarea class="form-control" id="hypothesis" name="hypothesis" rows="2" required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-        <!-- Sub-section 2.4 - Overall Methodology -->
-        <fieldset>
-            <legend><strong>2.4 Please state your overall methodology (max 400 words):</strong></legend>
-            <br>
-            <label for="methodology">Include the tasks participants will be asked to do, estimated time commitment and
-                the methods of
-                analysis to be used</label>
-            <textarea id="methodology" name="methodology" rows="5" cols="50"></textarea>
-        </fieldset><br>
+                <!-- Section 2.4 - Methodology -->
+                <fieldset class="fieldset">
+                    <legend>2.4 Please state your overall methodology (max 400 words):</legend>
+                    <div class="form-group">
+                        <label><i>Include the tasks participants will be asked to do, estimated time commitment and the
+                                methods of
+                                analysis to be used</i></label>
+                        <textarea class="form-control" id="methodology" name="methodology" rows="5" required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-        <!-- Sub-section 2.5 - Methods of Data Collection -->
-        <fieldset>
-            <legend><strong>2.5 Please confirm your methods of data collection:</strong></legend>
-            <label for="">Tick all relevant check boxes and provide details for each one, including any devices used to
-                collect
-                data, and whether the data will be anonymous, potentially identifiable or identifiable at point of
-                collection:</label><br>
+                <!-- Section 2.5 - Methods of Data Collection -->
+                <fieldset class="fieldset">
+                    <legend>2.5 Please confirm your methods of data collection:</legend>
+                    <div class="form-group">
+                        <label>
+                            <i>Tick all relevant check boxes and provide details for each one, including any devices
+                                used to collect data, and whether the data will be anonymous, potentially identifiable or identifiable
+                                at point of collection</i>
+                        </label>
+                        <div class="form-check"><br>
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="interviews"
+                                id="interviews">
+                            <label class="form-check-label" for="interviews">Interviews or focus groups</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="surveys"
+                                id="surveys">
+                            <label class="form-check-label" for="surveys">Surveys/questionnaires</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="recordings"
+                                id="recordings">
+                            <label class="form-check-label" for="recordings">Audio/video recordings</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="observations"
+                                id="observations">
+                            <label class="form-check-label" for="observations">Public observations</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="public-office"
+                                id="public-office">
+                            <label class="form-check-label" for="public-office">Persons in public office</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="existing-data"
+                                id="existing-data">
+                            <label class="form-check-label" for="existing-data">Using existing data (including secondary
+                                data)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection"
+                                value="biological-samples" id="biological-samples">
+                            <label class="form-check-label" for="biological-samples">Using human derived material
+                                (biological samples)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection"
+                                value="standard-tests" id="standard-tests">
+                            <label class="form-check-label" for="standard-tests">Standard tests
+                                (educational/personality, etc.)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection"
+                                value="educational-practices" id="educational-practices">
+                            <label class="form-check-label" for="educational-practices">Standard educational
+                                practices</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="data-collection" value="other"
+                                id="other-data-collection">
+                            <label class="form-check-label" for="other-data-collection">Other (please specify)</label>
+                        </div><br>
+                        <textarea class="form-control mt-2" id="other-data-collection-details"
+                            name="other-data-collection-details" rows="2"></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-            <input type="checkbox" id="interviews" name="dataCollectionMethods" value="Interviews">
-            <label for="interviews">Interviews or focus groups</label><br>
+                <!-- Section 2.6 - Investigator Qualifications -->
+                <fieldset class="fieldset">
+                    <legend>2.6 Please list the Investigator qualifications, experience and skills relevant to
+                        conducting
+                        the research for this project (max 200 words).</legend>
+                    <div class="form-group">
+                        <label for="qualifications"> <i>Please complete for all investigators and specify who will be
+                                carrying out the research procedures</label></i>
+                        <textarea class="form-control" id="qualifications" name="qualifications" rows="3"
+                            required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-            <input type="checkbox" id="surveys" name="dataCollectionMethods" value="Surveys">
-            <label for="surveys">Surveys/questionnaires</label><br>
+                <!-- Section 2.7 - Participant Details -->
+                <fieldset class="fieldset">
+                    <legend>2.7 Please confirm who the participants on this study will be, including group size and
+                        composition:</legend>
+                    <div class="form-group">
+                        <label for="participants"><i>Include associated demographic characteristics, and state how your
+                                proposed sample size was
+                                determined (e.g. power analysis)</i></label>
+                        <textarea class="form-control" id="participants" name="participants" rows="3"
+                            required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-            <input type="checkbox" id="recordings" name="dataCollectionMethods" value="Recordings">
-            <label for="recordings">Audio/video recordings</label><br>
+                <!-- Section 2.8 - Recruitment Process -->
+                <fieldset class="fieldset">
+                    <legend>2.8 Please outline your recruitment process, including where you are sourcing participants
+                        from and your criteria for inclusion/exclusion:</legend>
+                    <div class="form-group">
+                        <label for="recruitment"><i>Where gatekeepers are involved, outline the procedures relating to
+                                their involvement</i></label>
+                        <textarea class="form-control" id="recruitment" name="recruitment" rows="3" required></textarea>
+                    </div>
+                </fieldset>
+                <br>
 
-            <input type="checkbox" id="observations" name="dataCollectionMethods" value="Observations">
-            <label for="observations">Public observations</label><br>
+                <!-- Section 2.9 - Addressing Participant Vulnerability -->
+                <fieldset class="fieldset">
+                    <legend>2.9 Addressing participant vulnerability – if your participants fall into any of the
+                        following
+                        categories, please check the relevant tick box/boxes and state below what special
+                        arrangements will be made to protect them:</legend>
+                    <div class="form-group">
 
-            <input type="checkbox" id="existingData" name="dataCollectionMethods" value="ExistingData">
-            <label for="existingData">Using existing data (incl. secondary data)</label><br>
+                        <label><i>If your participants are not in any of these categories, tick N/A</i></label>
+                        <br><br>
 
-            <!-- Additional data collection methods as per application -->
-        </fieldset><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability" value="n/a" id="n/a">
+                            <label class="form-check-label" for="n/a">N/A</label>
+                        </div>
 
-        <!-- Sub-section 2.6 - Investigator Qualifications -->
-        <fieldset>
-            <legend><strong>2.6 Please list the Investigator qualifications, experience and skills relevant to
-                    conducting the research for this project (max 200 words):</strong></legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability" value="children"
+                                id="children">
+                            <label class="form-check-label" for="children">Children under 18 years of age</label>
+                        </div>
 
-            <label for="qualifications">Please complete for all investigators and specify who will be carrying out the
-                research procedures</label>
-            <textarea id="qualifications" name="qualifications" rows="4" cols="50"></textarea>
-        </fieldset><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability"
+                                value="unequal-relationships" id="unequal-relationships">
+                            <label class="form-check-label" for="unequal-relationships">Persons in unequal relationships
+                                with the researcher (e.g. lecturer-student, therapist-client,
+                                employer-employee)</label>
+                        </div>
 
-        <!-- Additional sub-sections as per the application form requirements -->
-        <!-- Sub-section 2.7 - Participants -->
-        <fieldset>
-            <legend><strong>2.7 Please confirm who the participants on this study will be, including group size and
-                    composition:</strong>
-            </legend>
-            <label for="participants">Include associated demographic characteristics, and state how your proposed sample
-                size was
-                determined (e.g. power analysis)</label><br>
-            <textarea id="participants" name="participants" rows="3" cols="50"></textarea>
-        </fieldset><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability" value="impairment"
+                                id="impairment">
+                            <label class="form-check-label" for="impairment">People with a recognized or diagnosed
+                                intellectual, physical, or mental impairment</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability" value="institutions"
+                                id="institutions">
+                            <label class="form-check-label" for="institutions">People confined to institutions (e.g.
+                                prisoners, residents in 24 hr nursing facilities)</label>
+                        </div>
 
-        <!-- Sub-section 2.8 - Recruitment Process -->
-        <fieldset>
-            <legend><strong>2.8 Please outline your recruitment process:</strong></legend>
-            <label for="recruitmentProcess">Including where you are sourcing participants from and your criteria for
-                inclusion/exclusion: (Where gatekeepers are involved, outline the procedures relating to their
-                involvement)</label><br>
-            <textarea id="recruitmentProcess" name="recruitmentProcess" rows="3" cols="50"></textarea>
-        </fieldset><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability"
+                                value="traumatic-events" id="traumatic-events">
+                            <label class="form-check-label" for="traumatic-events">People who have undergone traumatic
+                                or adverse emotional events</label>
+                        </div>
 
-        <!-- Sub-section 2.9 - Addressing Participant Vulnerability -->
-        <fieldset>
-            <legend><strong>2.9 Addressing Participant Vulnerability:</strong></legend>
-            <label>If your participants fall into any of the following categories, please check the relevant tick
-                box/boxes
-                and
-                state below what special arrangements will be made to protect them:</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability"
+                                value="cognitive-ability" id="cognitive-ability">
+                            <label class="form-check-label" for="cognitive-ability">People with diminished cognitive
+                                ability</label>
+                        </div>
 
-            <input type="checkbox" id="n/a" name="n/a" value="n/a">
-            <label for="n/a">N/A</label><br>
-            <input type="checkbox" id="children" name="vulnerableGroups" value="Children">
-            <label for="children">Children under 18 years of age</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability" value="marginalized"
+                                id="marginalized">
+                            <label class="form-check-label" for="marginalized">Marginalized sections of society</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vulnerability" value="other"
+                                id="other-vulnerability">
+                            <label class="form-check-label" for="other-vulnerability">Other (please specify)</label>
+                        </div>
+                        <br>
+                        <label for="Special">Special arrangements:</label>
+                        <textarea class="form-control mt-2" id="other-vulnerability-details"
+                            name="other-vulnerability-details" rows="5" cols="50"></textarea>
+                        <br>
+                    </div>
+                </fieldset>
+                <br>
 
-            <input type="checkbox" id="unequalRelationships" name="vulnerableGroups" value="UnequalRelationships">
-            <label for="unequalRelationships">Persons in unequal relationships with the researcher (e.g.,
-                lecturer-student,
-                therapist-client)</label><br>
+                <!-- Section 2.10 - Involvement of Children under 18 -->
+                <fieldset class="fieldset">
+                    <legend>2.10 Involvement of Children under 18 years of age:- if your participants are in this
+                        category,
+                        please confirm compliance with the following:</legend>
 
-            <input type="checkbox" id="impaired" name="vulnerableGroups" value="Impaired">
-            <label for="impaired">People with a recognised or diagnosed intellectual, physical, or mental
-                impairment</label><br>
+                    <label><i>If your participants are not in this category, tick N/A</i></label>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="children-compliance" value="na"
+                                id="children-na">
+                            <label class="form-check-label" for="children-na">N/A</label>
+                        </div>
 
-            <input type="checkbox" id="institutionalized" name="vulnerableGroups" value="Institutionalized">
-            <label for="institutionalized">People confined to institutions (e.g., prisoners, residents in 24-hour
-                nursing
-                facilities)</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="children-compliance"
+                                value="child-protection-policy" id="child-protection-policy">
+                            <label class="form-check-label" for="child-protection-policy">We confirm that we have read
+                                and agree to act in accordance with the DCU
+                                Child Protection policy and procedures (as per <a
+                                    href="https://www.dcu.ie/ocoo/child-protection" target="_blank">DCU Child Protection
+                                    Unit webpage</a>)</label>
+                        </div>
 
-            <input type="checkbox" id="traumaticEvents" name="vulnerableGroups" value="TraumaticEvents">
-            <label for="traumaticEvents">People who have undergone traumatic or adverse emotional events</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="children-compliance"
+                                value="safeguards" id="safeguards">
+                            <label class="form-check-label" for="safeguards">We confirm that we have put in place
+                                safeguards for the children
+                                participating in the research.</label>
+                        </div>
 
-            <input type="checkbox" id="diminishedCapacity" name="vulnerableGroups" value="DiminishedCapacity">
-            <label for="diminishedCapacity">People with diminished cognitive ability</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="children-compliance" value="supports"
+                                id="supports">
+                            <label class="form-check-label" for="supports">We confirm that we have supports in place
+                                for children who may disclose
+                                current or historical
+                                abuse (whether or not this is the focus of the research)</label>
+                        </div>
 
-            <input type="checkbox" id="marginalized" name="vulnerableGroups" value="Marginalized">
-            <label for="marginalized">Marginalised sections of society</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="children-compliance"
+                                value="requirements" id="requirements">
+                            <label class="form-check-label" for="requirements">We confirm that all requirements will be
+                                met prior to commencing the research
+                                (e.g. TUSLA
+                                Children First Training completed, Garda Vetting in place)</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
 
-            <input type="checkbox" id="otherVulnerable" name="vulnerableGroups" value="Other">
-            <label for="otherVulnerable">Other (please specify)</label><br>
+                <!-- Section 2.11 - Dissemination of Results -->
+                <fieldset class="fieldset">
+                    <legend>2.11 Please confirm how the results of the research will be disseminated:</legend>
+                    <div class="form-group">
+                        <label for="dissemination"><i>In line with encouraging institutional Open Research practices,
+                                please
+                                note
+                                that the use of open
+                                access publishing is recommended. Further information on this is available via
+                                <a href="https://www.dcu.ie/library/open-research-open-access"
+                                    target="_blank">https://www.dcu.ie/library/open-research-open-access</a>
+                                <br><br>
+                                Please include a statement on whether the participants will be provided with any
+                                information as to
+                                the findings or outcomes of the project</i></label>
+                        <textarea class="form-control" id="dissemination" name="dissemination" rows="3"
+                            required></textarea>
+                    </div>
+                </fieldset>
 
-            <textarea id="specialArrangements" name="specialArrangements" rows="3" cols="50"
-                placeholder="Describe special arrangements for protecting vulnerable participants."></textarea>
-        </fieldset><br>
+                <div class="buttons">
+                    <!-- Previous Button -->
+                    <button type="button" class="btn btn-primary"
+                        onclick="window.location.href='page_1.html'">Previous</button>
+                    <!-- Next Page Button -->
+                    <button type="submit" class="btn btn-primary">Next Page</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br /><br />
 
-        <!-- Sub-section 2.10 - Involvement of Children -->
-        <fieldset>
-            <legend><strong>2.10 Involvement of children under 18 years of age – if your participants are in this
-                    category,
-                    please confirm compliance with the following:</strong></legend>
-            <br>
-            <label>If your participants are not in this category, tick N/A</label><br>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function validateForm() {
+            const requiredFields = document.querySelectorAll("textarea[required]");
+            for (let field of requiredFields) {
+                if (field.value.trim() === "") {
+                    alert("Please fill all the required fields.");
+                    field.focus();
+                    return false;
+                }
+            }
+            window.location.href = 'page_3.html';
+            return false; // Prevent form submission to handle redirection with JavaScript
+        }
+    </script>
+</body>
 
-            <input type="checkbox" id="n/a" name="n/a" value="n/a">
-            <label for="n/a">N/A</label><br>
-
-            <input type="checkbox" id="childProtectionPolicy" name="childCompliance" value="ChildProtectionPolicy">
-            <label for="childProtectionPolicy">We confirm that we have read and agree to act in accordance with the DCU
-                Child Protection policy and procedures (as per <a href="https://www.dcu.ie/ocoo/child-protection"
-                    target="_blank">DCU Child Protection Unit webpage</a>)</label><br>
-
-            <input type="checkbox" id="safeguardsForChildren" name="childCompliance" value="SafeguardsForChildren">
-            <label for="safeguardsForChildren">We confirm that we have put in place safeguards for the children
-                participating in the research.</label><br>
-
-            <input type="checkbox" id="supportsForDisclosure" name="childCompliance" value="SupportsForDisclosure">
-            <label for="supportsForDisclosure">We confirm that we have supports in place for children who may disclose
-                current or historical
-                abuse (whether or not this is the focus of the research)</label><br>
-
-            <input type="checkbox" id="requirementsMet" name="childCompliance" value="RequirementsMet">
-            <label for="requirementsMet">We confirm that all requirements will be met prior to commencing the research
-                (e.g. TUSLA
-                Children First Training completed, Garda Vetting in place)</label><br>
-        </fieldset><br>
-
-        <!-- Sub-section 2.11 - Dissemination of Research Results -->
-        <fieldset>
-            <legend><strong>2.11 Please confirm how the results of the research will be disseminated:</strong></legend>
-            <br><label for="disseminationPlan">In line with encouraging institutional Open Research practices, please
-                note
-                that the use of open
-                access publishing is recommended. Further information on this is available via
-                <a href="https://www.dcu.ie/library/open-research-open-access"
-                    target="_blank">https://www.dcu.ie/library/open-research-open-access</a>
-                <br><br>
-                Please include a statement on whether the participants will be provided with any information as to
-                the findings or outcomes of the project</label><br>
-            <textarea id="participantInfo" name="participantInfo" rows="2" cols="50"></textarea>
-        </fieldset><br>
-    </fieldset>
-</form>
-
-
-<a href="./page_1.html"><button id="prevPageBtn">Previous Page</button></a>
-<a href="./page_3.html"><button id="prevPageBtn">Next Page</button></a>
+</html>
