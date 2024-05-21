@@ -29,7 +29,7 @@
                 <legend><strong>1.2 Applicant Details:</strong></legend>
 
                 <!-- First Principal Investigator -->
-                <fieldset class="fieldset">
+                <fieldset class="fieldset" id="principalInvestigatorSection">
                     <legend>DCU Principal Investigator(s)</legend>
                     <p>In the case of PhD/D.Ed./Research Masters projects, the supervisor must be listed as
                         Principal Investigator.</p>
@@ -41,31 +41,11 @@
                         <label for="email1">Email:</label>
                         <input type="email" id="email1" name="email1" class="form-control" required><br>
                     </div>
-
-                    <!-- Second Principal Investigator -->
-                    <legend>Additional DCU Principal Investigator 1</legend>
-                    <div class="form-group">
-                        <label for="piName2">Name:</label>
-                        <input type="text" id="piName2" name="piName2" class="form-control">
-                        <label for="schoolUnit2">School/Unit:</label>
-                        <input type="text" id="schoolUnit2" name="schoolUnit2" class="form-control">
-                        <label for="email2">Email:</label>
-                        <input type="email" id="email2" name="email2" class="form-control"><br>
-                    </div>
-
-                    <!-- Third Principal Investigator -->
-                    <legend>Additional DCU Principal Investigator 2</legend>
-                    <div class="form-group">
-                        <label for="piName3">Name:</label>
-                        <input type="text" id="piName3" name="piName3" class="form-control">
-                        <label for="schoolUnit3">School/Unit:</label>
-                        <input type="text" id="schoolUnit3" name="schoolUnit3" class="form-control">
-                        <label for="email3">Email:</label>
-                        <input type="email" id="email3" name="email3" class="form-control"><br>
-                    </div>
                 </fieldset>
+                <button type="button" class="btn btn-secondary" onclick="addPrincipalInvestigator()">Add Principal Investigator</button>
+
                 <!-- Section for Other Investigators -->
-                <fieldset class="fieldset">
+                <fieldset class="fieldset" id="otherInvestigatorsSection">
                     <legend>Other Investigators</legend>
                     <p>Including any external to DCU</p>
                     <div class="form-group">
@@ -76,31 +56,9 @@
                         <label for="otherEmail1">Email:</label>
                         <input type="email" id="otherEmail1" name="otherEmail1" class="form-control"><br>
                     </div>
-
-                    <legend>Other Investigators 1</legend>
-                    <p>Including any external to DCU</p>
-                    <div class="form-group">
-                        <label for="otherName2">Name:</label>
-                        <input type="text" id="otherName2" name="otherName2" class="form-control">
-                        <label for="otherUnit2">School/Unit/External Institution:</label>
-                        <input type="text" id="otherUnit2" name="otherUnit2" class="form-control">
-                        <label for="otherEmail2">Email:</label>
-                        <input type="email" id="otherEmail2" name="otherEmail2" class="form-control"><br>
-                    </div>
-
-                    <legend>Other Investigators 2</legend>
-                    <p>Including any external to DCU</p>
-                    <div class="form-group">
-                        <label for="otherName3">Name:</label>
-                        <input type="text" id="otherName3" name="otherName3" class="form-control">
-                        <label for="otherUnit3">School/Unit/External Institution:</label>
-                        <input type="text" id="otherUnit3" name="otherUnit3" class="form-control">
-                        <label for="otherEmail3">Email:</label>
-                        <input type="email" id="otherEmail3" name="otherEmail3" class="form-control"><br>
-                    </div>
                 </fieldset>
+                <button type="button" class="btn btn-secondary" onclick="addOtherInvestigator()">Add Other Investigator</button>
             </fieldset>
-
 
             <!-- Section 1.3 - Key Project Dates -->
             <fieldset class="fieldset">
@@ -139,65 +97,56 @@
 
             <!-- Section 1.5 - Academic Award -->
             <fieldset class="fieldset">
-                <legend><strong>1.5 Please indicate if this project is for an academic award (tick N/A checkbox if not):
-                    </strong></legend>
+                <legend><strong>1.5 Please indicate if this project is for an academic award:</strong></legend>
                 <div class="form-group">
-                    <label for="phd">PhD</label>
-                    <input type="checkbox" id="phd" name="academicAward" value="PhD">
-                    <br>
-
-                    <label for="ded">D.Ed.</label>
-                    <input type="checkbox" id="ded" name="academicAward" value="D.Ed.">
-                    <br>
-
-                    <label for="researchMasters">Research Masters</label>
-                    <input type="checkbox" id="researchMasters" name="academicAward" value="Research Masters">
-                    <br>
-
-                    <label for="na">N/A</label>
-                    <input type="checkbox" id="na" name="academicAward" value="N/A">
-
+                    <label for="academicAward">Academic Award</label>
+                    <select id="academicAward" name="academicAward" class="form-control" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="CA326">CA326</option>
+                        <option value="CA400">CA400</option>
+                        <option value="CA4021">CA4021</option>
+                        <option value="CA472">CA472</option>
+                        <option value="CA5377">CA5377</option>
+                        <option value="CA550">CA550</option>
+                        <option value="CA690">CA690</option>
+                        <option value="CA691">CA691</option>
+                        <option value="MCM">MCM</option>
+                    </select>
                 </div>
             </fieldset>
 
             <!-- Section 1.6 - Research Location -->
             <fieldset class="fieldset">
-                <legend><strong>1.6 Please confirm the location(s) where the research will be carried out:</strong>
-                </legend>
+                <legend><strong>1.6 Indicate location(s) where the research will be carried out:</strong></legend>
                 <div class="form-group">
-                    <p><i>If research will be carried out abroad, you will need to address the ethical challenges raised
-                            by this
-                            in Section 3 of your application - consult the Conducting Research Abroad document in the
-                            Ethics
-                            Resources and Guidelines section of the <a
-                                href="https://www.dcu.ie/researchsupport/research-ethics" target="_blank">DCU
-                                Research Ethics webpage</a>.</i></p>
-                    <textarea id="location" name="location" class="form-control" required></textarea>
+                    <label><input type="checkbox" name="location" value="DCU campus"> DCU campus</label><br>
+                    <label><input type="checkbox" name="location" value="Dublin City"> Dublin City</label><br>
+                    <label><input type="checkbox" name="location" value="Republic of Ireland"> Republic of Ireland</label><br>
+                    <label><input type="checkbox" name="location" value="Online / On the Internet"> Online / On the Internet</label><br>
+                    <label><input type="checkbox" name="location" value="Other" onclick="toggleOtherLocation(this)"> Other</label><br>
+                    <textarea id="otherLocation" name="otherLocation" class="form-control" style="display: none;" placeholder="Please specify"></textarea>
                 </div>
             </fieldset>
 
             <!-- Section 1.7 - Access to Participants -->
             <fieldset class="fieldset">
-                <legend><strong>1.7 Please state what additional permissions may be required to access
-                        participants:</strong></legend>
+                <legend><strong>1.7 What additional permissions are required to access these locations?</strong></legend>
                 <div class="form-group">
-                    <p><i>Specify from whom the permission is required (e.g. a school Board of Management), and when
-                            their written approval will be obtained</i></p>
+                    <p><i>If you specified DCU campus, you might need permission to use a classroom, for example.</i></p>
                     <textarea id="permissions" name="permissions" class="form-control" required></textarea>
                 </div>
             </fieldset>
 
             <!-- Section 1.8 - Other Ethics Committee Review -->
             <fieldset class="fieldset">
-                <legend><strong>1.8 Has this project has been submitted to another research ethics committee for
+                <legend><strong>1.8 Has this project been submitted to another research ethics committee for
                         review?</strong></legend>
                 <div class="form-group">
-                    <input type="radio" id="yesReview" name="otherCommitteeReview" value="Yes" required>
+                    <input type="radio" id="yesReview" name="otherCommitteeReview" value="Yes" onclick="toggleReviewDetails(true)" required>
                     <label for="yesReview">Yes</label>
-                    <input type="radio" id="noReview" name="otherCommitteeReview" value="No">
+                    <input type="radio" id="noReview" name="otherCommitteeReview" value="No" onclick="toggleReviewDetails(false)">
                     <label for="noReview">No</label>
-                    <div id="reviewDetails" style="margin-top: 10px;">
-
+                    <div id="reviewDetails" style="margin-top: 10px; display: none;">
                         <label for="detailsOutcome"><i>If yes, please provide details on the outcome below (a copy of
                                 approval should be attached to this
                                 form)</i></label>
@@ -236,8 +185,7 @@
 
             // Validate required checkbox groups
             const checkboxGroups = [
-                document.querySelectorAll("input[name='reviewLevel']"),
-                document.querySelectorAll("input[name='academicAward']")
+                document.querySelectorAll("input[name='reviewLevel']")
             ];
 
             for (let group of checkboxGroups) {
@@ -250,6 +198,46 @@
 
             window.location.href = 'page_2.html';
             return false; // Prevent form submission to handle redirection with JavaScript
+        }
+
+        function addPrincipalInvestigator() {
+            const section = document.getElementById('principalInvestigatorSection');
+            const newInvestigator = document.createElement('div');
+            newInvestigator.className = 'form-group';
+            newInvestigator.innerHTML = `
+                <label>Name:</label>
+                <input type="text" name="piName" class="form-control" required>
+                <label>School/Unit:</label>
+                <input type="text" name="schoolUnit" class="form-control" required>
+                <label>Email:</label>
+                <input type="email" name="email" class="form-control" required><br>
+            `;
+            section.appendChild(newInvestigator);
+        }
+
+        function addOtherInvestigator() {
+            const section = document.getElementById('otherInvestigatorsSection');
+            const newInvestigator = document.createElement('div');
+            newInvestigator.className = 'form-group';
+            newInvestigator.innerHTML = `
+                <label>Name:</label>
+                <input type="text" name="otherName" class="form-control">
+                <label>School/Unit/External Institution:</label>
+                <input type="text" name="otherUnit" class="form-control">
+                <label>Email:</label>
+                <input type="email" name="otherEmail" class="form-control"><br>
+            `;
+            section.appendChild(newInvestigator);
+        }
+
+        function toggleReviewDetails(show) {
+            const reviewDetails = document.getElementById('reviewDetails');
+            reviewDetails.style.display = show ? 'block' : 'none';
+        }
+
+        function toggleOtherLocation(checkbox) {
+            const otherLocation = document.getElementById('otherLocation');
+            otherLocation.style.display = checkbox.checked ? 'block' : 'none';
         }
     </script>
 </body>
