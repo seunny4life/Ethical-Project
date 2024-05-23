@@ -18,7 +18,6 @@
         </h2>
         <form id="applicationForm" onsubmit="return validateForm()">
             <!-- Section 1.1 - Project Title -->
-
             <fieldset class="fieldset">
                 <legend><strong>1.1 Project Title:</strong></legend>
                 <input type="text" id="projectTitle" name="projectTitle" class="form-control" required>
@@ -27,12 +26,11 @@
             <!-- Section 1.2 - Applicant Details -->
             <fieldset class="fieldset">
                 <legend><strong>1.2 Applicant Details:</strong></legend>
-
                 <!-- First Principal Investigator -->
                 <fieldset class="fieldset" id="principalInvestigatorSection">
                     <legend>DCU Principal Investigator(s)</legend>
-                    <p>In the case of PhD/D.Ed./Research Masters projects, the supervisor must be listed as
-                        Principal Investigator.</p>
+                    <p>In the case of PhD/D.Ed./Research Masters projects, the supervisor must be listed as Principal
+                        Investigator.</p>
                     <div class="form-group">
                         <label for="piName1">Name:</label>
                         <input type="text" id="piName1" name="piName1" class="form-control" required>
@@ -42,7 +40,8 @@
                         <input type="email" id="email1" name="email1" class="form-control" required><br>
                     </div>
                 </fieldset>
-                <button type="button" class="btn btn-secondary" onclick="addPrincipalInvestigator()">Add Principal Investigator</button>
+                <button type="button" class="btn btn-secondary" onclick="addPrincipalInvestigator()">Add Principal
+                    Investigator</button>
 
                 <!-- Section for Other Investigators -->
                 <fieldset class="fieldset" id="otherInvestigatorsSection">
@@ -57,7 +56,8 @@
                         <input type="email" id="otherEmail1" name="otherEmail1" class="form-control"><br>
                     </div>
                 </fieldset>
-                <button type="button" class="btn btn-secondary" onclick="addOtherInvestigator()">Add Other Investigator</button>
+                <button type="button" class="btn btn-secondary" onclick="addOtherInvestigator()">Add Other
+                    Investigator</button>
             </fieldset>
 
             <!-- Section 1.3 - Key Project Dates -->
@@ -80,9 +80,7 @@
                 <div class="form-group">
                     <p><i>Consult the Level of Review advice in the Information and Guidance section of the <a
                                 href="https://www.dcu.ie/researchsupport/research-ethics" target="_blank"><strong>DCU
-                                    Research
-                                    Ethics webpage.</strong></a><br>
-                        </i></p>
+                                    Research Ethics webpage.</strong></a></i></p>
                     <label for="fullCommittee">Full Committee</label>
                     <input type="checkbox" id="fullCommittee" name="reviewLevel" value="Full Committee">
                     <br>
@@ -91,7 +89,9 @@
                     <br>
                     <label for="notification">Notification</label>
                     <input type="checkbox" id="notification" name="reviewLevel" value="Notification">
-
+                    <br>
+                    <label for="survey">Survey</label>
+                    <input type="checkbox" id="survey" name="reviewLevel" value="Survey">
                 </div>
             </fieldset>
 
@@ -121,18 +121,24 @@
                 <div class="form-group">
                     <label><input type="checkbox" name="location" value="DCU campus"> DCU campus</label><br>
                     <label><input type="checkbox" name="location" value="Dublin City"> Dublin City</label><br>
-                    <label><input type="checkbox" name="location" value="Republic of Ireland"> Republic of Ireland</label><br>
-                    <label><input type="checkbox" name="location" value="Online / On the Internet"> Online / On the Internet</label><br>
-                    <label><input type="checkbox" name="location" value="Other" onclick="toggleOtherLocation(this)"> Other</label><br>
-                    <textarea id="otherLocation" name="otherLocation" class="form-control" style="display: none;" placeholder="Please specify"></textarea>
+                    <label><input type="checkbox" name="location" value="Republic of Ireland"> Republic of
+                        Ireland</label><br>
+                    <label><input type="checkbox" name="location" value="Online / On the Internet"> Online / On the
+                        Internet</label><br>
+                    <label><input type="checkbox" name="location" value="Other" onclick="toggleOtherLocation(this)">
+                        Other</label><br>
+                    <textarea id="otherLocation" name="otherLocation" class="form-control" style="display: none;"
+                        placeholder="Please specify"></textarea>
                 </div>
             </fieldset>
 
             <!-- Section 1.7 - Access to Participants -->
             <fieldset class="fieldset">
-                <legend><strong>1.7 What additional permissions are required to access these locations?</strong></legend>
+                <legend><strong>1.7 What additional permissions are required to access these locations?</strong>
+                </legend>
                 <div class="form-group">
-                    <p><i>If you specified DCU campus, you might need permission to use a classroom, for example.</i></p>
+                    <p><i>If you specified DCU campus, you might need permission to use a classroom, for example.</i>
+                    </p>
                     <textarea id="permissions" name="permissions" class="form-control" required></textarea>
                 </div>
             </fieldset>
@@ -142,27 +148,30 @@
                 <legend><strong>1.8 Has this project been submitted to another research ethics committee for
                         review?</strong></legend>
                 <div class="form-group">
-                    <input type="radio" id="yesReview" name="otherCommitteeReview" value="Yes" onclick="toggleReviewDetails(true)" required>
+                    <input type="radio" id="yesReview" name="otherCommitteeReview" value="Yes"
+                        onclick="toggleReviewDetails(true)" required>
                     <label for="yesReview">Yes</label>
-                    <input type="radio" id="noReview" name="otherCommitteeReview" value="No" onclick="toggleReviewDetails(false)">
+                    <input type="radio" id="noReview" name="otherCommitteeReview" value="No"
+                        onclick="toggleReviewDetails(false)">
                     <label for="noReview">No</label>
                     <div id="reviewDetails" style="margin-top: 10px; display: none;">
                         <label for="detailsOutcome"><i>If yes, please provide details on the outcome below (a copy of
-                                approval should be attached to this
-                                form)</i></label>
+                                approval should be attached to this form)</i></label>
                         <textarea id="detailsOutcome" name="detailsOutcome" class="form-control"></textarea>
                     </div>
                 </div>
             </fieldset>
-
-            <!-- Buttons -->
+            
+            <!-- Button to Previous and Next step -->
             <div class="buttons">
+                <!-- Previous Button -->
+                <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
 
-                <button type="button" class="btn btn-primary"
-                    onclick="window.location.href='index.html'">Previous</button>
+                <!-- Next Page Button -->
                 <button type="submit" class="btn btn-primary">Next Page</button>
             </div>
-        </form>
+    </div>
+    </form>
     </div>
     <br><br>
 
@@ -173,7 +182,6 @@
 
     <script>
         function validateForm() {
-            // Validate required text inputs and textareas
             const requiredFields = document.querySelectorAll("#applicationForm input[required], #applicationForm textarea[required]");
             for (let field of requiredFields) {
                 if (field.value.trim() === "") {
@@ -183,7 +191,6 @@
                 }
             }
 
-            // Validate required checkbox groups
             const checkboxGroups = [
                 document.querySelectorAll("input[name='reviewLevel']")
             ];
@@ -196,8 +203,17 @@
                 }
             }
 
+            saveFormData(); // Save form data to localStorage
+
             window.location.href = 'page_2.html';
-            return false; // Prevent form submission to handle redirection with JavaScript
+            return false;
+        }
+
+        function saveFormData() {
+            const reviewLevel = document.querySelector('input[name="reviewLevel"]:checked');
+            if (reviewLevel) {
+                localStorage.setItem('reviewLevel', reviewLevel.value);
+            }
         }
 
         function addPrincipalInvestigator() {

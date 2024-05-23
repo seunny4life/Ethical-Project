@@ -243,13 +243,15 @@
                 </fieldset>
                 <br>
 
+                <!-- Button to Previous and Next step -->
                 <div class="buttons">
                     <!-- Previous Button -->
-                    <button type="button" class="btn btn-primary"
-                        onclick="window.location.href='page_3.html'">Previous</button>
+                    <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+
                     <!-- Next Page Button -->
                     <button type="submit" class="btn btn-primary">Next Page</button>
                 </div>
+
             </form>
         </div>
     </div>
@@ -260,7 +262,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/Javascript/scripts.js"></script>
+
     <script>
+        // Function to toggle visibility of compliance checkboxes based on user selection in Section 4.1
         function toggleCompliance(isYes) {
             const complianceDiv = document.getElementById('personalDataCompliance');
             if (isYes) {
@@ -270,6 +274,7 @@
             }
         }
 
+        // Function to toggle visibility of data access details based on user selection in Section 4.2
         function toggleDataAccess(isNo) {
             const dataAccessDiv = document.getElementById('dataAccessDetails');
             if (isNo) {
@@ -279,6 +284,7 @@
             }
         }
 
+        // Function to toggle visibility of data disposition details based on user selection in Section 4.6
         function toggleDataDisposition(value) {
             const archivedDataDiv = document.getElementById('archivedDataDetails');
             const destroyedDataDiv = document.getElementById('destroyedDataDetails');
@@ -298,6 +304,7 @@
             }
         }
 
+        // Function to validate form submission
         function validateForm() {
             const form = document.getElementById('confidentialityDataManagementForm');
 
@@ -354,6 +361,8 @@
             form.reportValidity(); // Show validation errors if form is not valid
             return false; // Prevent default form submission
         }
+
+
     </script>
 </body>
 

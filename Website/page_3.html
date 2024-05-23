@@ -14,18 +14,16 @@
 <body>
   <!-- Section 3 - Ethical Issues and Risk Management -->
   <div class="container">
-    <h2 class="section-heading">
-      SECTION 3 – ETHICAL ISSUES AND RISK MANAGEMENT
-    </h2>
+    <h2 class="section-heading">SECTION 3 – ETHICAL ISSUES AND RISK MANAGEMENT</h2>
     <br><br>
     <div class="form-container">
-      <form id="ethicalIssuesForm" onsubmit="return validateForm()">
+      <form id="ethicalIssuesForm" onsubmit="return validateForm(event)">
+
         <!-- Section 3.1 - Ethical Issues and Risks -->
         <fieldset class="fieldset">
-          <legend>3.1 Please identify all ethical issues which may arise in the course of this research. What are the potential risks to participants, and how will those risks be addressed or minimised?</legend>
-          <div class="form-group">
-            <label for="ethicalIssues"><i>Potential risks can be physical, psychological, social, legal, etc. Please include details of any additional support being provided for participants during/after the study.</i></label>
-            <textarea class="form-control" id="ethicalIssues" name="ethicalIssues" rows="4" required></textarea>
+          <legend>3.1 Indicate how you are addressing the following ethical issues:</legend>
+          <div class="form-group" id="ethicalIssuesContainer">
+            <!-- Using Javascript to work here  -->
           </div>
         </fieldset>
         <br>
@@ -34,8 +32,26 @@
         <fieldset class="fieldset">
           <legend>3.2 Please identify the potential benefits (direct and/or indirect) to those participating in this research:</legend>
           <div class="form-group">
-            <label for="benefits"><i>Potential benefits should outweigh the potential risks to participants</i></label>
-            <textarea class="form-control" id="benefits" name="benefits" rows="3" required></textarea>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="noBenefit" name="benefits" value="No benefit" required onclick="toggleOther('benefitsOtherDetails', false)">
+              <label class="form-check-label" for="noBenefit">No benefit</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="efficiencyBenefit" name="benefits" value="Efficiency or time saving in process" required onclick="toggleOther('benefitsOtherDetails', false)">
+              <label class="form-check-label" for="efficiencyBenefit">Efficiency or time saving in process</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="monetaryBenefit" name="benefits" value="Monetary benefit" required onclick="toggleOther('benefitsOtherDetails', false)">
+              <label class="form-check-label" for="monetaryBenefit">Monetary benefit</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="otherBenefit" name="benefits" value="Other" required onclick="toggleOther('benefitsOtherDetails', true)">
+              <label class="form-check-label" for="otherBenefit">Other</label>
+            </div>
+            <br>
+            <div id="benefitsOtherDetails" style="display:none;">
+              <textarea class="form-control" id="benefitsOtherText" name="benefitsOtherText" rows="2" aria-label="Describe other benefits"></textarea>
+            </div>
           </div>
         </fieldset>
         <br>
@@ -44,8 +60,22 @@
         <fieldset class="fieldset">
           <legend>3.3 Please describe what measures/protocols you have put in place in the event that there are any unexpected outcomes or adverse effects to participants arising from involvement in the research:</legend>
           <div class="form-group">
-            <label for="unexpectedOutcomes"></label>
-            <textarea class="form-control" id="unexpectedOutcomes" name="unexpectedOutcomes" rows="3" required></textarea>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="communicationChannel" name="unexpectedOutcomes" value="Communication channel with the supervisor" required onclick="toggleOther('unexpectedOutcomesOtherDetails', false)">
+              <label class="form-check-label" for="communicationChannel">Communication channel with the supervisor</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="notifyParticipants" name="unexpectedOutcomes" value="Notify participants" required onclick="toggleOther('unexpectedOutcomesOtherDetails', false)">
+              <label class="form-check-label" for="notifyParticipants">Notify participants</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="otherOutcome" name="unexpectedOutcomes" value="Other" required onclick="toggleOther('unexpectedOutcomesOtherDetails', true)">
+              <label class="form-check-label" for="otherOutcome">Other</label>
+            </div>
+            <br>
+            <div id="unexpectedOutcomesOtherDetails" style="display:none;">
+              <textarea class="form-control" id="unexpectedOutcomesOtherText" name="unexpectedOutcomesOtherText" rows="2" aria-label="Describe other unexpected outcomes"></textarea>
+            </div>
           </div>
         </fieldset>
         <br>
@@ -54,7 +84,7 @@
         <fieldset class="fieldset">
           <legend>3.4 Do you intend to provide payment or incentives to participants?</legend>
           <div class="form-group">
-            <select class="form-control" id="paymentParticipants" name="paymentParticipants" required>
+            <select class="form-control" id="paymentParticipants" name="paymentParticipants" required onchange="toggleDetails('paymentParticipants', 'Yes', 'paymentDetails')">
               <option value="">Select</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
@@ -62,7 +92,7 @@
             <br>
             <div id="paymentDetails" style="display:none;">
               <label for="paymentDetailsText"><i>If Yes, please consult the REC Guidelines on the Use of Compensation and Incentives (in the Ethics Resources and Guidelines section of the <a href="https://www.dcu.ie/researchsupport/research-ethics" target="_blank">DCU Research Ethics webpage</a> ) before providing additional details below</i></label>
-              <textarea class="form-control" id="paymentDetailsText" name="paymentDetailsText" rows="2"></textarea>
+              <textarea class="form-control" id="paymentDetailsText" name="paymentDetailsText" rows="2" aria-label="Describe payment details"></textarea>
             </div>
           </div>
         </fieldset>
@@ -72,16 +102,29 @@
         <fieldset class="fieldset">
           <legend>3.5 Does this research raise any potential risks for the researchers themselves?</legend>
           <div class="form-group">
-            <p><i>Please consider the location/environment where the research is being conducted, exposure to distressing data content etc.</i></p>
-            <select class="form-control" id="risksResearchers" name="risksResearchers" required>
-              <option value="">Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="noRisk" name="risksResearchers" value="No risk" required onclick="toggleOther('risksResearchersOtherDetails', false)">
+              <label class="form-check-label" for="noRisk">No risk</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="defamation" name="risksResearchers" value="Defamation" required onclick="toggleOther('risksResearchersOtherDetails', false)">
+              <label class="form-check-label" for="defamation">Defamation</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="legalLiability" name="risksResearchers" value="Legal liability" required onclick="toggleOther('risksResearchersOtherDetails', false)">
+              <label class="form-check-label" for="legalLiability">Legal liability</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="physicalHarm" name="risksResearchers" value="Harm to physical safety" required onclick="toggleOther('risksResearchersOtherDetails', false)">
+              <label class="form-check-label" for="physicalHarm">Harm to physical safety</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="otherRisk" name="risksResearchers" value="Other" required onclick="toggleOther('risksResearchersOtherDetails', true)">
+              <label class="form-check-label" for="otherRisk">Other</label>
+            </div>
             <br>
-            <div id="risksResearchersDetails" style="display:none;">
-              <label for="risksResearchersText"><i>If Yes, please describe further and explain what risk management procedures will be put in place to minimise these risks to researchers:</i></label>
-              <textarea class="form-control" id="risksResearchersText" name="risksResearchersText" rows="3"></textarea>
+            <div id="risksResearchersOtherDetails" style="display:none;">
+              <textarea class="form-control" id="risksResearchersOtherText" name="risksResearchersOtherText" rows="2" aria-label="Describe other risks"></textarea>
             </div>
           </div>
         </fieldset>
@@ -92,19 +135,17 @@
           <legend>3.6 Please confirm how the research is being funded:</legend>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="radio" id="selfFunded" name="fundingType" value="Self-funded" required>
+              <input class="form-check-input" type="radio" id="selfFunded" name="fundingType" value="Self-funded" required onclick="toggleOther('fundingDetails', false)">
               <label class="form-check-label" for="selfFunded">Self-funded</label>
             </div>
-
             <div class="form-check">
-              <input class="form-check-input" type="radio" id="externallyFunded" name="fundingType" value="Externally funded" required>
+              <input class="form-check-input" type="radio" id="externallyFunded" name="fundingType" value="Externally funded" required onclick="toggleOther('fundingDetails', true)">
               <label class="form-check-label" for="externallyFunded">Externally funded</label>
             </div>
             <br>
-
             <div id="fundingDetails" style="display:none;">
               <label for="fundingDetailsText"><i>Include details of any external funding of the research, whether in part or in full.</i></label>
-              <textarea class="form-control" id="fundingDetailsText" name="fundingDetailsText" rows="2"></textarea>
+              <textarea class="form-control" id="fundingDetailsText" name="fundingDetailsText" rows="2" aria-label="Describe funding details"></textarea>
             </div>
           </div>
         </fieldset>
@@ -115,19 +156,17 @@
           <legend>3.7 Does this research raise any potential conflict of interest?</legend>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="radio" id="conflictYes" name="conflictInterest" value="Yes" required>
+              <input class="form-check-input" type="radio" id="conflictYes" name="conflictInterest" value="Yes" required onclick="toggleOther('conflictDetails', true)">
               <label class="form-check-label" for="conflictYes">Yes</label>
             </div>
-
             <div class="form-check">
-              <input class="form-check-input" type="radio" id="conflictNo" name="conflictInterest" value="No" required>
+              <input class="form-check-input" type="radio" id="conflictNo" name="conflictInterest" value="No" required onclick="toggleOther('conflictDetails', false)">
               <label class="form-check-label" for="conflictNo">No</label>
             </div>
             <br>
-            
             <div id="conflictDetails" style="display:none;">
               <label for="conflictDetailsText"><i>If yes, identify and explain the steps being taken to address that conflict:</i></label>
-              <textarea class="form-control" id="conflictDetailsText" name="conflictDetailsText" rows="2"></textarea>
+              <textarea class="form-control" id="conflictDetailsText" name="conflictDetailsText" rows="2" aria-label="Describe conflict of interest details"></textarea>
             </div>
           </div>
         </fieldset>
@@ -137,15 +176,26 @@
         <fieldset class="fieldset">
           <legend>3.8 Please describe how the conduct of the research will be monitored:</legend>
           <div class="form-group">
-            <label for="monitoringDetails"><i>Regular oversight by the PI is required to ensure the project conforms to the procedures set out in this application (especially where several people are involved in carrying out the research procedures)</i></label>
-            <textarea class="form-control" id="monitoringDetails" name="monitoringDetails" rows="3" required></textarea>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="regularMeetings" name="monitoringDetails" value="Regular (bi-weekly or more frequent) meetings with the supervisor" required onclick="toggleOther('monitoringOtherDetails', false)">
+              <label class="form-check-label" for="regularMeetings">Regular (bi-weekly or more frequent) meetings with the supervisor</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="otherMonitoring" name="monitoringDetails" value="Other" required onclick="toggleOther('monitoringOtherDetails', true)">
+              <label class="form-check-label" for="otherMonitoring">Other</label>
+            </div>
+            <br>
+            <div id="monitoringOtherDetails" style="display:none;">
+              <textarea class="form-control" id="monitoringOtherText" name="monitoringOtherText" rows="2" aria-label="Describe other monitoring details"></textarea>
+            </div>
           </div>
         </fieldset>
         <br>
 
+        <!-- Button to Previous and Saved/Next step-->
         <div class="buttons">
           <!-- Previous Button -->
-          <button type="button" class="btn btn-primary" onclick="window.location.href='page_2.html'">Previous</button>
+          <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
           <!-- Next Page Button -->
           <button type="submit" class="btn btn-primary">Next Page</button>
         </div>
@@ -158,7 +208,87 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="/Javascipt/scripts.js"></script>
+  <script src="/Javascript/scripts.js"></script>
+  
+  <script>
+    // Array of ethical issues
+const ethicalIssues = [
+"Ensure gender balance in recruiting participants",
+"Obtain informed consent",
+"Protect confidentiality of participants",
+"Minimize psychological distress",
+];
+
+// Function to populate ethical issues in the form
+function populateEthicalIssues() {
+const container = document.getElementById('ethicalIssuesContainer');
+ethicalIssues.forEach(issue => {
+  const div = document.createElement('div');
+  div.className = 'form-group';
+  div.innerHTML = `
+    <label for="${issue}">${issue}</label>
+    <textarea class="form-control" id="${issue}" name="${issue}" rows="2" aria-label="Describe how to ${issue}"></textarea>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="${issue}_na" name="${issue}_na">
+      <label class="form-check-label" for="${issue}_na">N/A</label>
+    </div>
+  `;
+  container.appendChild(div);
+});
+}
+
+// Function to toggle additional details based on select option
+function toggleDetails(selectId, valueToShow, detailsId) {
+const selectElement = document.getElementById(selectId);
+const detailsElement = document.getElementById(detailsId);
+if (selectElement.value === valueToShow) {
+  detailsElement.style.display = 'block';
+} else {
+  detailsElement.style.display = 'none';
+}
+}
+
+// Function to toggle visibility of additional details
+function toggleOther(detailsId, show) {
+const detailsElement = document.getElementById(detailsId);
+if (show) {
+  detailsElement.style.display = 'block';
+} else {
+  detailsElement.style.display = 'none';
+}
+}
+
+// Function to validate the form before submission
+function validateForm(event) {
+event.preventDefault();
+
+// Helper function to validate textareas when "Other" is selected
+function validateOtherSelection(radioId, textareaId, errorMessage) {
+  const radioChecked = document.getElementById(radioId).checked;
+  const textareaValue = document.getElementById(textareaId).value.trim();
+  if (radioChecked && !textareaValue) {
+    alert(errorMessage);
+    return false;
+  }
+  return true;
+}
+
+// Perform validations
+const isOtherBenefitValid = validateOtherSelection('otherBenefit', 'benefitsOtherText', 'Please provide details for the other benefits.');
+const isOtherOutcomeValid = validateOtherSelection('otherOutcome', 'unexpectedOutcomesOtherText', 'Please provide details for the other unexpected outcomes.');
+const isConflictYesValid = validateOtherSelection('conflictYes', 'conflictDetailsText', 'Please provide details for the conflict of interest.');
+const isExternallyFundedValid = validateOtherSelection('externallyFunded', 'fundingDetailsText', 'Please provide details for the external funding.');
+
+// If all validations pass, redirect to the next page
+if (isOtherBenefitValid && isOtherOutcomeValid && isConflictYesValid && isExternallyFundedValid) {
+  window.location.href = 'page_4.html';
+}
+}
+
+// Populate ethical issues when the document is loaded
+document.addEventListener('DOMContentLoaded', populateEthicalIssues);
+
+  </script>
 </body>
 
 </html>
