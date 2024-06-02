@@ -155,32 +155,22 @@
                     </p>
                     <br />
 
-                    <fieldset class="fieldset">
-                        <legend><strong>Electronic Signature(s):</strong></legend>
-                        <br />
-                        <label for="signature"><i>Principal Investigator(s)</i></label>
-                        <input type="text" id="signature" name="signature" placeholder="" required /><br /><br />
+                    <div id="signaturesContainer"></div>
+                </fieldset>
 
-                        <label for="signature2"><i>Print Name(s) here:</i></label>
-                        <input type="text" id="signature2" name="signature2" placeholder="" required /><br /><br />
-                        <label for="dateSigned"><i>Date:</i></label>
-                        <input type="date" id="dateSigned" name="dateSigned" required />
-                    </fieldset>
-
-                    <br />
-                    <fieldset class="fieldset">
-                        <legend><strong>For student projects:</strong></legend>
-                        <p>
-                            <i>I, the main supervisor of this research proposal, have read and approve this
-                                submission.</i>
-                        </p>
-                        <label for="supervisorSignature"><i>Supervisor(s) Signature:</i> </label>
-                        <input type="text" id="supervisorSignature" name="supervisorSignature" required /><br /><br />
-                        <label for="supervisorSignature2"><i>Print Name(s) here:</i></label>
-                        <input type="text" id="supervisorSignature2" name="supervisorSignature2" required /><br /><br />
-                        <label for="supervisorDateSigned"><i>Date:</i></label>
-                        <input type="date" id="supervisorDateSigned" name="supervisorDateSigned" required /><br />
-                    </fieldset>
+                <br>
+                <fieldset class="fieldset">
+                    <legend><strong>For student projects:</strong></legend>
+                    <p>
+                        <i>I, the main supervisor of this research proposal, have read and approve this
+                            submission.</i>
+                    </p>
+                    <label for="supervisorSignature"><i>Supervisor(s) Signature:</i> </label>
+                    <input type="text" id="supervisorSignature" name="supervisorSignature" required /><br /><br />
+                    <label for="supervisorSignature2"><i>Print Name(s) here:</i></label>
+                    <input type="text" id="supervisorSignature2" name="supervisorSignature2" required /><br /><br />
+                    <label for="supervisorDateSigned"><i>Date:</i></label>
+                    <input type="date" id="supervisorDateSigned" name="supervisorDateSigned" required /><br />
                 </fieldset>
                 <br>
                 <div class="buttons">
@@ -232,8 +222,32 @@
             window.location.href = 'page_7.html'; // Redirect to page_7.html
             return false;
         }
-    </script>
 
+        // Populate signatures from localStorage
+        document.addEventListener("DOMContentLoaded", function() {
+            populateSignatures();
+        });
+
+        function populateSignatures() {
+            const piNames = JSON.parse(localStorage.getItem('piNames')) || [];
+            const otherNames = JSON.parse(localStorage.getItem('otherNames')) || [];
+            const allNames = piNames.concat(otherNames);
+
+            const signaturesContainer = document.getElementById('signaturesContainer');
+            allNames.forEach(name => {
+                const signatureFieldset = document.createElement('fieldset');
+                signatureFieldset.className = 'fieldset';
+                signatureFieldset.innerHTML = `
+                    <legend>${name}</legend>
+                    <label for="signature_${name}">Signature:</label>
+                    <input type="text" id="signature_${name}" name="signature_${name}" class="form-control" required><br>
+                    <label for="dateSigned_${name}">Date:</label>
+                    <input type="date" id="dateSigned_${name}" name="dateSigned_${name}" class="form-control" required><br>
+                `;
+                signaturesContainer.appendChild(signatureFieldset);
+            });
+        }
+    </script>
 </body>
 
 </html>

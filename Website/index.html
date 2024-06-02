@@ -2,8 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Application form for ethical review of a research project involving human participants at Dublin City University.">
     <title>Research Ethics Form</title>
     <!-- Linking to Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,10 +25,7 @@
             <div id="left" class="col-md-6 text-md-right">
                 <h1>Dublin City University</h1>
                 <h2>RESEARCH ETHICS COMMITTEE</h2>
-                <h3>
-                    APPLICATION FORM FOR ETHICAL REVIEW OF A RESEARCH PROJECT INVOLVING
-                    HUMAN PARTICIPANTS
-                </h3>
+                <h3>APPLICATION FORM FOR ETHICAL REVIEW OF A RESEARCH PROJECT INVOLVING HUMAN PARTICIPANTS</h3>
             </div>
         </div>
     </header>
@@ -34,37 +33,75 @@
     <div id="note" class="container my-4">
         <div class="alert alert-info">
             <p>
-                Any queries relating to this form should be e-mailed to the DCU Research
-                Ethics Committee (REC) at <a href="mailto:rec@dcu.ie">rec@dcu.ie</a>.
-                The REC Review Process is outlined in the Information and Guidance
+                Any queries relating to this form should be e-mailed to the DCU Research Ethics Committee (REC) at
+                <a href="mailto:rec@dcu.ie">rec@dcu.ie</a>. The REC Review Process is outlined in the Information and
+                Guidance
                 section of the DCU Research Ethics webpage.
             </p>
             <p>
-                Please note that the REC is not responsible for overseeing insurance
-                requirements. Applicants should refer to the DCU Insurance webpage for
-                guidance. It is incumbent upon every applicant to ensure that the
-                appropriate insurance cover is in place for their project.
+                Please note that the REC is not responsible for overseeing insurance requirements. Applicants should
+                refer to the
+                DCU Insurance webpage for guidance. It is incumbent upon every applicant to ensure that the appropriate
+                insurance cover
+                is in place for their project.
             </p>
             <p>
-                If your research involves collecting or processing personal data, you
-                must first complete the DCU online Data Protection training course and
-                review the “Data Protection – Key Points for DCU Researchers” guidance
-                from the Data Protection Unit to assist you in meeting your legal
-                obligations under GDPR and associated Irish law.
+                If your research involves collecting or processing personal data, you must first complete the DCU online
+                Data Protection
+                training course and review the “Data Protection – Key Points for DCU Researchers” guidance from the Data
+                Protection Unit
+                to assist you in meeting your legal obligations under GDPR and associated Irish law.
             </p>
             <p>
-                If your research requires approval from the Biological Safety Committee
-                (BSC) this must be in place prior to REC submission. Contact
-                <a href="mailto:bio.safety@dcu.ie">bio.safety@dcu.ie</a>.
+                If your research requires approval from the Biological Safety Committee (BSC) this must be in place
+                prior to REC submission.
+                Contact <a href="mailto:bio.safety@dcu.ie">bio.safety@dcu.ie</a>.
             </p>
         </div>
         <h3><a class="btn btn-primary" href="./page_1.html"><strong>Start</strong></a></h3>
+    </div>
+
+    <!-- Cookies Consent Modal -->
+    <div class="modal fade" id="cookiesModal" tabindex="-1" role="dialog" aria-labelledby="cookiesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cookiesModalLabel">Cookies Consent</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    This website uses cookies to ensure you get the best experience on our website. By continuing to use
+                    this site, you consent to our use of cookies.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="acceptCookies">Accept</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Including Bootstrap JS (Optional) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Check if cookies consent is already given
+            if (!localStorage.getItem('cookiesConsent')) {
+                $('#cookiesModal').modal('show');
+            }
+
+            // Set cookies consent on button click
+            $('#acceptCookies').click(function () {
+                localStorage.setItem('cookiesConsent', 'true');
+                $('#cookiesModal').modal('hide');
+            });
+        });
+    </script>
 </body>
 
 </html>

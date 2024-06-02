@@ -33,7 +33,42 @@
                                 value="Yes" onclick="toggleCompliance(true)" required>
                             <label class="form-check-label" for="personalDataYes">Yes</label>
                         </div>
-
+                        <div id="personalDataDescription" style="display:none;">
+                            <p>Personal data seems to be involved as you are doing Interview and/or survey as indicated
+                                in section 4.1. If this is incorrect, please select the option below.</p>
+                        </div>
+                        <div id="personalDataCompliance" style="display:none;">
+                            <p>If Yes, please confirm your compliance with the following by ticking the checkboxes:</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="dataProtectionTraining"
+                                    name="dataProtectionCompliance">
+                                <label class="form-check-label" for="dataProtectionTraining"><i>We confirm that we have
+                                        completed the DCU Data Protection training module on Loop.</i></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="dataProtectionGuidance"
+                                    name="dataProtectionCompliance">
+                                <label class="form-check-label" for="dataProtectionGuidance"><i>We confirm that we have
+                                        read the “Data Protection – Key Points for DCU Researchers” guidance on the DCU
+                                        Data
+                                        Protection Unit (DPU) website and agree to protect and manage our data in
+                                        accordance with same.</i></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gdprRequirements"
+                                    name="dataProtectionCompliance">
+                                <label class="form-check-label" for="gdprRequirements"><i>We have assessed the degree of
+                                        risk inherent in the personal data being used in the research project, and
+                                        confirm
+                                        that all DPU GDPR requirements have been met prior to submitting this
+                                        application (e.g.
+                                        completion of Data Protection questionnaire, confirmation that any survey tool
+                                        being used is GDPR compliant, that required Data Processing or Sharing
+                                        Agreements will
+                                        be in place, etc.)</i></label>
+                            </div>
+                        </div>
+                        <br>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="personalDataNo" name="personalData"
                                 value="No" onclick="toggleCompliance(false)" required>
@@ -41,34 +76,19 @@
                         </div>
                     </div>
 
-                    <br>
-                    <div id="personalDataCompliance" style="display:none;">
-                        <p>If Yes, please confirm your compliance with the following by ticking the checkboxes:</p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dataProtectionTraining"
-                                name="dataProtectionCompliance">
-                            <label class="form-check-label" for="dataProtectionTraining">We confirm that we have
-                                completed the DCU Data Protection training module on Loop.</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dataProtectionGuidance"
-                                name="dataProtectionCompliance">
-                            <label class="form-check-label" for="dataProtectionGuidance">We confirm that we have read
-                                the “Data Protection – Key Points for DCU Researchers” guidance on the DCU Data
-                                Protection Unit (DPU) website and agree to protect and manage our data in accordance
-                                with same.</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gdprRequirements"
-                                name="dataProtectionCompliance">
-                            <label class="form-check-label" for="gdprRequirements">We have assessed the degree of risk
-                                inherent in the personal data being used in the research project, and confirm that all
-                                DPU GDPR requirements have been met prior to submitting this application (e.g.
-                                completion of Data Protection questionnaire, confirmation that any survey tool being
-                                used is GDPR compliant, that required Data Processing or Sharing Agreements will be in
-                                place, etc.)</label>
-                        </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="personalDataNotInvolved"
+                            name="personalDataNotInvolved" onclick="togglePersonalDataNotInvolved()">
+                        <label class="form-check-label" for="personalDataNotInvolved">Personal data not involved</label>
                     </div>
+                    <div class="form-group" id="personalDataNotInvolvedJustification" style="display:none;">
+                        <textarea class="form-control" id="personalDataNotInvolvedJustificationText"
+                            name="personalDataNotInvolvedJustificationText" rows="3"
+                            placeholder="Justify why personal data is not involved..."></textarea>
+                    </div>
+
+                    <br>
+
                 </fieldset>
                 <br>
 
@@ -141,9 +161,9 @@
                 <fieldset class="fieldset">
                     <legend>4.4 Please confirm who will be responsible for the secure storage of data generated by the
                         research:</legend>
-                    <label for="dataResponsibility">Name the relevant DCU investigator/s</label>
-                    <textarea class="form-control" id="dataResponsibility" name="dataResponsibility" rows="2"
-                        required></textarea>
+                    <div id="investigatorCheckboxes">
+                        <!-- Checkboxes will be dynamically created here -->
+                    </div>
                 </fieldset>
                 <br>
 
@@ -153,13 +173,38 @@
                     <label for="dataRetention"><i>For personal data, consult section 15: Retention of Personal Data in
                             the “Data Protection – Key Points for DCU Researchers” guidance on the DCU Data Protection
                             Unit (DPU) website</i></label>
-                    <textarea class="form-control" id="dataRetention" name="dataRetention" rows="2" required></textarea>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="endOfProject" name="dataRetention"
+                            value="endOfProject">
+                        <label class="form-check-label" for="endOfProject">End of project</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="threeMonths" name="dataRetention"
+                            value="threeMonths">
+                        <label class="form-check-label" for="threeMonths">3 months after project end</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="sixMonths" name="dataRetention"
+                            value="sixMonths">
+                        <label class="form-check-label" for="sixMonths">6 months after project end</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="oneYear" name="dataRetention" value="oneYear">
+                        <label class="form-check-label" for="oneYear">1 year after project end</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="otherRetention" name="dataRetention"
+                            value="otherRetention">
+                        <label class="form-check-label" for="otherRetention">Other</label>
+                    </div>
+                    <textarea class="form-control mt-2" id="otherRetentionDetails" name="otherRetentionDetails" rows="2"
+                        placeholder="Specify other retention period here..."></textarea>
                 </fieldset>
                 <br>
 
                 <!-- Section 4.6 - Data Disposition -->
                 <fieldset class="fieldset">
-                    <legend>4.6 Please confirm what will happen to the data collected at the end of the study:</legend>
+                    <legend>4.6 What will happen at the end of the period mentioned in 4.5?</legend>
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="dataArchived" name="dataDisposition"
@@ -176,7 +221,14 @@
                                 value="Other" required onclick="toggleDataDisposition('other')">
                             <label class="form-check-label" for="dataOther">Other</label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="stayTheSame" name="dataDisposition"
+                                value="stayTheSame" required onclick="toggleDataDisposition('stayTheSame')">
+                            <label class="form-check-label" for="stayTheSame">Stay the same </label>
+                        </div>
                     </div>
+
+
                     <div id="archivedDataDetails" style="display:none;">
                         <h3>4.6.1 Archived data</h3>
                         <p>In line with encouraging institutional Open Research practices, please note that the use of
@@ -198,6 +250,7 @@
                                 access it:</i></label>
                         <textarea class="form-control" id="dataAccess" name="dataAccess" rows="2"></textarea>
                     </div>
+
                     <div id="destroyedDataDetails" style="display:none;">
                         <h3>4.6.2 Destroyed data</h3>
                         <p>Please provide the following details – Note: for student projects, the supervisor must take
@@ -233,6 +286,7 @@
                                 disposed in accordance with the relevant DCU approved SOP</label>
                         </div>
                     </div>
+
                     <div id="otherDataDetails" style="display:none;">
                         <h3>4.6.3 Other</h3>
                         <label for="otherDataDetailsText"><i>Please explain what will happen to the data if not being
@@ -264,13 +318,70 @@
     <script src="/Javascript/scripts.js"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Hide the textarea initially
+            const otherRetentionTextarea = document.getElementById('otherRetentionDetails');
+            otherRetentionTextarea.style.display = 'none';
+
+            // Add event listener to the radio buttons in section 4.5
+            const otherRetentionRadio = document.getElementById('otherRetention');
+            const otherRetentionRadios = document.querySelectorAll('input[name="dataRetention"]');
+
+            otherRetentionRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    // If "Other" option is selected, show the textarea; otherwise, hide it
+                    if (otherRetentionRadio.checked) {
+                        otherRetentionTextarea.style.display = 'block';
+                    } else {
+                        otherRetentionTextarea.style.display = 'none';
+                    }
+                });
+            });
+
+            // Check if survey or interview was selected in section 2.5 on page 2
+            const surveySelected = localStorage.getItem('surveysSelected') === 'true';
+            const interviewSelected = localStorage.getItem('interviewsSelected') === 'true';
+            if (surveySelected || interviewSelected) {
+                document.getElementById('personalDataYes').checked = true;
+                toggleCompliance(true);
+                document.getElementById('personalDataDescription').style.display = 'block';
+            }
+
+            // Generate investigator checkboxes in section 4.4
+            const investigatorCheckboxes = document.getElementById('investigatorCheckboxes');
+            const piNames = JSON.parse(localStorage.getItem('piNames') || '[]');
+            piNames.forEach((name, index) => {
+                const checkbox = document.createElement('div');
+                checkbox.className = 'form-check';
+                checkbox.innerHTML = `
+                    <input class="form-check-input" type="checkbox" id="investigator${index + 1}" name="dataResponsibility" value="${name}">
+                    <label class="form-check-label" for="investigator${index + 1}">${name}</label>
+                `;
+                investigatorCheckboxes.appendChild(checkbox);
+            });
+        });
+
         // Function to toggle visibility of compliance checkboxes based on user selection in Section 4.1
         function toggleCompliance(isYes) {
             const complianceDiv = document.getElementById('personalDataCompliance');
+            const descriptionDiv = document.getElementById('personalDataDescription');
             if (isYes) {
                 complianceDiv.style.display = 'block';
+                descriptionDiv.style.display = 'block';
             } else {
                 complianceDiv.style.display = 'none';
+                descriptionDiv.style.display = 'none';
+            }
+        }
+
+        // Function to toggle visibility of personal data not involved justification
+        function togglePersonalDataNotInvolved() {
+            const personalDataNotInvolvedCheckbox = document.getElementById('personalDataNotInvolved');
+            const justificationDiv = document.getElementById('personalDataNotInvolvedJustification');
+            if (personalDataNotInvolvedCheckbox.checked) {
+                justificationDiv.style.display = 'block';
+            } else {
+                justificationDiv.style.display = 'none';
             }
         }
 
@@ -301,6 +412,11 @@
                 archivedDataDiv.style.display = 'none';
                 destroyedDataDiv.style.display = 'none';
                 otherDataDiv.style.display = 'block';
+
+            } else if (value === 'stayTheSame') {
+                archivedDataDiv.style.display = 'none';
+                destroyedDataDiv.style.display = 'none';
+                otherDataDiv.style.display = 'none';
             }
         }
 
@@ -326,7 +442,7 @@
                 });
 
                 if (!isDataProtectionChecked) {
-                    alert('Please select at least one option in Section 4.1');
+                    alert('Please select at least one checkbox under Section 4.1 if "Yes" is selected.');
                     return false;
                 }
             }
@@ -353,6 +469,20 @@
                 return false;
             }
 
+            // Validate section 4.4 checkboxes
+            const dataResponsibilityCheckboxes = document.querySelectorAll('input[name="dataResponsibility"]');
+            let isDataResponsibilityChecked = false;
+            dataResponsibilityCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    isDataResponsibilityChecked = true;
+                }
+            });
+
+            if (!isDataResponsibilityChecked) {
+                alert('Please select at least one option in Section 4.4');
+                return false;
+            }
+
             if (form.checkValidity()) {
                 window.location.href = 'page_5.html';
                 return false; // Prevent default form submission
@@ -362,8 +492,21 @@
             return false; // Prevent default form submission
         }
 
+        // Check if survey or interview is selected in section 2.5 and update 4.1 accordingly
+        function checkSurveyOrInterview() {
+            const surveyCheckbox = document.querySelector('input[name="data-collection"][value="surveys"]');
+            const interviewCheckbox = document.querySelector('input[name="data-collection"][value="interviews"]');
+            if (surveyCheckbox.checked || interviewCheckbox.checked) {
+                document.getElementById('personalDataYes').checked = true;
+                toggleCompliance(true);
+            }
+        }
+
+        // Call the function to check survey or interview status
+        checkSurveyOrInterview();
 
     </script>
+
 </body>
 
 </html>

@@ -158,6 +158,7 @@
                                 rows="5"></textarea>
                         </div>
                     </div>
+
                     <div id="noConsentDetails" style="display:none;">
                         <div class="form-group">
                             <label for="noConsentDescription"><i>If No, describe the procedures regarding how
@@ -166,19 +167,39 @@
                                 rows="5"></textarea>
                         </div>
                     </div>
-                </fieldset>
-                <br>
 
-                <!-- Button to Previous and Next step -->
-                <div class="buttons">
-                    <!-- Previous Button -->
-                    <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+                    <div id="consentNote" style="display: none;">
+                        <p>Since you indicated in 4.1 that personal data is collected, it is likely that consent would
+                            be needed. If you disagree, indicate below why:</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="consentNotNeeded"
+                                name="consentNotNeeded" onclick="toggleNoConsentJustification()">
+                            <label class="form-check-label" for="consentNotNeeded">Consent not needed</label>
+                        </div>
 
-                    <!-- Next Page Button -->
-                    <button type="submit" class="btn btn-primary">Next Page</button>
-                </div>
-            </form>
+
+                        <div class="form-group" id="noConsentJustification" style="display:none;">
+                            <textarea class="form-control" id="noConsentJustificationText"
+                                name="noConsentJustificationText" rows="5"
+                                placeholder="Explain why consent is not needed..."></textarea>
+                        </div>
+                    </div>
+
         </div>
+
+        </fieldset>
+        <br>
+
+        <!-- Button to Previous and Next step -->
+        <div class="buttons">
+            <!-- Previous Button -->
+            <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+
+            <!-- Next Page Button -->
+            <button type="submit" class="btn btn-primary">Next Page</button>
+        </div>
+        </form>
+    </div>
     </div>
     <br /><br />
 
@@ -188,19 +209,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // JavaScript functions for form validation and navigation
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Check if personal data is involved from localStorage
+            const personalDataInvolved = localStorage.getItem('personalDataInvolved') === 'true';
+            if (personalDataInvolved) {
+                document.getElementById('consentRequired').value = 'yes';
+                document.getElementById('consentNote').style.display = 'block';
+            }
+
+            toggleConsentDetails();
+            toggleTextarea();
+        });
 
         // Function to toggle display of consent details based on user selection
         function toggleConsentDetails() {
             var consentRequired = document.getElementById('consentRequired').value;
             var consentDetailsDiv = document.getElementById('consentDetails');
             var noConsentDetailsDiv = document.getElementById('noConsentDetails');
+            var consentNoteDiv = document.getElementById('consentNote');
             if (consentRequired === 'yes') {
                 consentDetailsDiv.style.display = 'block';
                 noConsentDetailsDiv.style.display = 'none';
+                if (consentNoteDiv) {
+                    consentNoteDiv.style.display = 'none';
+                }
             } else if (consentRequired === 'no') {
                 consentDetailsDiv.style.display = 'none';
                 noConsentDetailsDiv.style.display = 'block';
+                if (consentNoteDiv) {
+                    consentNoteDiv.style.display = 'block';
+                }
             } else {
                 consentDetailsDiv.style.display = 'none';
                 noConsentDetailsDiv.style.display = 'none';
@@ -220,9 +258,10 @@
             document.getElementById('noExplanation').style.display = noSelected ? 'block' : 'none';
         }
 
-        // Function to navigate to previous page
-        function goToPreviousPage() {
-            window.location.href = 'page_4.html';
+        // Function to toggle display of no consent justification
+        function toggleNoConsentJustification() {
+            var noConsentNeeded = document.getElementById('consentNotNeeded').checked;
+            document.getElementById('noConsentJustification').style.display = noConsentNeeded ? 'block' : 'none';
         }
 
         // Function to validate form before submission
@@ -232,6 +271,7 @@
             var consentRequired = document.getElementById('consentRequired').value;
             var consentDescriptionFilled = document.getElementById('consentDescription').value.trim() !== '';
             var noConsentDescriptionFilled = document.getElementById('noConsentDescription').value.trim() !== '';
+            var noConsentJustificationFilled = document.getElementById('noConsentJustificationText').value.trim() !== '';
 
             // Check if all questions are answered and explanations provided for "No" responses
             var allAnswered = allQuestions.every(function (question) {
@@ -246,7 +286,7 @@
             });
 
             // Validate form inputs
-            if (!allAnswered || (document.getElementById('noExplanation').style.display === 'block' && !locationFilled) || !consentRequired || (consentRequired === 'yes' && !consentDescriptionFilled) || (consentRequired === 'no' && !noConsentDescriptionFilled)) {
+            if (!allAnswered || (document.getElementById('noExplanation').style.display === 'block' && !locationFilled) || !consentRequired || (consentRequired === 'yes' && !consentDescriptionFilled) || (consentRequired === 'no' && !noConsentDescriptionFilled) || (consentRequired === 'no' && document.getElementById('consentNote').style.display === 'block' && !noConsentJustificationFilled)) {
                 alert('Please fill out all required fields and provide explanations for any "No" responses.');
                 return false;
             }

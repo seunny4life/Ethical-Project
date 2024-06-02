@@ -33,7 +33,7 @@
                         Investigator.</p>
                     <div class="form-group">
                         <label for="piName1">Name:</label>
-                        <input type="text" id="piName1" name="piName1" class="form-control" required>
+                        <input type="text" id="piName1" name="piName1" class="form-control piName" required>
                         <label for="schoolUnit1">School/Unit:</label>
                         <input type="text" id="schoolUnit1" name="schoolUnit1" class="form-control" required>
                         <label for="email1">Email:</label>
@@ -49,7 +49,7 @@
                     <p>Including any external to DCU</p>
                     <div class="form-group">
                         <label for="otherName1">Name:</label>
-                        <input type="text" id="otherName1" name="otherName1" class="form-control">
+                        <input type="text" id="otherName1" name="otherName1" class="form-control otherName">
                         <label for="otherUnit1">School/Unit/External Institution:</label>
                         <input type="text" id="otherUnit1" name="otherUnit1" class="form-control">
                         <label for="otherEmail1">Email:</label>
@@ -73,8 +73,8 @@
                 </div>
             </fieldset>
 
-            <!-- Section 1.4 - Level of Review -->
-            <fieldset class="fieldset">
+            <!-- Section 1.4 - Level of Review (Hidden for now) -->
+            <fieldset class="fieldset" id="levelOfReview" style="display: none;">
                 <legend><strong>1.4 Please tick the checkbox for the appropriate level of required review:</strong>
                 </legend>
                 <div class="form-group">
@@ -161,7 +161,7 @@
                     </div>
                 </div>
             </fieldset>
-            
+
             <!-- Button to Previous and Next step -->
             <div class="buttons">
                 <!-- Previous Button -->
@@ -182,6 +182,20 @@
 
     <script>
         function validateForm() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const completionDate = document.getElementById("completionDate").value;
+
+            if (new Date(endDate) <= new Date(startDate)) {
+                alert("End date must be after start date.");
+                return false;
+            }
+
+            if (new Date(completionDate) <= new Date(endDate)) {
+                alert("Project completion date must be after end date.");
+                return false;
+            }
+
             const requiredFields = document.querySelectorAll("#applicationForm input[required], #applicationForm textarea[required]");
             for (let field of requiredFields) {
                 if (field.value.trim() === "") {
@@ -191,16 +205,19 @@
                 }
             }
 
-            const checkboxGroups = [
-                document.querySelectorAll("input[name='reviewLevel']")
-            ];
-
-            for (let group of checkboxGroups) {
-                if (!Array.from(group).some(checkbox => checkbox.checked)) {
-                    alert("Please select at least one option in each checkbox group.");
-                    group[0].focus();
-                    return false;
+            // Check if at least one checkbox is selected in section 1.6
+            const locationCheckboxes = document.querySelectorAll('input[name="location"]');
+            let isLocationSelected = false;
+            for (let checkbox of locationCheckboxes) {
+                if (checkbox.checked) {
+                    isLocationSelected = true;
+                    break;
                 }
+            }
+
+            if (!isLocationSelected) {
+                alert("Please select at least one location in section 1.6.");
+                return false;
             }
 
             saveFormData(); // Save form data to localStorage
@@ -210,6 +227,14 @@
         }
 
         function saveFormData() {
+            // Save principal investigator names
+            const piNames = Array.from(document.getElementsByClassName('piName')).map(input => input.value);
+            localStorage.setItem('piNames', JSON.stringify(piNames));
+
+            // Save other investigator names
+            const otherNames = Array.from(document.getElementsByClassName('otherName')).map(input => input.value);
+            localStorage.setItem('otherNames', JSON.stringify(otherNames));
+
             const reviewLevel = document.querySelector('input[name="reviewLevel"]:checked');
             if (reviewLevel) {
                 localStorage.setItem('reviewLevel', reviewLevel.value);
@@ -222,7 +247,7 @@
             newInvestigator.className = 'form-group';
             newInvestigator.innerHTML = `
                 <label>Name:</label>
-                <input type="text" name="piName" class="form-control" required>
+                <input type="text" name="piName" class="form-control piName" required>
                 <label>School/Unit:</label>
                 <input type="text" name="schoolUnit" class="form-control" required>
                 <label>Email:</label>
@@ -237,7 +262,7 @@
             newInvestigator.className = 'form-group';
             newInvestigator.innerHTML = `
                 <label>Name:</label>
-                <input type="text" name="otherName" class="form-control">
+                <input type="text" name="otherName" class="form-control otherName">
                 <label>School/Unit/External Institution:</label>
                 <input type="text" name="otherUnit" class="form-control">
                 <label>Email:</label>
