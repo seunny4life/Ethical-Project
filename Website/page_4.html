@@ -99,21 +99,27 @@
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="dataAccessYes" name="dataAccess"
-                                value="Yes" onclick="toggleDataAccess(false)" required>
+                                value="Yes" onclick="toggleDataAccess('yes')" required>
                             <label class="form-check-label" for="dataAccessYes">Yes</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="dataAccessNo" name="dataAccess" value="No"
-                                onclick="toggleDataAccess(true)" required>
+                                onclick="toggleDataAccess('no')" required>
                             <label class="form-check-label" for="dataAccessNo">No</label>
                         </div>
                     </div>
-                    <div id="dataAccessDetails" style="display:none;">
-                        <label for="dataAccessDetailsText"><i>If No, please name who the other individuals are and why
-                                they need access. Any proposed transfer of data (including outside of the EU) should be
-                                detailed here:</i></label>
-                        <textarea class="form-control" id="dataAccessDetailsText" name="dataAccessDetailsText" rows="3"
-                            required></textarea>
+                    <div id="dataAccessDetailsYes" style="display:none;">
+                        <h3>4.2.1 Data Access - Yes</h3>
+                        <p>Please confirm the data access details:</p>
+                        <textarea class="form-control" id="dataAccessYesDetails" name="dataAccessYesDetails" rows="3"
+                            placeholder="Provide details on data access..."></textarea>
+                    </div>
+                    <div id="dataAccessDetailsNo" style="display:none;">
+                        <h3>4.2.2 Data Access - No</h3>
+                        <p>Please name who the other individuals are and why they need access. Any proposed transfer of
+                            data (including outside of the EU) should be detailed here:</p>
+                        <textarea class="form-control" id="dataAccessNoDetails" name="dataAccessNoDetails" rows="3"
+                            placeholder="Provide details on data access..."></textarea>
                     </div>
                 </fieldset>
                 <br>
@@ -196,9 +202,11 @@
                         <input class="form-check-input" type="radio" id="otherRetention" name="dataRetention"
                             value="otherRetention">
                         <label class="form-check-label" for="otherRetention">Other</label>
+
+                        <textarea class="form-control mt-2" id="otherRetentionDetails" name="otherRetentionDetails"
+                            rows="2" placeholder="Specify other retention period here..."></textarea>
                     </div>
-                    <textarea class="form-control mt-2" id="otherRetentionDetails" name="otherRetentionDetails" rows="2"
-                        placeholder="Specify other retention period here..."></textarea>
+
                 </fieldset>
                 <br>
 
@@ -210,89 +218,106 @@
                             <input class="form-check-input" type="radio" id="dataArchived" name="dataDisposition"
                                 value="Archived" required onclick="toggleDataDisposition('archived')">
                             <label class="form-check-label" for="dataArchived">Archived</label>
+
+                            <div id="archivedDataDetails" style="display:none;"><br>
+                                <h3>4.6.1 Archived data</h3>
+                                <p>In line with encouraging institutional Open Research practices, please note that the
+                                    use of
+                                    trusted data repositories or archives is recommended. Further information is
+                                    available via
+                                    <a href="https://www.dcu.ie/library/open-research-fair-data">DCU Open Research Fair
+                                        Data</a>
+                                </p>
+                                <label for="archivedDataStaff"><i>Name the DCU staff member responsible for archival and
+                                        future
+                                        use of data:</i></label>
+                                <textarea class="form-control" id="archivedDataStaff" name="archivedDataStaff"
+                                    rows="2"></textarea>
+                                <label for="dataAvailability"><i>Confirm whether the data will be made available to
+                                        other
+                                        researchers, and if so, how?</i></label>
+                                <textarea class="form-control" id="dataAvailability" name="dataAvailability"
+                                    rows="2"></textarea>
+                                <label for="dataPreparation"><i>Confirm how the data will be prepared for archive (e.g.,
+                                        will
+                                        datasets be anonymised):</i></label>
+                                <textarea class="form-control" id="dataPreparation" name="dataPreparation"
+                                    rows="2"></textarea>
+                                <label for="dataAccess"><i>Confirm where the data will be archived and who will be
+                                        allowed to
+                                        access it:</i></label>
+                                <textarea class="form-control" id="dataAccess" name="dataAccess" rows="2"></textarea>
+                            </div>
                         </div>
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="dataDestroyed" name="dataDisposition"
                                 value="Destroyed" required onclick="toggleDataDisposition('destroyed')">
                             <label class="form-check-label" for="dataDestroyed">Destroyed</label>
+
+                            <div id="destroyedDataDetails" style="display:none;"><br>
+                                <h3>4.6.2 Destroyed data</h3>
+                                <p>Please provide the following details – Note: for student projects, the supervisor
+                                    must take
+                                    responsibility for data destruction if there is no guarantee the student will have
+                                    access to
+                                    the data at the time of destruction</p>
+                                <label for="dataDestructionReason"><i>Justify why the data will be
+                                        destroyed:</i></label>
+                                <textarea class="form-control" id="dataDestructionReason" name="dataDestructionReason"
+                                    rows="2"></textarea>
+                                <label for="dataDestructionResponsibility"><i>Name the DCU researcher responsible for
+                                        destruction of data:</i></label>
+                                <textarea class="form-control" id="dataDestructionResponsibility"
+                                    name="dataDestructionResponsibility" rows="2"></textarea>
+                                <label for="dataDestructionDate"><i>Confirm when the data will be destroyed (specify
+                                        date):</i></label>
+                                <textarea class="form-control" id="dataDestructionDate" name="dataDestructionDate"
+                                    rows="2"></textarea>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="electronicDataDestruction"
+                                        name="dataDestructionMethod">
+                                    <label class="form-check-label" for="electronicDataDestruction">Electronic data will
+                                        be
+                                        overwritten/securely deleted</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="paperDataDestruction"
+                                        name="dataDestructionMethod">
+                                    <label class="form-check-label" for="paperDataDestruction">Paper-based data will be
+                                        confidentially shredded</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="medicalSamplesDestruction"
+                                        name="dataDestructionMethod">
+                                    <label class="form-check-label" for="medicalSamplesDestruction">Medical samples will
+                                        be
+                                        disposed in accordance with the relevant DCU approved SOP</label>
+                                </div>
+                                <br>
+                            </div>
                         </div>
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="dataOther" name="dataDisposition"
                                 value="Other" required onclick="toggleDataDisposition('other')">
                             <label class="form-check-label" for="dataOther">Other</label>
+
+                            <div id="otherDataDetails" style="display:none;"><br>
+                                <h3>4.6.3 Other</h3>
+                                <label for="otherDataDetailsText"><i>Please explain what will happen to the data if not
+                                        being
+                                        archived or destroyed:</i></label>
+                                <textarea class="form-control" id="otherDataDetailsText" name="otherDataDetailsText"
+                                    rows="2"></textarea>
+                            </div>
                         </div>
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="stayTheSame" name="dataDisposition"
                                 value="stayTheSame" required onclick="toggleDataDisposition('stayTheSame')">
                             <label class="form-check-label" for="stayTheSame">Stay the same </label>
                         </div>
-                    </div>
-
-
-                    <div id="archivedDataDetails" style="display:none;">
-                        <h3>4.6.1 Archived data</h3>
-                        <p>In line with encouraging institutional Open Research practices, please note that the use of
-                            trusted data repositories or archives is recommended. Further information is available via
-                            <a href="https://www.dcu.ie/library/open-research-fair-data">DCU Open Research Fair Data</a>
-                        </p>
-                        <label for="archivedDataStaff"><i>Name the DCU staff member responsible for archival and future
-                                use of data:</i></label>
-                        <textarea class="form-control" id="archivedDataStaff" name="archivedDataStaff"
-                            rows="2"></textarea>
-                        <label for="dataAvailability"><i>Confirm whether the data will be made available to other
-                                researchers, and if so, how?</i></label>
-                        <textarea class="form-control" id="dataAvailability" name="dataAvailability"
-                            rows="2"></textarea>
-                        <label for="dataPreparation"><i>Confirm how the data will be prepared for archive (e.g., will
-                                datasets be anonymised):</i></label>
-                        <textarea class="form-control" id="dataPreparation" name="dataPreparation" rows="2"></textarea>
-                        <label for="dataAccess"><i>Confirm where the data will be archived and who will be allowed to
-                                access it:</i></label>
-                        <textarea class="form-control" id="dataAccess" name="dataAccess" rows="2"></textarea>
-                    </div>
-
-                    <div id="destroyedDataDetails" style="display:none;">
-                        <h3>4.6.2 Destroyed data</h3>
-                        <p>Please provide the following details – Note: for student projects, the supervisor must take
-                            responsibility for data destruction if there is no guarantee the student will have access to
-                            the data at the time of destruction</p>
-                        <label for="dataDestructionReason"><i>Justify why the data will be destroyed:</i></label>
-                        <textarea class="form-control" id="dataDestructionReason" name="dataDestructionReason"
-                            rows="2"></textarea>
-                        <label for="dataDestructionResponsibility"><i>Name the DCU researcher responsible for
-                                destruction of data:</i></label>
-                        <textarea class="form-control" id="dataDestructionResponsibility"
-                            name="dataDestructionResponsibility" rows="2"></textarea>
-                        <label for="dataDestructionDate"><i>Confirm when the data will be destroyed (specify
-                                date):</i></label>
-                        <textarea class="form-control" id="dataDestructionDate" name="dataDestructionDate"
-                            rows="2"></textarea>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="electronicDataDestruction"
-                                name="dataDestructionMethod">
-                            <label class="form-check-label" for="electronicDataDestruction">Electronic data will be
-                                overwritten/securely deleted</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="paperDataDestruction"
-                                name="dataDestructionMethod">
-                            <label class="form-check-label" for="paperDataDestruction">Paper-based data will be
-                                confidentially shredded</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="medicalSamplesDestruction"
-                                name="dataDestructionMethod">
-                            <label class="form-check-label" for="medicalSamplesDestruction">Medical samples will be
-                                disposed in accordance with the relevant DCU approved SOP</label>
-                        </div>
-                    </div>
-
-                    <div id="otherDataDetails" style="display:none;">
-                        <h3>4.6.3 Other</h3>
-                        <label for="otherDataDetailsText"><i>Please explain what will happen to the data if not being
-                                archived or destroyed:</i></label>
-                        <textarea class="form-control" id="otherDataDetailsText" name="otherDataDetailsText"
-                            rows="2"></textarea>
                     </div>
                 </fieldset>
                 <br>
@@ -368,9 +393,11 @@
             if (isYes) {
                 complianceDiv.style.display = 'block';
                 descriptionDiv.style.display = 'block';
+                localStorage.setItem('personalDataInvolved', 'true');
             } else {
                 complianceDiv.style.display = 'none';
                 descriptionDiv.style.display = 'none';
+                localStorage.setItem('personalDataInvolved', 'false');
             }
         }
 
@@ -386,12 +413,15 @@
         }
 
         // Function to toggle visibility of data access details based on user selection in Section 4.2
-        function toggleDataAccess(isNo) {
-            const dataAccessDiv = document.getElementById('dataAccessDetails');
-            if (isNo) {
-                dataAccessDiv.style.display = 'block';
-            } else {
-                dataAccessDiv.style.display = 'none';
+        function toggleDataAccess(value) {
+            const dataAccessYesDiv = document.getElementById('dataAccessDetailsYes');
+            const dataAccessNoDiv = document.getElementById('dataAccessDetailsNo');
+            if (value === 'yes') {
+                dataAccessYesDiv.style.display = 'block';
+                dataAccessNoDiv.style.display = 'none';
+            } else if (value === 'no') {
+                dataAccessYesDiv.style.display = 'none';
+                dataAccessNoDiv.style.display = 'block';
             }
         }
 
@@ -412,7 +442,6 @@
                 archivedDataDiv.style.display = 'none';
                 destroyedDataDiv.style.display = 'none';
                 otherDataDiv.style.display = 'block';
-
             } else if (value === 'stayTheSame') {
                 archivedDataDiv.style.display = 'none';
                 destroyedDataDiv.style.display = 'none';
@@ -447,12 +476,28 @@
                 }
             }
 
-            // Validate section 4.2 radio buttons
+            // Validate section 4.2 radio buttons and textareas
             const dataAccessYes = document.getElementById('dataAccessYes').checked;
             const dataAccessNo = document.getElementById('dataAccessNo').checked;
             if (!dataAccessYes && !dataAccessNo) {
                 alert('Please select Yes or No in Section 4.2');
                 return false;
+            }
+
+            if (dataAccessYes) {
+                const dataAccessYesDetails = document.getElementById('dataAccessYesDetails').value.trim();
+                if (!dataAccessYesDetails) {
+                    alert('Please fill the details in Section 4.2 for "Yes" option.');
+                    return false;
+                }
+            }
+
+            if (dataAccessNo) {
+                const dataAccessNoDetails = document.getElementById('dataAccessNoDetails').value.trim();
+                if (!dataAccessNoDetails) {
+                    alert('Please fill the details in Section 4.2 for "No" option.');
+                    return false;
+                }
             }
 
             // Validate section 4.3 checkboxes
@@ -483,7 +528,82 @@
                 return false;
             }
 
+            // Validate section 4.5 radio buttons
+            const dataRetentionRadios = document.querySelectorAll('input[name="dataRetention"]');
+            let isDataRetentionSelected = false;
+            dataRetentionRadios.forEach((radio) => {
+                if (radio.checked) {
+                    isDataRetentionSelected = true;
+                }
+            });
+
+            if (!isDataRetentionSelected) {
+                alert('Please select one of the options in Section 4.5');
+                return false;
+            }
+
+            if (document.getElementById('otherRetention').checked) {
+                const otherRetentionTextarea = document.getElementById('otherRetentionDetails').value.trim();
+                if (!otherRetentionTextarea) {
+                    alert('Please fill the "Specify other retention period here..." field in Section 4.5');
+                    return false;
+                }
+            }
+
+            // Validate section 4.6 radio buttons
+            const dataDispositionArchived = document.getElementById('dataArchived').checked;
+            const dataDispositionDestroyed = document.getElementById('dataDestroyed').checked;
+            const dataDispositionOther = document.getElementById('dataOther').checked;
+            const dataDispositionStayTheSame = document.getElementById('stayTheSame').checked;
+            if (!dataDispositionArchived && !dataDispositionDestroyed && !dataDispositionOther && !dataDispositionStayTheSame) {
+                alert('Please select one of the options in Section 4.6');
+                return false;
+            }
+
+            if (dataDispositionArchived) {
+                const archivedDataStaff = document.getElementById('archivedDataStaff').value.trim();
+                const dataAvailability = document.getElementById('dataAvailability').value.trim();
+                const dataPreparation = document.getElementById('dataPreparation').value.trim();
+                const dataAccess = document.getElementById('dataAccess').value.trim();
+                if (!archivedDataStaff || !dataAvailability || !dataPreparation || !dataAccess) {
+                    alert('Please fill all the fields in "Archived data" section of 4.6');
+                    return false;
+                }
+            }
+
+            if (dataDispositionDestroyed) {
+                const dataDestructionReason = document.getElementById('dataDestructionReason').value.trim();
+                const dataDestructionResponsibility = document.getElementById('dataDestructionResponsibility').value.trim();
+                const dataDestructionDate = document.getElementById('dataDestructionDate').value.trim();
+                if (!dataDestructionReason || !dataDestructionResponsibility || !dataDestructionDate) {
+                    alert('Please fill all the fields in "Destroyed data" section of 4.6');
+                    return false;
+                }
+
+                const dataDestructionCheckboxes = document.querySelectorAll('input[name="dataDestructionMethod"]');
+                let isDataDestructionChecked = false;
+                dataDestructionCheckboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        isDataDestructionChecked = true;
+                    }
+                });
+
+                if (!isDataDestructionChecked) {
+                    alert('Please select at least one checkbox in "Destroyed data" section of 4.6');
+                    return false;
+                }
+            }
+
+            if (dataDispositionOther) {
+                const otherDataDetailsText = document.getElementById('otherDataDetailsText').value.trim();
+                if (!otherDataDetailsText) {
+                    alert('Please fill all the fields in "Other data" section of 4.6');
+                    return false;
+                }
+            }
+
             if (form.checkValidity()) {
+                // Redirect to the next page after validation
                 window.location.href = 'page_5.html';
                 return false; // Prevent default form submission
             }
@@ -504,7 +624,6 @@
 
         // Call the function to check survey or interview status
         checkSurveyOrInterview();
-
     </script>
 
 </body>

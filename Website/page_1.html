@@ -157,7 +157,7 @@
                     <div id="reviewDetails" style="margin-top: 10px; display: none;">
                         <label for="detailsOutcome"><i>If yes, please provide details on the outcome below (a copy of
                                 approval should be attached to this form)</i></label>
-                        <textarea id="detailsOutcome" name="detailsOutcome" class="form-control"></textarea>
+                        <textarea id="detailsOutcome" name="detailsOutcome" class="form-control" required></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -227,17 +227,58 @@
         }
 
         function saveFormData() {
-            // Save principal investigator names
-            const piNames = Array.from(document.getElementsByClassName('piName')).map(input => input.value);
+            // Save project title
+            const projectTitle = document.getElementById('projectTitle').value.trim();
+            localStorage.setItem('projectTitle', projectTitle);
+
+            // Save key project dates
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const completionDate = document.getElementById('completionDate').value;
+            localStorage.setItem('startDate', startDate);
+            localStorage.setItem('endDate', endDate);
+            localStorage.setItem('completionDate', completionDate);
+
+            // Save principal investigator names, trimming spaces and filtering out empty names
+            const piNames = Array.from(document.getElementsByClassName('piName'))
+                .map(input => input.value.trim())
+                .filter(name => name !== "");
             localStorage.setItem('piNames', JSON.stringify(piNames));
 
-            // Save other investigator names
-            const otherNames = Array.from(document.getElementsByClassName('otherName')).map(input => input.value);
+            // Save other investigator names in a similar manner
+            const otherNames = Array.from(document.getElementsByClassName('otherName'))
+                .map(input => input.value.trim())
+                .filter(name => name !== "");
             localStorage.setItem('otherNames', JSON.stringify(otherNames));
 
+            // Save the selected review level, if any
             const reviewLevel = document.querySelector('input[name="reviewLevel"]:checked');
             if (reviewLevel) {
                 localStorage.setItem('reviewLevel', reviewLevel.value);
+            }
+
+            // Save academic award
+            const academicAward = document.getElementById('academicAward').value;
+            localStorage.setItem('academicAward', academicAward);
+
+            // Save research locations
+            const locations = Array.from(document.querySelectorAll('input[name="location"]:checked')).map(checkbox => checkbox.value);
+            localStorage.setItem('locations', JSON.stringify(locations));
+            const otherLocation = document.getElementById('otherLocation').value.trim();
+            if (otherLocation) {
+                localStorage.setItem('otherLocation', otherLocation);
+            }
+
+            // Save permissions required to access locations
+            const permissions = document.getElementById('permissions').value.trim();
+            localStorage.setItem('permissions', permissions);
+
+            // Save other ethics committee review details
+            const otherCommitteeReview = document.querySelector('input[name="otherCommitteeReview"]:checked').value;
+            localStorage.setItem('otherCommitteeReview', otherCommitteeReview);
+            if (otherCommitteeReview === 'Yes') {
+                const detailsOutcome = document.getElementById('detailsOutcome').value.trim();
+                localStorage.setItem('detailsOutcome', detailsOutcome);
             }
         }
 
@@ -274,6 +315,7 @@
         function toggleReviewDetails(show) {
             const reviewDetails = document.getElementById('reviewDetails');
             reviewDetails.style.display = show ? 'block' : 'none';
+            document.getElementById('detailsOutcome').required = show;
         }
 
         function toggleOtherLocation(checkbox) {
@@ -281,6 +323,7 @@
             otherLocation.style.display = checkbox.checked ? 'block' : 'none';
         }
     </script>
+
 </body>
 
 </html>
