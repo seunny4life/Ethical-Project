@@ -88,20 +88,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // Check if cookies consent is already given
-            if (!localStorage.getItem('cookiesConsent')) {
-                $('#cookiesModal').modal('show');
-            }
-
-            // Set cookies consent on button click
-            $('#acceptCookies').click(function () {
-                localStorage.setItem('cookiesConsent', 'true');
-                $('#cookiesModal').modal('hide');
-            });
-        });
-    </script>
 </body>
 
 </html>

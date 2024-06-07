@@ -9,6 +9,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Link to custom CSS -->
     <link href="/Design/styles.css" rel="stylesheet" />
+    <!-- jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -26,6 +28,13 @@
                 on Loop.
             </p>
         </fieldset>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button type="button" class="btn btn-primary" onclick="generatePDF()">Generate PDF</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset Form</button>
+            <button type="button" class="btn btn-info" onclick="retrieveInfo()">Retrieve Info</button>
+        </div>
     </div>
     <br /><br />
 
@@ -33,6 +42,142 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script to generate PDF, reset form, and retrieve info -->
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Helper functions for adding content
+            const addSectionHeader = (title, yPos) => {
+                doc.setFontSize(14);
+                doc.setFont('Helvetica', 'bold');
+                doc.setFillColor(0, 0, 255);
+                doc.rect(10, yPos, 190, 10, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.text(title, 15, yPos + 7);
+                doc.setTextColor(0, 0, 0);
+                return yPos + 15;
+            };
+
+            const addSubsection = (title, content, yPos) => {
+                doc.setFontSize(12);
+                doc.setFont('Helvetica', 'bold');
+                doc.text(title, 10, yPos);
+                doc.setFont('Helvetica', 'normal');
+                const lines = doc.splitTextToSize(content, 180);
+                doc.text(lines, 20, yPos + 5);
+                return yPos + 5 + lines.length * 10;
+            };
+
+            const addNewPageIfNeeded = (yPos) => {
+                if (yPos > 280) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                return yPos;
+            };
+
+            let yPosition = 20;
+
+            // Title
+            doc.setFontSize(16);
+            doc.setFont('Helvetica', 'bold');
+            doc.text('Research Ethics Application Form', 105, yPosition, null, null, 'center');
+            yPosition += 20;
+
+            // Section 1
+            yPosition = addSectionHeader('SECTION 1 – GENERAL DETAILS', yPosition);
+
+            // Project Title
+            const projectTitle = localStorage.getItem('projectTitle') || 'Not provided';
+            yPosition = addSubsection('1.1 Project Title:', projectTitle, yPosition);
+
+            // Applicant Details
+            const piNames = JSON.parse(localStorage.getItem('piNames')) || ['Not provided'];
+            const piContent = piNames.length > 0 ? piNames.join('\n') : 'Not provided';
+            yPosition = addSubsection('1.2 Applicant Details (Principal Investigators):', piContent, yPosition);
+
+            const otherNames = JSON.parse(localStorage.getItem('otherNames')) || [];
+            if (otherNames.length > 0) {
+                const otherContent = otherNames.join('\n');
+                yPosition = addSubsection('Other Investigators:', otherContent, yPosition);
+            }
+
+            // Key Project Dates
+            const startDate = localStorage.getItem('startDate') || 'Not provided';
+            const endDate = localStorage.getItem('endDate') || 'Not provided';
+            const completionDate = localStorage.getItem('completionDate') || 'Not provided';
+            const keyDates = `Proposed start date for data collection: ${startDate}\nProposed end date for data collection: ${endDate}\nProposed project completion date: ${completionDate}`;
+            yPosition = addSubsection('1.3 Key Project Dates:', keyDates, yPosition);
+
+            // Level of Review
+            const reviewLevel = localStorage.getItem('reviewLevel') || 'Not provided';
+            yPosition = addSubsection('1.4 Level of Review:', reviewLevel, yPosition);
+
+            // Academic Award
+            const academicAward = localStorage.getItem('academicAward') || 'Not provided';
+            yPosition = addSubsection('1.5 Academic Award:', academicAward, yPosition);
+
+            // Locations
+            const locations = JSON.parse(localStorage.getItem('locations')) || [];
+            const otherLocation = localStorage.getItem('otherLocation') || '';
+            let locationDetails = locations.join(', ');
+            if (otherLocation) {
+                locationDetails += `, Other: ${otherLocation}`;
+            }
+            yPosition = addSubsection('1.6 Locations:', locationDetails, yPosition);
+
+            // Permissions
+            const permissions = localStorage.getItem('permissions') || 'Not provided';
+            yPosition = addSubsection('1.7 Permissions Required to Access Locations:', permissions, yPosition);
+
+            // Other Ethics Committee Review
+            const otherCommitteeReview = localStorage.getItem('otherCommitteeReview') || 'Not provided';
+            let reviewDetails = `Has this project been submitted to another research ethics committee for review? ${otherCommitteeReview}`;
+            if (otherCommitteeReview === 'Yes') {
+                const detailsOutcome = localStorage.getItem('detailsOutcome') || 'Not provided';
+                reviewDetails += `\nDetails on the outcome: ${detailsOutcome}`;
+            }
+            yPosition = addSubsection('1.8 Other Ethics Committee Review:', reviewDetails, yPosition);
+
+            // Check if a new page is needed
+            yPosition = addNewPageIfNeeded(yPosition);
+
+            // Continue with other sections as needed...
+
+            // Save PDF
+            doc.save('research_submission.pdf');
+        }
+
+        function resetForm() {
+            // Clear all localStorage items
+            localStorage.clear();
+            alert("Form has been reset.");
+            window.location.href = 'page_1.html'; // Redirect to the first page of the form
+        }
+
+        function retrieveInfo() {
+            const retrievedData = {
+                projectTitle: localStorage.getItem('projectTitle'),
+                piNames: JSON.parse(localStorage.getItem('piNames')),
+                otherNames: JSON.parse(localStorage.getItem('otherNames')),
+                startDate: localStorage.getItem('startDate'),
+                endDate: localStorage.getItem('endDate'),
+                completionDate: localStorage.getItem('completionDate'),
+                reviewLevel: localStorage.getItem('reviewLevel'),
+                academicAward: localStorage.getItem('academicAward'),
+                locations: JSON.parse(localStorage.getItem('locations')),
+                otherLocation: localStorage.getItem('otherLocation'),
+                permissions: localStorage.getItem('permissions'),
+                otherCommitteeReview: localStorage.getItem('otherCommitteeReview'),
+                detailsOutcome: localStorage.getItem('detailsOutcome')
+            };
+
+            alert("Retrieved Information: " + JSON.stringify(retrievedData, null, 2));
+        }
+    </script>
 </body>
 
 </html>

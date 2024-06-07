@@ -9,8 +9,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Link to custom CSS -->
     <link href="/Design/styles.css" rel="stylesheet" />
-    <!-- jsPDF library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +18,7 @@
             SECTION 6 – SUBMISSION CHECKLIST AND RESEARCHER DECLARATION
         </h2>
         <div class="form-container">
-            <form id="submissionForm" onsubmit="return handleSubmit(event)">
+            <form id="submissionForm" onsubmit="return validateForm()">
                 <fieldset class="fieldset">
                     <legend>
                         6.1 Please confirm all required supplementary documentation to be included in this application
@@ -38,61 +36,83 @@
                             <tr>
                                 <td>Participant Information Sheet/s</td>
                                 <td>
-                                    <input type="radio" id="infoSheet_yes" name="infoSheet" value="Yes" class="infoSheet" />
+                                    <input type="radio" id="infoSheet_yes" name="infoSheet" value="Yes"
+                                        class="infoSheet" />
                                 </td>
                                 <td>
-                                    <input type="radio" id="infoSheet_na" name="infoSheet" value="N/A" class="infoSheet" />
+                                    <input type="radio" id="infoSheet_na" name="infoSheet" value="N/A"
+                                        class="infoSheet" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Informed Consent Form/s</td>
-                                <td><input type="radio" id="consentForms_yes" name="consentForms" value="Yes" class="consentForms"></td>
-                                <td><input type="radio" id="consentForms_na" name="consentForms" value="N/A" class="consentForms"></td>
+                                <td><input type="radio" id="consentForms_yes" name="consentForms" value="Yes"
+                                        class="consentForms"></td>
+                                <td><input type="radio" id="consentForms_na" name="consentForms" value="N/A"
+                                        class="consentForms"></td>
                             </tr>
                             <tr>
                                 <td>Informed Assent Form/s</td>
-                                <td><input type="radio" id="assentForms_yes" name="assentForms" value="Yes" class="assentForms"></td>
-                                <td><input type="radio" id="assentForms_na" name="assentForms" value="N/A" class="assentForms"></td>
+                                <td><input type="radio" id="assentForms_yes" name="assentForms" value="Yes"
+                                        class="assentForms"></td>
+                                <td><input type="radio" id="assentForms_na" name="assentForms" value="N/A"
+                                        class="assentForms"></td>
                             </tr>
                             <tr>
                                 <td>Recruitment Advertisement</td>
-                                <td><input type="radio" id="recruitmentAd_yes" name="recruitmentAd" value="Yes" class="recruitmentAd"></td>
-                                <td><input type="radio" id="recruitmentAd_na" name="recruitmentAd" value="N/A" class="recruitmentAd"></td>
+                                <td><input type="radio" id="recruitmentAd_yes" name="recruitmentAd" value="Yes"
+                                        class="recruitmentAd"></td>
+                                <td><input type="radio" id="recruitmentAd_na" name="recruitmentAd" value="N/A"
+                                        class="recruitmentAd"></td>
                             </tr>
                             <tr>
                                 <td>Questionnaire/Survey</td>
-                                <td><input type="radio" id="questionnaire_yes" name="questionnaire" value="Yes" class="questionnaire"></td>
-                                <td><input type="radio" id="questionnaire_na" name="questionnaire" value="N/A" class="questionnaire"></td>
+                                <td><input type="radio" id="questionnaire_yes" name="questionnaire" value="Yes"
+                                        class="questionnaire"></td>
+                                <td><input type="radio" id="questionnaire_na" name="questionnaire" value="N/A"
+                                        class="questionnaire"></td>
                             </tr>
                             <tr>
                                 <td>Interview/Focus Group Questions</td>
-                                <td><input type="radio" id="interviewQuestions_yes" name="interviewQuestions" value="Yes" class="interviewQuestions"></td>
-                                <td><input type="radio" id="interviewQuestions_na" name="interviewQuestions" value="N/A" class="interviewQuestions"></td>
+                                <td><input type="radio" id="interviewQuestions_yes" name="interviewQuestions"
+                                        value="Yes" class="interviewQuestions"></td>
+                                <td><input type="radio" id="interviewQuestions_na" name="interviewQuestions" value="N/A"
+                                        class="interviewQuestions"></td>
                             </tr>
                             <tr>
                                 <td>Debriefing Material</td>
-                                <td><input type="radio" id="debriefingMaterial_yes" name="debriefingMaterial" value="Yes" class="debriefingMaterial"></td>
-                                <td><input type="radio" id="debriefingMaterial_na" name="debriefingMaterial" value="N/A" class="debriefingMaterial"></td>
+                                <td><input type="radio" id="debriefingMaterial_yes" name="debriefingMaterial"
+                                        value="Yes" class="debriefingMaterial"></td>
+                                <td><input type="radio" id="debriefingMaterial_na" name="debriefingMaterial" value="N/A"
+                                        class="debriefingMaterial"></td>
                             </tr>
                             <tr>
                                 <td>Bibliography</td>
-                                <td><input type="radio" id="bibliography_yes" name="bibliography" value="Yes" class="bibliography"></td>
-                                <td><input type="radio" id="bibliography_na" name="bibliography" value="N/A" class="bibliography"></td>
+                                <td><input type="radio" id="bibliography_yes" name="bibliography" value="Yes"
+                                        class="bibliography"></td>
+                                <td><input type="radio" id="bibliography_na" name="bibliography" value="N/A"
+                                        class="bibliography"></td>
                             </tr>
                             <tr>
                                 <td>Approval from another Research Ethics Committee</td>
-                                <td><input type="radio" id="ethicsApproval_yes" name="ethicsApproval" value="Yes" class="ethicsApproval"></td>
-                                <td><input type="radio" id="ethicsApproval_na" name="ethicsApproval" value="N/A" class="ethicsApproval"></td>
+                                <td><input type="radio" id="ethicsApproval_yes" name="ethicsApproval" value="Yes"
+                                        class="ethicsApproval"></td>
+                                <td><input type="radio" id="ethicsApproval_na" name="ethicsApproval" value="N/A"
+                                        class="ethicsApproval"></td>
                             </tr>
                             <tr>
                                 <td>Evidence of other external approvals (e.g. Board of Management letter)</td>
-                                <td><input type="radio" id="externalApprovals_yes" name="externalApprovals" value="Yes" class="externalApprovals"></td>
-                                <td><input type="radio" id="externalApprovals_na" name="externalApprovals" value="N/A" class="externalApprovals"></td>
+                                <td><input type="radio" id="externalApprovals_yes" name="externalApprovals" value="Yes"
+                                        class="externalApprovals"></td>
+                                <td><input type="radio" id="externalApprovals_na" name="externalApprovals" value="N/A"
+                                        class="externalApprovals"></td>
                             </tr>
                             <tr>
                                 <td>Evidence of internal approvals (e.g. BSC approval review letter)</td>
-                                <td><input type="radio" id="internalApprovals_yes" name="internalApprovals" value="Yes" class="internalApprovals"></td>
-                                <td><input type="radio" id="internalApprovals_na" name="internalApprovals" value="N/A" class="internalApprovals"></td>
+                                <td><input type="radio" id="internalApprovals_yes" name="internalApprovals" value="Yes"
+                                        class="internalApprovals"></td>
+                                <td><input type="radio" id="internalApprovals_na" name="internalApprovals" value="N/A"
+                                        class="internalApprovals"></td>
                             </tr>
                             <tr>
                                 <td>Other – provide details here:</td>
@@ -107,7 +127,8 @@
                 <fieldset class="fieldset">
                     <legend>6.2 Signed Declaration</legend>
                     <p>
-                        <i>By submitting this form, the applicant (and supervisor if applicable) agree to the following:</i>
+                        <i>By submitting this form, the applicant (and supervisor if applicable) agree to the
+                            following:</i>
                     </p>
                     <p>
                         <i>The information contained herein is to the best of my knowledge and belief accurate. I have
@@ -167,19 +188,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        function handleSubmit(event) {
-            event.preventDefault(); // Prevent default form submission
-            if (!validateForm()) {
-                return false;
-            }
-            generatePDF(); // Generate PDF
-            setTimeout(() => {
-                window.location.href = 'page_7.html'; // Redirect to the next page
-            }, 1000); // Wait for a second to ensure PDF is generated and downloaded
-            return false; // Ensure the form doesn't perform a default submission
-        }
 
+    <script>
         function validateForm() {
             var rows = document.querySelectorAll('tbody tr');
             var allValid = true;
@@ -200,7 +210,9 @@
                 return false; // Prevent form submission if not valid
             }
 
-            return true;
+            alert('Form submitted successfully! Redirecting to the next page...');
+            window.location.href = 'page_7.html'; // Redirect to the next page
+            return false; // Ensure the form doesn't perform a default submission
         }
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -229,67 +241,6 @@
                     signaturesContainer.appendChild(signatureFieldset);
                 }
             });
-        }
-
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            let yPosition = 10;
-
-            const keys = [
-                'projectTitle', 'startDate', 'endDate', 'completionDate', 'permissions', 'detailsOutcome', 'academicAward', 
-                'supervisorSignature', 'supervisorName', 'supervisorDateSigned'
-            ];
-
-            // Add general details from localStorage
-            keys.forEach(key => {
-                const value = localStorage.getItem(key);
-                if (value) {
-                    doc.text(10, yPosition, `${key}: ${value}`);
-                    yPosition += 10;
-                }
-            });
-
-            // Add dynamically stored investigator details
-            const principalInvestigators = JSON.parse(localStorage.getItem('principalInvestigators')) || [];
-            principalInvestigators.forEach((pi, index) => {
-                doc.text(10, yPosition, `Principal Investigator ${index + 1}:`);
-                yPosition += 10;
-                doc.text(20, yPosition, `Name: ${pi.piName}`);
-                yPosition += 10;
-                doc.text(20, yPosition, `School/Unit: ${pi.schoolUnit}`);
-                yPosition += 10;
-                doc.text(20, yPosition, `Email: ${pi.email}`);
-                yPosition += 10;
-            });
-
-            const otherInvestigators = JSON.parse(localStorage.getItem('otherInvestigators')) || [];
-            otherInvestigators.forEach((oi, index) => {
-                doc.text(10, yPosition, `Other Investigator ${index + 1}:`);
-                yPosition += 10;
-                doc.text(20, yPosition, `Name: ${oi.otherName}`);
-                yPosition += 10;
-                doc.text(20, yPosition, `School/Unit: ${oi.otherUnit}`);
-                yPosition += 10;
-                doc.text(20, yPosition, `Email: ${oi.otherEmail}`);
-                yPosition += 10;
-            });
-
-            // Add locations
-            const locations = JSON.parse(localStorage.getItem('locations')) || [];
-            if (locations.length > 0) {
-                doc.text(10, yPosition, `Locations: ${locations.join(', ')}`);
-                yPosition += 10;
-            }
-
-            const otherLocation = localStorage.getItem('otherLocation');
-            if (otherLocation) {
-                doc.text(10, yPosition, `Other Location: ${otherLocation}`);
-                yPosition += 10;
-            }
-
-            doc.save('research_submission.pdf');
         }
     </script>
 
