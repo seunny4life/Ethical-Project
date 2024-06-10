@@ -182,30 +182,75 @@
 
     <script>
         function validateForm() {
+            // Validate Section 1.1 - Project Title
+            const projectTitle = document.getElementById("projectTitle").value.trim();
+            if (projectTitle === "") {
+                alert("Please enter the Project Title.");
+                document.getElementById("projectTitle").focus();
+                return false;
+            }
+
+            // Validate Section 1.2 - Applicant Details
+            const piNames = document.querySelectorAll(".piName");
+            for (let piName of piNames) {
+                if (piName.value.trim() === "") {
+                    alert("Please enter the name of all Principal Investigators.");
+                    piName.focus();
+                    return false;
+                }
+            }
+
+            const schoolUnits = document.querySelectorAll("input[name='schoolUnit']");
+            for (let schoolUnit of schoolUnits) {
+                if (schoolUnit.value.trim() === "") {
+                    alert("Please enter the school/unit of all Principal Investigators.");
+                    schoolUnit.focus();
+                    return false;
+                }
+            }
+
+            const principalEmails = document.querySelectorAll("#principalInvestigatorSection input[name='email']");
+            for (let email of principalEmails) {
+                if (email.value.trim() === "") {
+                    alert("Please enter the email of all Principal Investigators.");
+                    email.focus();
+                    return false;
+                }
+            }
+
+            // Validate Section 1.3 - Key Project Dates
             const startDate = document.getElementById("startDate").value;
             const endDate = document.getElementById("endDate").value;
             const completionDate = document.getElementById("completionDate").value;
+            const today = new Date().setHours(0, 0, 0, 0);
+
+            if (new Date(startDate).setHours(0, 0, 0, 0) < today) {
+                alert("Proposed start date for data collection must be today or a future date.");
+                document.getElementById("startDate").focus();
+                return false;
+            }
 
             if (new Date(endDate) <= new Date(startDate)) {
                 alert("End date must be after start date.");
+                document.getElementById("endDate").focus();
                 return false;
             }
 
             if (new Date(completionDate) <= new Date(endDate)) {
                 alert("Project completion date must be after end date.");
+                document.getElementById("completionDate").focus();
                 return false;
             }
 
-            const requiredFields = document.querySelectorAll("#applicationForm input[required], #applicationForm textarea[required]");
-            for (let field of requiredFields) {
-                if (field.value.trim() === "") {
-                    alert("Please fill all the required fields.");
-                    field.focus();
-                    return false;
-                }
+            // Validate Section 1.5 - Academic Award
+            const academicAward = document.getElementById("academicAward").value;
+            if (academicAward === "") {
+                alert("Please select an academic award.");
+                document.getElementById("academicAward").focus();
+                return false;
             }
 
-            // Check if at least one checkbox is selected in section 1.6
+            // Validate Section 1.6 - Research Location
             const locationCheckboxes = document.querySelectorAll('input[name="location"]');
             let isLocationSelected = false;
             for (let checkbox of locationCheckboxes) {
@@ -220,65 +265,85 @@
                 return false;
             }
 
-            saveFormData(); // Save form data to localStorage
+            // Validate Section 1.7 - Access to Participants
+            const permissions = document.getElementById("permissions").value.trim();
+            if (permissions === "") {
+                alert("Please specify the additional permissions required to access these locations.");
+                document.getElementById("permissions").focus();
+                return false;
+            }
 
+            // Validate Section 1.8 - Other Ethics Committee Review
+            const otherCommitteeReview = document.querySelector('input[name="otherCommitteeReview"]:checked');
+            if (!otherCommitteeReview) {
+                alert("Please specify if the project has been submitted to another research ethics committee for review.");
+                return false;
+            }
+
+            if (otherCommitteeReview.value === "Yes") {
+                const detailsOutcome = document.getElementById("detailsOutcome").value.trim();
+                if (detailsOutcome === "") {
+                    alert("Please provide details on the outcome of the other ethics committee review.");
+                    document.getElementById("detailsOutcome").focus();
+                    return false;
+                }
+            }
+
+            saveFormData();
             window.location.href = 'page_2.html';
             return false;
         }
 
         function saveFormData() {
-            // Save project title
-            const projectTitle = document.getElementById('projectTitle').value.trim();
-            localStorage.setItem('projectTitle', projectTitle);
+            const formData = new FormData(document.getElementById('applicationForm'));
+            let piNames = [];
+            let piSchools = [];
+            let piEmails = [];
+            let otherNames = [];
+            let otherUnits = [];
+            let otherEmails = [];
+            let locations = [];
 
-            // Save key project dates
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const completionDate = document.getElementById('completionDate').value;
-            localStorage.setItem('startDate', startDate);
-            localStorage.setItem('endDate', endDate);
-            localStorage.setItem('completionDate', completionDate);
+            formData.forEach((value, key) => {
+                if (key.startsWith('piName')) {
+                    piNames.push(value);
+                } else if (key.startsWith('schoolUnit')) {
+                    piSchools.push(value);
+                } else if (key.startsWith('email') && key.includes('pi')) {
+                    piEmails.push(value);
+                } else if (key.startsWith('otherName')) {
+                    otherNames.push(value);
+                } else if (key.startsWith('otherUnit')) {
+                    otherUnits.push(value);
+                } else if (key.startsWith('otherEmail')) {
+                    otherEmails.push(value);
+                } else if (key.startsWith('location')) {
+                    locations.push(value);
+                } else {
+                    localStorage.setItem(key, value);
+                }
+            });
 
-            // Save principal investigator names, trimming spaces and filtering out empty names
-            const piNames = Array.from(document.getElementsByClassName('piName'))
-                .map(input => input.value.trim())
-                .filter(name => name !== "");
-            localStorage.setItem('piNames', JSON.stringify(piNames));
-
-            // Save other investigator names in a similar manner
-            const otherNames = Array.from(document.getElementsByClassName('otherName'))
-                .map(input => input.value.trim())
-                .filter(name => name !== "");
-            localStorage.setItem('otherNames', JSON.stringify(otherNames));
-
-            // Save the selected review level, if any
-            const reviewLevel = document.querySelector('input[name="reviewLevel"]:checked');
-            if (reviewLevel) {
-                localStorage.setItem('reviewLevel', reviewLevel.value);
+            if (piNames.length > 0) {
+                localStorage.setItem('piNames', JSON.stringify(piNames));
             }
-
-            // Save academic award
-            const academicAward = document.getElementById('academicAward').value;
-            localStorage.setItem('academicAward', academicAward);
-
-            // Save research locations
-            const locations = Array.from(document.querySelectorAll('input[name="location"]:checked')).map(checkbox => checkbox.value);
-            localStorage.setItem('locations', JSON.stringify(locations));
-            const otherLocation = document.getElementById('otherLocation').value.trim();
-            if (otherLocation) {
-                localStorage.setItem('otherLocation', otherLocation);
+            if (piSchools.length > 0) {
+                localStorage.setItem('piSchools', JSON.stringify(piSchools));
             }
-
-            // Save permissions required to access locations
-            const permissions = document.getElementById('permissions').value.trim();
-            localStorage.setItem('permissions', permissions);
-
-            // Save other ethics committee review details
-            const otherCommitteeReview = document.querySelector('input[name="otherCommitteeReview"]:checked').value;
-            localStorage.setItem('otherCommitteeReview', otherCommitteeReview);
-            if (otherCommitteeReview === 'Yes') {
-                const detailsOutcome = document.getElementById('detailsOutcome').value.trim();
-                localStorage.setItem('detailsOutcome', detailsOutcome);
+            if (piEmails.length > 0) {
+                localStorage.setItem('piEmails', JSON.stringify(piEmails));
+            }
+            if (otherNames.length > 0) {
+                localStorage.setItem('otherNames', JSON.stringify(otherNames));
+            }
+            if (otherUnits.length > 0) {
+                localStorage.setItem('otherUnits', JSON.stringify(otherUnits));
+            }
+            if (otherEmails.length > 0) {
+                localStorage.setItem('otherEmails', JSON.stringify(otherEmails));
+            }
+            if (locations.length > 0) {
+                localStorage.setItem('locations', JSON.stringify(locations));
             }
         }
 
@@ -323,6 +388,7 @@
             otherLocation.style.display = checkbox.checked ? 'block' : 'none';
         }
     </script>
+
 
 </body>
 

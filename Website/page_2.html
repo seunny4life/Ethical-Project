@@ -9,6 +9,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Link to custom CSS -->
     <link href="/Design/styles.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -144,8 +145,8 @@
                                 id="other-data-collection" onclick="toggleOtherDetails()">
                             <label class="form-check-label" for="other-data-collection">Other (please specify)</label>
                             <textarea class="form-control mt-2" id="other-data-collection-details"
-                            name="other-data-collection-details" style="display: none;"></textarea>
-                        </div>                        
+                                name="other-data-collection-details" style="display: none;"></textarea>
+                        </div>
                     </div>
                 </fieldset>
                 <br>
@@ -485,202 +486,235 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    // Function to validate form fields before submission
-    function validateForm() {
-        // Get all required textarea fields
-        const requiredFields = document.querySelectorAll("textarea[required]");
-        // Loop through each required field
-        for (let field of requiredFields) {
-            // Check if field is empty
-            if (field.value.trim() === "") {
-                // If empty, show alert and focus on the field
-                alert("Please fill all the required fields.");
-                field.focus();
-                return false; // Prevent form submission
-            }
-        }
-
-        // Check if at least one checkbox in Section 2.1 is selected
-        const section21Checkboxes = document.querySelectorAll("input[name='project-category']:checked");
-        if (section21Checkboxes.length === 0) {
-            alert("Please select at least one technology involved in the project in Section 2.1.");
-            return false;
-        }
-
-        // Check if at least one checkbox in Section 2.5 is selected
-        const section25Checkboxes = document.querySelectorAll("input[name='data-collection']:checked");
-        if (section25Checkboxes.length === 0) {
-            alert("Please select at least one data collection method in Section 2.5.");
-            return false;
-        }
-
-        // Check if "Other" is selected in Section 2.5 and the corresponding textarea is filled
-        const otherDataCollection = document.getElementById("other-data-collection");
-        if (otherDataCollection.checked) {
-            const otherDataCollectionDetails = document.getElementById("other-data-collection-details");
-            if (otherDataCollectionDetails.value.trim() === "") {
-                alert("Please fill out the details for the 'Other' data collection method in Section 2.5.");
-                otherDataCollectionDetails.focus();
-                return false;
-            }
-        }
-
-        // Check if at least one checkbox in Section 2.6a is selected
-        const section26aCheckboxes = document.querySelectorAll("input[name='participants-group']:checked");
-        if (section26aCheckboxes.length === 0) {
-            alert("Please select at least one participant group in Section 2.6a.");
-            return false;
-        }
-
-        // Check if at least one checkbox in Section 2.6b is selected
-        const section26bCheckboxes = document.querySelectorAll("input[name='participants-age']:checked");
-        if (section26bCheckboxes.length === 0) {
-            alert("Please select at least one age range in Section 2.6b.");
-            return false;
-        }
-
-        // Check if at least one checkbox in Section 2.6c is selected
-        const section26cCheckboxes = document.querySelectorAll("input[name='choosing-demographics']:checked");
-        if (section26cCheckboxes.length === 0) {
-            alert("Please select at least one demographic characteristic in Section 2.6c.");
-            return false;
-        }
-
-        // Check if all corresponding textareas for Section 2.6c are filled if needed
-        let section26cValid = true;
-        section26cCheckboxes.forEach(checkbox => {
-            const textarea = document.getElementById(`${checkbox.id}-details`);
-            if (textarea && textarea.style.display === 'block' && textarea.value.trim() === "") {
-                section26cValid = false;
-                textarea.focus();
-            }
-        });
-
-        if (!section26cValid) {
-            alert("Please fill out the details for all selected demographic characteristics in Section 2.6c that require additional information.");
-            return false;
-        }
-
-        // Check if at least one checkbox in Section 2.7 is selected and its corresponding textarea is filled
-        const section27Checkboxes = document.querySelectorAll("input[name='recruitment-method']:checked");
-        if (section27Checkboxes.length === 0) {
-            alert("Please select at least one recruitment method in Section 2.7 and provide the corresponding details.");
-            return false;
-        }
-
-        let allTextareasFilled = true;
-        section27Checkboxes.forEach(checkbox => {
-            const textarea = document.getElementById(`${checkbox.id}-details`);
-            if (textarea && textarea.value.trim() === "") {
-                allTextareasFilled = false;
-                textarea.focus();
-            }
-        });
-
-        if (!allTextareasFilled) {
-            alert("Please fill out the details for all selected recruitment methods.");
-            return false;
-        }
-
-        // Check if at least one checkbox in Section 2.8 is selected and its corresponding textarea is filled if "Other" is selected
-        const section28Checkboxes = document.querySelectorAll("input[name='vulnerability']:checked");
-        if (section28Checkboxes.length === 0) {
-            alert("Please select at least one participant vulnerability category in Section 2.8.");
-            return false;
-        }
-
-        let section28Valid = true;
-        section28Checkboxes.forEach(checkbox => {
-            if (checkbox.id === "other-vulnerability") {
-                const textarea = document.getElementById("other-vulnerability-details");
-                if (textarea && textarea.value.trim() === "") {
-                    section28Valid = false;
-                    textarea.focus();
+    <script>
+        // Function to validate form fields before submission
+        function validateForm() {
+            // Get all required textarea fields
+            const requiredFields = document.querySelectorAll("textarea[required]");
+            // Loop through each required field
+            for (let field of requiredFields) {
+                // Check if field is empty
+                if (field.value.trim() === "") {
+                    // If empty, show alert and focus on the field
+                    alert("Please fill all the required fields.");
+                    field.focus();
+                    return false; // Prevent form submission
                 }
             }
-        });
 
-        if (!section28Valid) {
-            alert("Please fill out the special arrangements for the selected 'Other' vulnerability category.");
-            return false;
-        }
-
-        // Check if at least one checkbox in Section 2.10 is selected and its corresponding textarea is filled if needed
-        const section210Checkboxes = document.querySelectorAll("input[name='dissemination-method']:checked");
-        if (section210Checkboxes.length === 0) {
-            alert("Please select at least one dissemination method in Section 2.10.");
-            return false;
-        }
-
-        let section210Valid = true;
-        section210Checkboxes.forEach(checkbox => {
-            const textarea = document.getElementById(`${checkbox.id}-details`);
-            if (textarea && textarea.style.display === 'block' && textarea.value.trim() === "") {
-                section210Valid = false;
-                textarea.focus();
+            // Check if at least one checkbox in Section 2.1 is selected
+            const section21Checkboxes = document.querySelectorAll("input[name='project-category']:checked");
+            if (section21Checkboxes.length === 0) {
+                alert("Please select at least one technology involved in the project in Section 2.1.");
+                return false;
             }
-        });
 
-        if (!section210Valid) {
-            alert("Please fill out the details for all selected dissemination methods that require additional information.");
-            return false;
+            // Check if at least one checkbox in Section 2.5 is selected
+            const section25Checkboxes = document.querySelectorAll("input[name='data-collection']:checked");
+            if (section25Checkboxes.length === 0) {
+                alert("Please select at least one data collection method in Section 2.5.");
+                return false;
+            }
+
+            // Check if "Other" is selected in Section 2.5 and the corresponding textarea is filled
+            const otherDataCollection = document.getElementById("other-data-collection");
+            if (otherDataCollection.checked) {
+                const otherDataCollectionDetails = document.getElementById("other-data-collection-details");
+                if (otherDataCollectionDetails.value.trim() === "") {
+                    alert("Please fill out the details for the 'Other' data collection method in Section 2.5.");
+                    otherDataCollectionDetails.focus();
+                    return false;
+                }
+            }
+
+            // Check if at least one checkbox in Section 2.6a is selected
+            const section26aCheckboxes = document.querySelectorAll("input[name='participants-group']:checked");
+            if (section26aCheckboxes.length === 0) {
+                alert("Please select at least one participant group in Section 2.6a.");
+                return false;
+            }
+
+            // Check if at least one checkbox in Section 2.6b is selected
+            const section26bCheckboxes = document.querySelectorAll("input[name='participants-age']:checked");
+            if (section26bCheckboxes.length === 0) {
+                alert("Please select at least one age range in Section 2.6b.");
+                return false;
+            }
+
+            // Check if at least one checkbox in Section 2.6c is selected
+            const section26cCheckboxes = document.querySelectorAll("input[name='choosing-demographics']:checked");
+            if (section26cCheckboxes.length === 0) {
+                alert("Please select at least one demographic characteristic in Section 2.6c.");
+                return false;
+            }
+
+            // Check if all corresponding textareas for Section 2.6c are filled if needed
+            let section26cValid = true;
+            section26cCheckboxes.forEach(checkbox => {
+                const textarea = document.getElementById(`${checkbox.id}-details`);
+                if (textarea && textarea.style.display === 'block' && textarea.value.trim() === "") {
+                    section26cValid = false;
+                    textarea.focus();
+                }
+            });
+
+            if (!section26cValid) {
+                alert("Please fill out the details for all selected demographic characteristics in Section 2.6c that require additional information.");
+                return false;
+            }
+
+            // Check if at least one checkbox in Section 2.7 is selected and its corresponding textarea is filled
+            const section27Checkboxes = document.querySelectorAll("input[name='recruitment-method']:checked");
+            if (section27Checkboxes.length === 0) {
+                alert("Please select at least one recruitment method in Section 2.7 and provide the corresponding details.");
+                return false;
+            }
+
+            let allTextareasFilled = true;
+            section27Checkboxes.forEach(checkbox => {
+                const textarea = document.getElementById(`${checkbox.id}-details`);
+                if (textarea && textarea.value.trim() === "") {
+                    allTextareasFilled = false;
+                    textarea.focus();
+                }
+            });
+
+            if (!allTextareasFilled) {
+                alert("Please fill out the details for all selected recruitment methods.");
+                return false;
+            }
+
+            // Check if at least one checkbox in Section 2.8 is selected and its corresponding textarea is filled if "Other" is selected
+            const section28Checkboxes = document.querySelectorAll("input[name='vulnerability']:checked");
+            if (section28Checkboxes.length === 0) {
+                alert("Please select at least one participant vulnerability category in Section 2.8.");
+                return false;
+            }
+
+            let section28Valid = true;
+            section28Checkboxes.forEach(checkbox => {
+                if (checkbox.id === "other-vulnerability") {
+                    const textarea = document.getElementById("other-vulnerability-details");
+                    if (textarea && textarea.value.trim() === "") {
+                        section28Valid = false;
+                        textarea.focus();
+                    }
+                }
+            });
+
+            if (!section28Valid) {
+                alert("Please fill out the special arrangements for the selected 'Other' vulnerability category.");
+                return false;
+            }
+
+            // Check if at least one checkbox in Section 2.10 is selected and its corresponding textarea is filled if needed
+            const section210Checkboxes = document.querySelectorAll("input[name='dissemination-method']:checked");
+            if (section210Checkboxes.length === 0) {
+                alert("Please select at least one dissemination method in Section 2.10.");
+                return false;
+            }
+
+            let section210Valid = true;
+            section210Checkboxes.forEach(checkbox => {
+                const textarea = document.getElementById(`${checkbox.id}-details`);
+                if (textarea && textarea.style.display === 'block' && textarea.value.trim() === "") {
+                    section210Valid = false;
+                    textarea.focus();
+                }
+            });
+
+            if (!section210Valid) {
+                alert("Please fill out the details for all selected dissemination methods that require additional information.");
+                return false;
+            }
+
+            // Save form data to localStorage
+            const formData = new FormData(document.getElementById('designMethodologyForm'));
+            formData.forEach((value, key) => {
+                localStorage.setItem(key, value);
+            });
+
+            // Save textareas
+            const textareas = document.querySelectorAll("textarea");
+            textareas.forEach(textarea => {
+                localStorage.setItem(textarea.id, textarea.value);
+            });
+
+            // Save checkboxes
+            const checkboxes = document.querySelectorAll("input[type='checkbox']");
+            checkboxes.forEach(checkbox => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+
+            // If all fields are filled, redirect to the next page
+            window.location.href = 'page_3.html';
+            return false; // Prevent form submission to handle redirection with JavaScript
         }
 
-        // Save form data to localStorage
-        const formData = new FormData(document.getElementById('designMethodologyForm'));
-        formData.forEach((value, key) => {
-            localStorage.setItem(key, value);
-        });
-
-        // Save specific selections from section 2.5 to localStorage
-        const surveyCheckbox = document.getElementById('surveys');
-        const interviewCheckbox = document.getElementById('interviews');
-        localStorage.setItem('surveysSelected', surveyCheckbox.checked);
-        localStorage.setItem('interviewsSelected', interviewCheckbox.checked);
-
-        // If all fields are filled, redirect to the next page
-        window.location.href = 'page_3.html';
-        return false; // Prevent form submission to handle redirection with JavaScript
-    }
-
-    // Function to toggle display of child involvement section based on checkbox status
-    function toggleChildInvolvementSection() {
-        const childrenCheckbox = document.getElementById('children');
-        const childInvolvementSection = document.getElementById('child-involvement-section');
-        if (childrenCheckbox.checked) {
-            // If checkbox is checked, show child involvement section
-            childInvolvementSection.style.display = 'block';
-        } else {
-            // If checkbox is unchecked, hide child involvement section
-            childInvolvementSection.style.display = 'none';
-        }
-    }
-
-    // Function to toggle display of other data collection details based on checkbox status
-    function toggleOtherDetails() {
-        const otherCheckbox = document.getElementById('other-data-collection');
-        const otherDetails = document.getElementById('other-data-collection-details');
-        if (otherCheckbox.checked) {
-            otherDetails.style.display = 'block';
-        } else {
-            otherDetails.style.display = 'none';
-        }
-    }
-
-    // Function to toggle display of textareas based on checkbox status
-    function toggleTextarea(textareaId) {
-        const textarea = document.getElementById(textareaId);
-        if (textarea) {
-            if (textarea.style.display === 'none') {
-                textarea.style.display = 'block';
+        // Function to toggle display of child involvement section based on checkbox status
+        function toggleChildInvolvementSection() {
+            const childrenCheckbox = document.getElementById('children');
+            const childInvolvementSection = document.getElementById('child-involvement-section');
+            if (childrenCheckbox.checked) {
+                // If checkbox is checked, show child involvement section
+                childInvolvementSection.style.display = 'block';
             } else {
-                textarea.style.display = 'none';
+                // If checkbox is unchecked, hide child involvement section
+                childInvolvementSection.style.display = 'none';
             }
         }
-    }
-</script>
 
+        // Function to toggle display of other data collection details based on checkbox status
+        function toggleOtherDetails() {
+            const otherCheckbox = document.getElementById('other-data-collection');
+            const otherDetails = document.getElementById('other-data-collection-details');
+            if (otherCheckbox.checked) {
+                otherDetails.style.display = 'block';
+            } else {
+                otherDetails.style.display = 'none';
+            }
+        }
+
+        // Function to toggle display of textareas based on checkbox status
+        function toggleTextarea(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            if (textarea) {
+                if (textarea.style.display === 'none') {
+                    textarea.style.display = 'block';
+                } else {
+                    textarea.style.display = 'none';
+                }
+            }
+        }
+
+        // Load saved data from localStorage when the page loads
+        window.onload = function () {
+            const formData = new FormData(document.getElementById('designMethodologyForm'));
+            formData.forEach((value, key) => {
+                if (localStorage.getItem(key)) {
+                    const input = document.querySelector(`[name="${key}"]`);
+                    if (input) input.value = localStorage.getItem(key);
+                }
+            });
+
+            // Load textareas
+            const textareas = document.querySelectorAll("textarea");
+            textareas.forEach(textarea => {
+                if (localStorage.getItem(textarea.id)) {
+                    textarea.value = localStorage.getItem(textarea.id);
+                }
+            });
+
+            // Load checkboxes
+            const checkboxes = document.querySelectorAll("input[type='checkbox']");
+            checkboxes.forEach(checkbox => {
+                if (localStorage.getItem(checkbox.id) === 'true') {
+                    checkbox.checked = true;
+                }
+            });
+        };
+
+    </script>
 
 </body>
 

@@ -207,7 +207,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             // Check if personal data is involved from localStorage
@@ -291,11 +290,48 @@
                 return false;
             }
 
+            // Save form data to localStorage
+            saveFormData();
+
             window.location.href = 'page_6.html'; // Redirect to next page
             return false; // Prevent form submission
         }
 
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const formData = new FormData(document.getElementById('consentForm'));
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            localStorage.setItem('formData', JSON.stringify(formObject));
+        }
+
+        // Function to populate form with data from localStorage
+        function populateFormData() {
+            const savedData = JSON.parse(localStorage.getItem('formData'));
+            if (savedData) {
+                for (const key in savedData) {
+                    if (savedData.hasOwnProperty(key)) {
+                        const element = document.getElementsByName(key)[0];
+                        if (element) {
+                            if (element.type === 'checkbox' || element.type === 'radio') {
+                                element.checked = true;
+                            } else {
+                                element.value = savedData[key];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Populate form data when the document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            populateFormData();
+        });
     </script>
+
 </body>
 
 </html>

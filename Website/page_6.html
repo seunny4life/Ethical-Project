@@ -165,7 +165,7 @@
                             submission.</i>
                     </p>
                     <label for="supervisorSignature"><i>Supervisor(s) Signature:</i> </label>
-                    <input type="text" id="supervisorSignature" name="supervisorSignature" required /><br /><br />
+                    <input type="text" id="supervisorSignature" name="supervisorSignature" /><br /><br />
                     <label for="supervisorName"><i>Print Name(s) here:</i></label>
                     <input type="text" id="supervisorName" name="supervisorName" required /><br /><br />
                     <label for="supervisorDateSigned"><i>Date:</i></label>
@@ -210,6 +210,9 @@
                 return false; // Prevent form submission if not valid
             }
 
+            // Save form data to localStorage
+            saveFormData();
+
             alert('Form submitted successfully! Redirecting to the next page...');
             window.location.href = 'page_7.html'; // Redirect to the next page
             return false; // Ensure the form doesn't perform a default submission
@@ -217,6 +220,7 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             populateSignatures();
+            populateFormData();
         });
 
         function populateSignatures() {
@@ -234,13 +238,42 @@
                     signatureFieldset.innerHTML = `
                         <legend>${name}</legend>
                         <label>Signature:</label>
-                        <input type="text" id="signature_${name.replace(/\s+/g, '_')}" name="signature_${name}" required>
+                        <input type="text" id="signature_${name.replace(/\s+/g, '_')}" name="signature_${name}">
                         <label>Date:</label>
                         <input type="date" id="dateSigned_${name.replace(/\s+/g, '_')}" name="dateSigned_${name}" required><br>
                     `;
                     signaturesContainer.appendChild(signatureFieldset);
                 }
             });
+        }
+
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const formData = new FormData(document.getElementById('submissionForm'));
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            localStorage.setItem('formData', JSON.stringify(formObject));
+        }
+
+        // Function to populate form with data from localStorage
+        function populateFormData() {
+            const savedData = JSON.parse(localStorage.getItem('formData'));
+            if (savedData) {
+                for (const key in savedData) {
+                    if (savedData.hasOwnProperty(key)) {
+                        const element = document.getElementsByName(key)[0];
+                        if (element) {
+                            if (element.type === 'checkbox' || element.type === 'radio') {
+                                element.checked = true;
+                            } else {
+                                element.value = savedData[key];
+                            }
+                        }
+                    }
+                }
+            }
         }
     </script>
 
