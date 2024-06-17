@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="Successful.css">
 </head>
+
 <body>
     <div class="container text-center mt-5">
         <h1 class="text-primary">Congratulations!</h1>
@@ -17,5 +19,271 @@
     </div>
     <!-- Bootstrap JS (optional, if you need Bootstrap JS functionalities) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Check if "Interviews" or "Surveys" was selected on page 2
+            const interviewsChecked = localStorage.getItem('interviewsChecked') === 'true';
+            const surveysChecked = localStorage.getItem('surveysChecked') === 'true';
+
+            if (interviewsChecked || surveysChecked) {
+                document.getElementById('personalDataYes').checked = true;
+            toggleCompliance(true);
+            document.getElementById('personalDataDescription').style.display = 'block';
+            }
+
+            // Generate investigator checkboxes in section 4.4
+            const investigatorCheckboxes = document.getElementById('investigatorCheckboxes');
+            const piNames = JSON.parse(localStorage.getItem('piNames') || '[]');
+            piNames.forEach((name, index) => {
+                const checkbox = document.createElement('div');
+            checkbox.className = 'form-check';
+            checkbox.innerHTML = `
+            <input class="form-check-input" type="checkbox" id="investigator${index + 1}" name="dataResponsibility" value="${name}">
+                <label class="form-check-label" for="investigator${index + 1}">${name}</label>
+                `;
+                investigatorCheckboxes.appendChild(checkbox);
+            });
+        });
+
+        // Function to toggle visibility of compliance checkboxes based on user selection in Section 4.1
+        function toggleCompliance(isYes) {
+            const complianceDiv = document.getElementById('personalDataCompliance');
+            const descriptionDiv = document.getElementById('personalDataDescription');
+            if (isYes) {
+                complianceDiv.style.display = 'block';
+                descriptionDiv.style.display = 'block';
+                localStorage.setItem('personalDataInvolved', 'true');
+            } else {
+                complianceDiv.style.display = 'none';
+                descriptionDiv.style.display = 'none';
+                localStorage.setItem('personalDataInvolved', 'false');
+            }
+        }
+
+        // Function to toggle visibility of personal data not involved justification
+        function togglePersonalDataNotInvolved() {
+            const personalDataNotInvolvedCheckbox = document.getElementById('personalDataNotInvolved');
+            const justificationDiv = document.getElementById('personalDataNotInvolvedJustification');
+            if (personalDataNotInvolvedCheckbox.checked) {
+                justificationDiv.style.display = 'block';
+            } else {
+                justificationDiv.style.display = 'none';
+            }
+        }
+
+        // Function to toggle visibility of data access details based on user selection in Section 4.2
+        function toggleDataAccess(value) {
+            const dataAccessYesDiv = document.getElementById('dataAccessDetailsYes');
+            const dataAccessNoDiv = document.getElementById('dataAccessDetailsNo');
+            if (value === 'yes') {
+                dataAccessYesDiv.style.display = 'block';
+                dataAccessNoDiv.style.display = 'none';
+            } else if (value === 'no') {
+                dataAccessYesDiv.style.display = 'none';
+                dataAccessNoDiv.style.display = 'block';
+            }
+        }
+
+        // Function to toggle visibility of data disposition details based on user selection in Section 4.6
+        function toggleDataDisposition(value) {
+            const archivedDataDiv = document.getElementById('archivedDataDetails');
+            const destroyedDataDiv = document.getElementById('destroyedDataDetails');
+            const otherDataDiv = document.getElementById('otherDataDetails');
+            if (value === 'archived') {
+                archivedDataDiv.style.display = 'block';
+                destroyedDataDiv.style.display = 'none';
+                otherDataDiv.style.display = 'none';
+            } else if (value === 'destroyed') {
+                archivedDataDiv.style.display = 'none';
+                destroyedDataDiv.style.display = 'block';
+                otherDataDiv.style.display = 'none';
+            } else if (value === 'other') {
+                archivedDataDiv.style.display = 'none';
+                destroyedDataDiv.style.display = 'none';
+                otherDataDiv.style.display = 'block';
+            } else if (value === 'stayTheSame') {
+                archivedDataDiv.style.display = 'none';
+                destroyedDataDiv.style.display = 'none';
+                otherDataDiv.style.display = 'none';
+            }
+        }
+
+        // Function to validate form submission
+        function validateForm() {
+            const form = document.getElementById('confidentialityDataManagementForm');
+
+            // Validate section 4.1 radio buttons and checkboxes
+            const personalDataYes = document.getElementById('personalDataYes').checked;
+            const personalDataNo = document.getElementById('personalDataNo').checked;
+            if (!personalDataYes && !personalDataNo) {
+                alert('Please select Yes or No in Section 4.1');
+                return false;
+            }
+
+            if (personalDataYes) {
+                const dataProtectionCheckboxes = document.querySelectorAll('input[name="dataProtectionCompliance"]');
+                let isDataProtectionChecked = false;
+                dataProtectionCheckboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        isDataProtectionChecked = true;
+                    }
+                });
+
+                if (!isDataProtectionChecked) {
+                    alert('Please select at least one checkbox under Section 4.1 if "Yes" is selected.');
+                    return false;
+                }
+            }
+
+            // Validate section 4.2 radio buttons and textareas
+            const dataAccessYes = document.getElementById('dataAccessYes').checked;
+            const dataAccessNo = document.getElementById('dataAccessNo').checked;
+            if (!dataAccessYes && !dataAccessNo) {
+                alert('Please select Yes or No in Section 4.2');
+                return false;
+            }
+
+            if (dataAccessYes) {
+                const dataAccessYesDetails = document.getElementById('dataAccessYesDetails').value.trim();
+                if (!dataAccessYesDetails) {
+                    alert('Please fill the details in Section 4.2 for "Yes" option.');
+                    return false;
+                }
+            }
+
+            if (dataAccessNo) {
+                const dataAccessNoDetails = document.getElementById('dataAccessNoDetails').value.trim();
+                if (!dataAccessNoDetails) {
+                    alert('Please fill the details in Section 4.2 for "No" option.');
+                    return false;
+                }
+            }
+
+            // Validate section 4.3 checkboxes
+            const dataStorageCheckboxes = document.querySelectorAll('input[name="dataStorageCompliance"]');
+            let isDataStorageChecked = false;
+            dataStorageCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    isDataStorageChecked = true;
+                }
+            });
+
+            if (!isDataStorageChecked) {
+                alert('Please select at least one option in Section 4.3');
+                return false;
+            }
+
+            // Validate section 4.4 checkboxes
+            const dataResponsibilityCheckboxes = document.querySelectorAll('input[name="dataResponsibility"]');
+            let isDataResponsibilityChecked = false;
+            dataResponsibilityCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    isDataResponsibilityChecked = true;
+                }
+            });
+
+            if (!isDataResponsibilityChecked) {
+                alert('Please select at least one option in Section 4.4');
+                return false;
+            }
+
+            // Validate section 4.5 radio buttons
+            const dataRetentionRadios = document.querySelectorAll('input[name="dataRetention"]');
+            let isDataRetentionSelected = false;
+            dataRetentionRadios.forEach((radio) => {
+                if (radio.checked) {
+                    isDataRetentionSelected = true;
+                }
+            });
+
+            if (!isDataRetentionSelected) {
+                alert('Please select one of the options in Section 4.5');
+                return false;
+            }
+
+            if (document.getElementById('otherRetention').checked) {
+                const otherRetentionTextarea = document.getElementById('otherRetentionDetails').value.trim();
+                if (!otherRetentionTextarea) {
+                    alert('Please fill the "Specify other retention period here..." field in Section 4.5');
+                    return false;
+                }
+            }
+
+            // Validate section 4.6 radio buttons
+            const dataDispositionArchived = document.getElementById('dataArchived').checked;
+            const dataDispositionDestroyed = document.getElementById('dataDestroyed').checked;
+            const dataDispositionOther = document.getElementById('dataOther').checked;
+            const dataDispositionStayTheSame = document.getElementById('stayTheSame').checked;
+            if (!dataDispositionArchived && !dataDispositionDestroyed && !dataDispositionOther && !dataDispositionStayTheSame) {
+                alert('Please select one of the options in Section 4.6');
+                return false;
+            }
+
+            if (dataDispositionArchived) {
+                const archivedDataStaff = document.getElementById('archivedDataStaff').value.trim();
+                const dataAvailability = document.getElementById('dataAvailability').value.trim();
+                const dataPreparation = document.getElementById('dataPreparation').value.trim();
+                const dataAccess = document.getElementById('dataAccess').value.trim();
+                if (!archivedDataStaff || !dataAvailability || !dataPreparation || !dataAccess) {
+                    alert('Please fill all the fields in "Archived data" section of 4.6');
+                    return false;
+                }
+            }
+
+            if (dataDispositionDestroyed) {
+                const dataDestructionReason = document.getElementById('dataDestructionReason').value.trim();
+                const dataDestructionResponsibility = document.getElementById('dataDestructionResponsibility').value.trim();
+                const dataDestructionDate = document.getElementById('dataDestructionDate').value.trim();
+                if (!dataDestructionReason || !dataDestructionResponsibility || !dataDestructionDate) {
+                    alert('Please fill all the fields in "Destroyed data" section of 4.6');
+                    return false;
+                }
+
+                const dataDestructionCheckboxes = document.querySelectorAll('input[name="dataDestructionMethod"]');
+                let isDataDestructionChecked = false;
+                dataDestructionCheckboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        isDataDestructionChecked = true;
+                    }
+                });
+
+                if (!isDataDestructionChecked) {
+                    alert('Please select at least one checkbox in "Destroyed data" section of 4.6');
+                    return false;
+                }
+            }
+
+            if (dataDispositionOther) {
+                const otherDataDetailsText = document.getElementById('otherDataDetailsText').value.trim();
+                if (!otherDataDetailsText) {
+                    alert('Please fill all the fields in "Other data" section of 4.6');
+                    return false;
+                }
+            }
+
+            if (form.checkValidity()) {
+                // Redirect to the next page after validation
+                window.location.href = 'page_5.html';
+                return false; // Prevent default form submission
+            }
+
+            form.reportValidity(); // Show validation errors if form is not valid
+            return false; // Prevent default form submission
+        }
+
+        // Check if survey or interview is selected in section 2.5 and update 4.1 accordingly
+        function checkSurveyOrInterview() {
+            const surveyCheckbox = document.querySelector('input[name="data-collection"][value="surveys"]');
+            const interviewCheckbox = document.querySelector('input[name="data-collection"][value="interviews"]');
+            if (surveyCheckbox.checked || interviewCheckbox.checked) {
+                document.getElementById('personalDataYes').checked = true;
+                toggleCompliance(true);
+            }
+        }
+
+        // Call the function to check survey or interview status
+        checkSurveyOrInterview();
+    </script>
 </body>
+
 </html>

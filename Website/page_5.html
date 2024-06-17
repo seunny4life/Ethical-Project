@@ -17,7 +17,7 @@
         <h2 class="section-heading">PARTICIPANT INFORMATION AND INFORMED CONSENT PROCEDURES</h2>
         <br><br>
         <div class="form-container">
-            <form id="consentForm" onsubmit="return validateForm()">
+            <form id="consentForm" onsubmit="return validateForm(event)">
 
                 <!-- Section 5.1 - Participant Information Sheet -->
                 <fieldset class="fieldset">
@@ -185,21 +185,21 @@
                         </div>
                     </div>
 
+                </div>
+
+                </fieldset>
+                <br>
+
+                <!-- Button to Previous and Next step -->
+                <div class="buttons">
+                    <!-- Previous Button -->
+                    <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+
+                    <!-- Next Page Button -->
+                    <button type="submit" class="btn btn-primary">Next Page</button>
+                </div>
+            </form>
         </div>
-
-        </fieldset>
-        <br>
-
-        <!-- Button to Previous and Next step -->
-        <div class="buttons">
-            <!-- Previous Button -->
-            <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
-
-            <!-- Next Page Button -->
-            <button type="submit" class="btn btn-primary">Next Page</button>
-        </div>
-        </form>
-    </div>
     </div>
     <br /><br />
 
@@ -207,6 +207,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             // Check if personal data is involved from localStorage
@@ -218,6 +219,7 @@
 
             toggleConsentDetails();
             toggleTextarea();
+            populateFormData(); // Ensure form data is populated from localStorage
         });
 
         // Function to toggle display of consent details based on user selection
@@ -250,7 +252,7 @@
             var allQuestions = ["intro_statement", "research_topic", "purpose", "invitation", "participation", "data_usage", "privacy", "benefits", "risks", "withdrawal", "project_outcomes", "contact_info"];
             allQuestions.forEach(function (question) {
                 var noRadio = document.getElementById(question + '_no');
-                if (noRadio.checked) {
+                if (noRadio && noRadio.checked) {
                     noSelected = true;
                 }
             });
@@ -264,7 +266,9 @@
         }
 
         // Function to validate form before submission
-        function validateForm() {
+        function validateForm(event) {
+            event.preventDefault();
+
             var allQuestions = ["intro_statement", "research_topic", "purpose", "invitation", "participation", "data_usage", "privacy", "benefits", "risks", "withdrawal", "project_outcomes", "contact_info"];
             var locationFilled = document.getElementById('location').value.trim() !== '';
             var consentRequired = document.getElementById('consentRequired').value;
@@ -294,44 +298,41 @@
             saveFormData();
 
             window.location.href = 'page_6.html'; // Redirect to next page
-            return false; // Prevent form submission
         }
 
         // Function to save form data to localStorage
         function saveFormData() {
             const formData = new FormData(document.getElementById('consentForm'));
-            const formObject = {};
             formData.forEach((value, key) => {
-                formObject[key] = value;
+                if (value === "on") {  // Handle checkboxes correctly
+                    localStorage.setItem(key, document.getElementById(key).checked ? "true" : "false");
+                } else {
+                    localStorage.setItem(key, value);
+                }
             });
-            localStorage.setItem('formData', JSON.stringify(formObject));
         }
 
         // Function to populate form with data from localStorage
         function populateFormData() {
-            const savedData = JSON.parse(localStorage.getItem('formData'));
-            if (savedData) {
-                for (const key in savedData) {
-                    if (savedData.hasOwnProperty(key)) {
-                        const element = document.getElementsByName(key)[0];
-                        if (element) {
-                            if (element.type === 'checkbox' || element.type === 'radio') {
-                                element.checked = true;
-                            } else {
-                                element.value = savedData[key];
-                            }
+            const savedData = Object.keys(localStorage).reduce((data, key) => {
+                data[key] = localStorage.getItem(key);
+                return data;
+            }, {});
+
+            for (const key in savedData) {
+                if (savedData.hasOwnProperty(key)) {
+                    const element = document.getElementsByName(key)[0];
+                    if (element) {
+                        if (element.type === 'checkbox' || element.type === 'radio') {
+                            element.checked = savedData[key] === element.value;
+                        } else {
+                            element.value = savedData[key];
                         }
                     }
                 }
             }
         }
-
-        // Populate form data when the document is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            populateFormData();
-        });
     </script>
-
 </body>
 
 </html>

@@ -466,41 +466,25 @@
     function saveFormData() {
       const formData = new FormData(document.getElementById('ethicalIssuesForm'));
       formData.forEach((value, key) => {
-        if (localStorage.getItem(key)) {
-          let storedValue = JSON.parse(localStorage.getItem(key));
-          if (Array.isArray(storedValue)) {
-            storedValue.push(value);
-            localStorage.setItem(key, JSON.stringify(storedValue));
-          } else {
-            localStorage.setItem(key, JSON.stringify([storedValue, value]));
-          }
-        } else {
-          localStorage.setItem(key, JSON.stringify([value]));
-        }
+        localStorage.setItem(key, value);
       });
     }
 
     // Function to populate form with data from localStorage
     function populateFormData() {
       const savedData = Object.keys(localStorage).reduce((data, key) => {
-        data[key] = JSON.parse(localStorage.getItem(key));
+        data[key] = localStorage.getItem(key);
         return data;
       }, {});
 
       for (const key in savedData) {
         if (savedData.hasOwnProperty(key)) {
-          const elements = document.getElementsByName(key);
-          if (elements.length) {
-            if (elements[0].type === 'checkbox' || elements[0].type === 'radio') {
-              savedData[key].forEach(value => {
-                elements.forEach(element => {
-                  if (element.value === value) {
-                    element.checked = true;
-                  }
-                });
-              });
+          const element = document.getElementsByName(key)[0];
+          if (element) {
+            if (element.type === 'checkbox' || element.type === 'radio') {
+              element.checked = savedData[key] === element.value;
             } else {
-              elements[0].value = savedData[key].join(', ');
+              element.value = savedData[key];
             }
           }
         }
@@ -513,7 +497,6 @@
       toggleTextArea(); // Ensure text areas are displayed based on selected options
     });
   </script>
-
 </body>
 
 </html>

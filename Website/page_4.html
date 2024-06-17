@@ -181,26 +181,26 @@
                             Unit (DPU) website</i></label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" id="endOfProject" name="dataRetention"
-                            value="endOfProject">
+                            value="End of Project">
                         <label class="form-check-label" for="endOfProject">End of project</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" id="threeMonths" name="dataRetention"
-                            value="threeMonths">
+                            value="3 Months">
                         <label class="form-check-label" for="threeMonths">3 months after project end</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" id="sixMonths" name="dataRetention"
-                            value="sixMonths">
+                            value="6 Months">
                         <label class="form-check-label" for="sixMonths">6 months after project end</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" id="oneYear" name="dataRetention" value="oneYear">
+                        <input class="form-check-input" type="radio" id="oneYear" name="dataRetention" value="1 Year">
                         <label class="form-check-label" for="oneYear">1 year after project end</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" id="otherRetention" name="dataRetention"
-                            value="otherRetention">
+                            value="Other Retention">
                         <label class="form-check-label" for="otherRetention">Other</label>
 
                         <textarea class="form-control mt-2" id="otherRetentionDetails" name="otherRetentionDetails"
@@ -341,32 +341,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/Javascript/scripts.js"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Hide the textarea initially
-            const otherRetentionTextarea = document.getElementById('otherRetentionDetails');
-            otherRetentionTextarea.style.display = 'none';
+            // Check if "Interviews" or "Surveys" was selected on page 2
+            const interviewsChecked = localStorage.getItem('interviews') === 'true';
+            const surveysChecked = localStorage.getItem('surveys') === 'true';
 
-            // Add event listener to the radio buttons in section 4.5
-            const otherRetentionRadio = document.getElementById('otherRetention');
-            const otherRetentionRadios = document.querySelectorAll('input[name="dataRetention"]');
-
-            otherRetentionRadios.forEach(radio => {
-                radio.addEventListener('change', () => {
-                    // If "Other" option is selected, show the textarea; otherwise, hide it
-                    if (otherRetentionRadio.checked) {
-                        otherRetentionTextarea.style.display = 'block';
-                    } else {
-                        otherRetentionTextarea.style.display = 'none';
-                    }
-                });
-            });
-
-            // Check if survey or interview was selected in section 2.5 on page 2
-            const surveySelected = localStorage.getItem('surveysSelected') === 'true';
-            const interviewSelected = localStorage.getItem('interviewsSelected') === 'true';
-            if (surveySelected || interviewSelected) {
+            if (interviewsChecked || surveysChecked) {
                 document.getElementById('personalDataYes').checked = true;
                 toggleCompliance(true);
                 document.getElementById('personalDataDescription').style.display = 'block';
@@ -384,7 +365,72 @@
                 `;
                 investigatorCheckboxes.appendChild(checkbox);
             });
+
+            // Load previous form data from localStorage
+            const formData = new FormData(document.getElementById('confidentialityDataManagementForm'));
+            formData.forEach((value, key) => {
+                const element = document.querySelector(`[name="${key}"]`);
+                if (element) {
+                    if (element.type === 'checkbox' || element.type === 'radio') {
+                        element.checked = localStorage.getItem(key) === 'true';
+                    } else {
+                        element.value = localStorage.getItem(key);
+                    }
+                }
+            });
+
+            // Load data protection compliance checkboxes
+            const dataProtectionCompliance = document.querySelectorAll('input[name="dataProtectionCompliance"]');
+            dataProtectionCompliance.forEach(checkbox => {
+                checkbox.checked = localStorage.getItem(checkbox.id) === 'true';
+            });
+
+            // Load data destruction method checkboxes
+            const dataDestructionMethod = document.querySelectorAll('input[name="dataDestructionMethod"]');
+            dataDestructionMethod.forEach(checkbox => {
+                checkbox.checked = localStorage.getItem(checkbox.id) === 'true';
+            });
         });
+
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const formData = new FormData(document.getElementById('confidentialityDataManagementForm'));
+            formData.forEach((value, key) => {
+                if (key.startsWith('dataResponsibility') || key.startsWith('dataProtectionCompliance') || key.startsWith('dataDestructionMethod')) {
+                    localStorage.setItem(key, document.querySelector(`[name="${key}"]`).checked);
+                } else {
+                    localStorage.setItem(key, value);
+                }
+            });
+
+            // Save data storage compliance checkboxes
+            const dataStorageCompliance = document.querySelectorAll('input[name="dataStorageCompliance"]');
+            dataStorageCompliance.forEach(checkbox => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+
+            // Save data protection compliance checkboxes
+            const dataProtectionCompliance = document.querySelectorAll('input[name="dataProtectionCompliance"]');
+            dataProtectionCompliance.forEach(checkbox => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+
+            // Save data destruction method checkboxes
+            const dataDestructionMethod = document.querySelectorAll('input[name="dataDestructionMethod"]');
+            dataDestructionMethod.forEach(checkbox => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+
+            // Save data responsibility checkboxes
+            const dataResponsibilityCheckboxes = document.querySelectorAll('input[name="dataResponsibility"]');
+            const dataResponsibility = [];
+            dataResponsibilityCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    dataResponsibility.push(checkbox.value);
+                }
+            });
+            localStorage.setItem('dataResponsibility', JSON.stringify(dataResponsibility));
+        }
 
         // Function to toggle visibility of compliance checkboxes based on user selection in Section 4.1
         function toggleCompliance(isYes) {
@@ -603,6 +649,7 @@
             }
 
             if (form.checkValidity()) {
+                saveFormData();
                 // Redirect to the next page after validation
                 window.location.href = 'page_5.html';
                 return false; // Prevent default form submission
@@ -625,7 +672,6 @@
         // Call the function to check survey or interview status
         checkSurveyOrInterview();
     </script>
-
 </body>
 
 </html>

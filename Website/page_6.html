@@ -18,7 +18,7 @@
             SECTION 6 – SUBMISSION CHECKLIST AND RESEARCHER DECLARATION
         </h2>
         <div class="form-container">
-            <form id="submissionForm" onsubmit="return validateForm()">
+            <form id="submissionForm" onsubmit="return validateForm(event)">
                 <fieldset class="fieldset">
                     <legend>
                         6.1 Please confirm all required supplementary documentation to be included in this application
@@ -36,88 +36,71 @@
                             <tr>
                                 <td>Participant Information Sheet/s</td>
                                 <td>
-                                    <input type="radio" id="infoSheet_yes" name="infoSheet" value="Yes"
-                                        class="infoSheet" />
+                                    <input type="radio" id="infoSheet_yes" name="infoSheet" value="Yes" class="infoSheet" />
                                 </td>
                                 <td>
-                                    <input type="radio" id="infoSheet_na" name="infoSheet" value="N/A"
-                                        class="infoSheet" />
+                                    <input type="radio" id="infoSheet_na" name="infoSheet" value="N/A" class="infoSheet" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Informed Consent Form/s</td>
-                                <td><input type="radio" id="consentForms_yes" name="consentForms" value="Yes"
-                                        class="consentForms"></td>
-                                <td><input type="radio" id="consentForms_na" name="consentForms" value="N/A"
-                                        class="consentForms"></td>
+                                <td><input type="radio" id="consentForms_yes" name="consentForms" value="Yes" class="consentForms"></td>
+                                <td><input type="radio" id="consentForms_na" name="consentForms" value="N/A" class="consentForms"></td>
                             </tr>
                             <tr>
                                 <td>Informed Assent Form/s</td>
-                                <td><input type="radio" id="assentForms_yes" name="assentForms" value="Yes"
-                                        class="assentForms"></td>
-                                <td><input type="radio" id="assentForms_na" name="assentForms" value="N/A"
-                                        class="assentForms"></td>
+                                <td><input type="radio" id="assentForms_yes" name="assentForms" value="Yes" class="assentForms"></td>
+                                <td><input type="radio" id="assentForms_na" name="assentForms" value="N/A" class="assentForms"></td>
                             </tr>
                             <tr>
                                 <td>Recruitment Advertisement</td>
-                                <td><input type="radio" id="recruitmentAd_yes" name="recruitmentAd" value="Yes"
-                                        class="recruitmentAd"></td>
-                                <td><input type="radio" id="recruitmentAd_na" name="recruitmentAd" value="N/A"
-                                        class="recruitmentAd"></td>
+                                <td><input type="radio" id="recruitmentAd_yes" name="recruitmentAd" value="Yes" class="recruitmentAd"></td>
+                                <td><input type="radio" id="recruitmentAd_na" name="recruitmentAd" value="N/A" class="recruitmentAd"></td>
                             </tr>
                             <tr>
                                 <td>Questionnaire/Survey</td>
-                                <td><input type="radio" id="questionnaire_yes" name="questionnaire" value="Yes"
-                                        class="questionnaire"></td>
-                                <td><input type="radio" id="questionnaire_na" name="questionnaire" value="N/A"
-                                        class="questionnaire"></td>
+                                <td><input type="radio" id="questionnaire_yes" name="questionnaire" value="Yes" class="questionnaire"></td>
+                                <td><input type="radio" id="questionnaire_na" name="questionnaire" value="N/A" class="questionnaire"></td>
                             </tr>
                             <tr>
                                 <td>Interview/Focus Group Questions</td>
-                                <td><input type="radio" id="interviewQuestions_yes" name="interviewQuestions"
-                                        value="Yes" class="interviewQuestions"></td>
-                                <td><input type="radio" id="interviewQuestions_na" name="interviewQuestions" value="N/A"
-                                        class="interviewQuestions"></td>
+                                <td><input type="radio" id="interviewQuestions_yes" name="interviewQuestions" value="Yes" class="interviewQuestions"></td>
+                                <td><input type="radio" id="interviewQuestions_na" name="interviewQuestions" value="N/A" class="interviewQuestions"></td>
                             </tr>
                             <tr>
                                 <td>Debriefing Material</td>
-                                <td><input type="radio" id="debriefingMaterial_yes" name="debriefingMaterial"
-                                        value="Yes" class="debriefingMaterial"></td>
-                                <td><input type="radio" id="debriefingMaterial_na" name="debriefingMaterial" value="N/A"
-                                        class="debriefingMaterial"></td>
+                                <td><input type="radio" id="debriefingMaterial_yes" name="debriefingMaterial" value="Yes" class="debriefingMaterial"></td>
+                                <td><input type="radio" id="debriefingMaterial_na" name="debriefingMaterial" value="N/A" class="debriefingMaterial"></td>
                             </tr>
                             <tr>
                                 <td>Bibliography</td>
-                                <td><input type="radio" id="bibliography_yes" name="bibliography" value="Yes"
-                                        class="bibliography"></td>
-                                <td><input type="radio" id="bibliography_na" name="bibliography" value="N/A"
-                                        class="bibliography"></td>
+                                <td><input type="radio" id="bibliography_yes" name="bibliography" value="Yes" class="bibliography"></td>
+                                <td><input type="radio" id="bibliography_na" name="bibliography" value="N/A" class="bibliography"></td>
                             </tr>
                             <tr>
                                 <td>Approval from another Research Ethics Committee</td>
-                                <td><input type="radio" id="ethicsApproval_yes" name="ethicsApproval" value="Yes"
-                                        class="ethicsApproval"></td>
-                                <td><input type="radio" id="ethicsApproval_na" name="ethicsApproval" value="N/A"
-                                        class="ethicsApproval"></td>
+                                <td><input type="radio" id="ethicsApproval_yes" name="ethicsApproval" value="Yes" class="ethicsApproval"></td>
+                                <td><input type="radio" id="ethicsApproval_na" name="ethicsApproval" value="N/A" class="ethicsApproval"></td>
                             </tr>
                             <tr>
                                 <td>Evidence of other external approvals (e.g. Board of Management letter)</td>
-                                <td><input type="radio" id="externalApprovals_yes" name="externalApprovals" value="Yes"
-                                        class="externalApprovals"></td>
-                                <td><input type="radio" id="externalApprovals_na" name="externalApprovals" value="N/A"
-                                        class="externalApprovals"></td>
+                                <td><input type="radio" id="externalApprovals_yes" name="externalApprovals" value="Yes" class="externalApprovals"></td>
+                                <td><input type="radio" id="externalApprovals_na" name="externalApprovals" value="N/A" class="externalApprovals"></td>
                             </tr>
                             <tr>
                                 <td>Evidence of internal approvals (e.g. BSC approval review letter)</td>
-                                <td><input type="radio" id="internalApprovals_yes" name="internalApprovals" value="Yes"
-                                        class="internalApprovals"></td>
-                                <td><input type="radio" id="internalApprovals_na" name="internalApprovals" value="N/A"
-                                        class="internalApprovals"></td>
+                                <td><input type="radio" id="internalApprovals_yes" name="internalApprovals" value="Yes" class="internalApprovals"></td>
+                                <td><input type="radio" id="internalApprovals_na" name="internalApprovals" value="N/A" class="internalApprovals"></td>
                             </tr>
                             <tr>
                                 <td>Other – provide details here:</td>
                                 <td><input type="radio" id="other_yes" name="other" value="Yes" class="other"></td>
                                 <td><input type="radio" id="other_na" name="other" value="N/A" class="other"></td>
+                            </tr>
+                            <tr id="otherDetailsRow" style="display: none;">
+                                <td colspan="3">
+                                    <textarea id="otherDetails" name="otherDetails" rows="4" class="form-control" placeholder="Please provide details..."></textarea>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -188,10 +171,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
     <script>
-        function validateForm() {
-            var rows = document.querySelectorAll('tbody tr');
+        function validateForm(event) {
+            event.preventDefault();
+            var rows = document.querySelectorAll('tbody tr:not(#otherDetailsRow)');
             var allValid = true;
             var errorMessage = "Please select either 'Yes' or 'N/A' for all checklist items.";
 
@@ -221,6 +204,23 @@
         document.addEventListener("DOMContentLoaded", function () {
             populateSignatures();
             populateFormData();
+
+            // Add event listener for "Other" radio buttons
+            var otherYesRadio = document.getElementById('other_yes');
+            var otherNaRadio = document.getElementById('other_na');
+            var otherDetailsRow = document.getElementById('otherDetailsRow');
+
+            otherYesRadio.addEventListener('change', function () {
+                if (this.checked) {
+                    otherDetailsRow.style.display = 'table-row';
+                }
+            });
+
+            otherNaRadio.addEventListener('change', function () {
+                if (this.checked) {
+                    otherDetailsRow.style.display = 'none';
+                }
+            });
         });
 
         function populateSignatures() {

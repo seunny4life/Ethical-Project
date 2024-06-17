@@ -155,10 +155,6 @@
                 ['completionDate', '1.3 Proposed project completion date:']
             ]);
 
-            addSectionContent('SECTION 1.4', 'Level of Review', [
-                ['reviewLevel', '1.4 Level of Review:']
-            ]);
-
             addSectionContent('SECTION 1.5', 'Academic Award', [
                 ['academicAward', '1.5 Academic Award:']
             ]);
@@ -286,6 +282,98 @@
                 ['monitoringOtherText', 'Other monitoring details:']
             ]);
 
+            // Add Section 4 content
+            yPosition = addSectionHeader('SECTION 4 – CONFIDENTIALITY AND DATA MANAGEMENT', yPosition);
+
+            addSectionContent('4.1', 'Personal Data', [
+                ['personalData', '4.1 Are you collecting or processing personal data in this research project?'],
+                ['dataProtectionTraining', 'DCU Data Protection training module on Loop completed:'],
+                ['dataProtectionGuidance', 'Read the “Data Protection – Key Points for DCU Researchers” guidance:'],
+                ['gdprRequirements', 'GDPR requirements met:'],
+                ['personalDataNotInvolvedJustificationText', 'Justification for no personal data involved:']
+            ]);
+
+            addSectionContent('4.2', 'Data Access', [
+                ['dataAccess', 'Is access to participant data confined to the investigators named on this application?'],
+                ['dataAccessYesDetails', 'Data access details for Yes:'],
+                ['dataAccessNoDetails', 'Data access details for No:']
+            ]);
+
+            const dataStorageOptions = [
+                { id: 'mobileDevicesSecurity', title: 'Data collected on mobile devices will be protected with a strong password/passphrase at a minimum, and/or encrypted if the device supports it' },
+                { id: 'dataRemoval', title: 'Data will be removed from mobile devices as soon as practicable and stored in a secured location in DCU (on server or institutional Google Drive)' },
+                { id: 'paperBasedSecurity', title: 'Paper-based data will be held securely in locked cabinets in DCU, with access restricted to the named researchers' }
+            ];
+
+            yPosition = addSectionHeader('4.3 Data Storage', yPosition);
+
+            dataStorageOptions.forEach(option => {
+                const value = localStorage.getItem(option.id);
+                if (value === 'true') {
+                    yPosition = addSubsection(option.title, '', yPosition);
+                    yPosition = addNewPageIfNeeded(yPosition);
+                }
+            });
+
+            addSectionContent('4.4', 'Data Responsibility', [
+                ['dataResponsibility', 'Responsible for secure storage of data:']
+            ]);
+
+            addSectionContent('4.5', 'Data Retention', [
+                ['dataRetention', 'How long will the data be held for?'],
+                ['otherRetentionDetails', 'Specify other retention period:']
+            ]);
+
+            addSectionContent('4.6', 'Data Disposition', [
+                ['dataDisposition', 'What will happen at the end of the period mentioned in 4.5?'],
+                ['archivedDataStaff', 'Name the DCU staff member responsible for archival and future use of data:'],
+                ['dataAvailability', 'Confirm whether the data will be made available to other researchers:'],
+                ['dataPreparation', 'Confirm how the data will be prepared for archive:'],
+                ['dataAccess', 'Confirm where the data will be archived and who will be allowed to access it:'],
+                ['dataDestructionReason', 'Justify why the data will be destroyed:'],
+                ['dataDestructionResponsibility', 'Name the DCU researcher responsible for destruction of data:'],
+                ['dataDestructionDate', 'Confirm when the data will be destroyed:'],
+                ['dataDestructionMethod', 'Method of data destruction:'],
+                ['otherDataDetailsText', 'Explain what will happen to the data if not being archived or destroyed:']
+            ]);
+
+            // Add Section 5 content
+            yPosition = addSectionHeader('SECTION 5 – INFORMATION AND INFORMED CONSENT PROCEDURES', yPosition);
+            addSectionContent('5.1', 'Items have been addressed in your Participant Information Sheet', [
+                ['intro_statement', 'Introductory Statement:'],
+                ['research_topic', 'What is this research about?'],
+                ['purpose', 'Why is this research being conducted?'],
+                ['invitation', 'Why have you been invited to take part?'],
+                ['participation', 'What will happen if you decide to take part in this research study?'],
+                ['data_usage', 'How will your data be used?'],
+                ['privacy', 'How will your privacy be protected?'],
+                ['benefits', 'What are the benefits of taking part?'],
+                ['risks', 'What are the risks of taking part?'],
+                ['withdrawal', 'Can you change your mind and withdraw?'],
+                ['project_outcomes', 'How will you find out what happens with this project?'],
+                ['contact_info', 'Contact details for further information:']
+            ]);
+
+
+            // Add explanation for "No" responses in Section 5.1
+            const noExplanation = localStorage.getItem('location');
+            if (noExplanation) {
+                yPosition = addSubsection('Explanation for No responses:', noExplanation, yPosition);
+            }
+
+
+            yPosition = addSectionHeader('5.2 Informed Consent Procedures', yPosition);
+            const consentRequired = localStorage.getItem('consentRequired');
+            if (consentRequired) {
+                yPosition = addSubsection('Will written consent be obtained?', consentRequired === 'yes' ? 'Yes' : 'No', yPosition);
+                if (consentRequired === 'yes') {
+                    yPosition = addSubsection('Consent Description:', localStorage.getItem('consentDescription'), yPosition);
+                } else {
+                    yPosition = addSubsection('No Consent Description:', localStorage.getItem('noConsentDescription'), yPosition);
+                    yPosition = addSubsection('Consent Not Needed Justification:', localStorage.getItem('noConsentJustificationText'), yPosition);
+                }
+            }
+
             // Save PDF
             doc.save('research_submission.pdf');
         }
@@ -297,57 +385,46 @@
             window.location.href = 'page_1.html'; // Redirect to the first page of the form
         }
 
-        function saveFormData() {
-            const formData = new FormData(document.getElementById('applicationForm'));
-            let piNames = [];
-            let piSchools = [];
-            let piEmails = [];
-            let otherNames = [];
-            let otherUnits = [];
-            let otherEmails = [];
-            let locations = [];
 
-            formData.forEach((value, key) => {
-                if (key.startsWith('piName')) {
-                    piNames.push(value);
-                } else if (key.startsWith('schoolUnit')) {
-                    piSchools.push(value);
-                } else if (key.startsWith('email') && key.includes('pi')) {
-                    piEmails.push(value);
-                } else if (key.startsWith('otherName')) {
-                    otherNames.push(value);
-                } else if (key.startsWith('otherUnit')) {
-                    otherUnits.push(value);
-                } else if (key.startsWith('otherEmail')) {
-                    otherEmails.push(value);
-                } else if (key.startsWith('location')) {
-                    locations.push(value);
-                } else {
-                    localStorage.setItem(key, value);
+        // Load the saved data for checkboxes in 4.1 and 4.6
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const formElements = document.querySelectorAll('input[type="checkbox"], input[type="radio"], textarea');
+            formElements.forEach(element => {
+                const storedValue = localStorage.getItem(element.id);
+                if (storedValue !== null) {
+                    if (element.type === 'checkbox' || element.type === 'radio') {
+                        element.checked = storedValue === 'true';
+                    } else {
+                        element.value = storedValue;
+                    }
                 }
             });
+        });
 
-            if (piNames.length > 0) {
-                localStorage.setItem('piNames', JSON.stringify(piNames));
-            }
-            if (piSchools.length > 0) {
-                localStorage.setItem('piSchools', JSON.stringify(piSchools));
-            }
-            if (piEmails.length > 0) {
-                localStorage.setItem('piEmails', JSON.stringify(piEmails));
-            }
-            if (otherNames.length > 0) {
-                localStorage.setItem('otherNames', JSON.stringify(otherNames));
-            }
-            if (otherUnits.length > 0) {
-                localStorage.setItem('otherUnits', JSON.stringify(otherUnits));
-            }
-            if (otherEmails.length > 0) {
-                localStorage.setItem('otherEmails', JSON.stringify(otherEmails));
-            }
-            if (locations.length > 0) {
-                localStorage.setItem('locations', JSON.stringify(locations));
-            }
+        // Function to toggle display of explanation textarea when "No" is selected
+        function toggleTextarea() {
+            var noSelected = false;
+            var allQuestions = ["intro_statement", "research_topic", "purpose", "invitation", "participation", "data_usage", "privacy", "benefits", "risks", "withdrawal", "project_outcomes", "contact_info"];
+            allQuestions.forEach(function (question) {
+                var noRadio = document.getElementById(question + '_no');
+                if (noRadio && noRadio.checked) {
+                    noSelected = true;
+                }
+            });
+            document.getElementById('noExplanation').style.display = noSelected ? 'block' : 'none';
+        }
+
+
+        // Save form data to localStorage
+        function saveFormData() {
+            const formElements = document.querySelectorAll('input[type="checkbox"], input[type="radio"], textarea');
+            formElements.forEach(element => {
+                if (element.type === 'checkbox' || element.type === 'radio') {
+                    localStorage.setItem(element.id, element.checked);
+                } else {
+                    localStorage.setItem(element.id, element.value);
+                }
+            });
         }
     </script>
 </body>
