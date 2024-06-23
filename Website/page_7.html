@@ -63,7 +63,6 @@
             const addSubsection = (title, content, yPos) => {
                 doc.setFontSize(12);
                 doc.setFont('Helvetica', 'bold');
-                doc.setFillColor(36, 208, 240);
                 doc.text(title, 10, yPos);
                 doc.setFont('Helvetica', 'normal');
                 const lines = doc.splitTextToSize(content, 180);
@@ -90,6 +89,47 @@
                     yPos += lines.length * 6 + 2;
                 });
                 return yPos + 5;
+            };
+
+            const addCheckbox = (label, isChecked, yPos) => {
+                doc.setFontSize(12);
+                doc.setFont('Helvetica', 'normal');
+                const lines = doc.splitTextToSize(label, 180);
+                if (isChecked) {
+                    doc.setFont('ZapfDingbats');
+                    doc.text('4', 10, yPos); // Checked box
+                    doc.setFont('Helvetica', 'normal');
+                } else {
+                    doc.rect(10, yPos - 4, 4, 4); // Unchecked box
+                }
+                doc.text(lines, 20, yPos);
+                return yPos + 6 + lines.length * 6;
+            };
+
+            const addYesNoOptions = (label, yesSelected, yPos) => {
+                if (yesSelected !== null) {
+                    doc.setFontSize(12);
+                    doc.setFont('Helvetica', 'normal');
+                    const lines = doc.splitTextToSize(label, 180);
+                    doc.text(lines, 20, yPos);
+                    if (yesSelected) {
+                        doc.setFont('ZapfDingbats');
+                        doc.text('4', 110, yPos); // Checked box for Yes
+                        doc.setFont('Helvetica', 'normal');
+                        doc.text('Yes', 115, yPos);
+                        doc.rect(140, yPos - 4, 4, 4); // Unchecked box for No
+                        doc.text('No', 145, yPos);
+                    } else {
+                        doc.rect(110, yPos - 4, 4, 4); // Unchecked box for Yes
+                        doc.text('Yes', 115, yPos);
+                        doc.setFont('ZapfDingbats');
+                        doc.text('4', 140, yPos); // Checked box for No
+                        doc.setFont('Helvetica', 'normal');
+                        doc.text('No', 145, yPos);
+                    }
+                    return yPos + 6 + lines.length * 6;
+                }
+                return yPos;
             };
 
             let yPosition = 20;
@@ -159,9 +199,17 @@
                 ['academicAward', '1.5 Academic Award:']
             ]);
 
-            addSectionContent('SECTION 1.6', 'Locations', [
-                ['locations', '1.6 Locations:']
-            ]);
+            yPosition = addSectionHeader('1.6 Locations', yPosition);
+            yPosition = addCheckbox('DCU campus', localStorage.getItem('location-DCU campus') === 'true', yPosition);
+            yPosition = addCheckbox('Dublin City', localStorage.getItem('location-Dublin City') === 'true', yPosition);
+            yPosition = addCheckbox('Republic of Ireland', localStorage.getItem('location-Republic of Ireland') === 'true', yPosition);
+            yPosition = addCheckbox('Online / On the Internet', localStorage.getItem('location-Online / On the Internet') === 'true', yPosition);
+            yPosition = addCheckbox('Other', localStorage.getItem('location-Other') === 'true', yPosition);
+
+            const otherLocation = localStorage.getItem('otherLocation');
+            if (otherLocation) {
+                yPosition = addSubsection('Other Location Details:', otherLocation, yPosition);
+            }
 
             addSectionContent('SECTION 1.7', 'Permissions Required to Access Locations', [
                 ['permissions', '1.7 Permissions Required to Access Locations:']
@@ -175,9 +223,12 @@
             // Add Section 2 content
             yPosition = addSectionHeader('SECTION 2 – PROJECT DESIGN AND METHODOLOGY', yPosition);
 
-            addSectionContent('2.1', 'Select technologies involved in the project:', [
-                ['project-category', 'Technologies involved in the project:']
-            ]);
+            yPosition = addSectionHeader('2.1 Technologies Involved', yPosition);
+            yPosition = addCheckbox('Smartphone app', localStorage.getItem('smartphone-app') === 'true', yPosition);
+            yPosition = addCheckbox('Website', localStorage.getItem('website') === 'true', yPosition);
+            yPosition = addCheckbox('Machine-learning', localStorage.getItem('machine-learning') === 'true', yPosition);
+            yPosition = addCheckbox('NLP', localStorage.getItem('nlp') === 'true', yPosition);
+            yPosition = addCheckbox('LLMs', localStorage.getItem('llms') === 'true', yPosition);
 
             addSectionContent('2.2', 'Aims and Objectives', [
                 ['aims-objectives', 'Please state the aims and objectives of the research project (max 200 words):']
@@ -191,21 +242,44 @@
                 ['methodology', 'Please state your overall methodology (max 400 words):']
             ]);
 
-            addSectionContent('2.5', 'Methods of Data Collection', [
-                ['data-collection', 'Which of these are you doing in your project?']
-            ]);
+            yPosition = addSectionHeader('2.5 Methods of Data Collection', yPosition);
+            yPosition = addCheckbox('Interviews or focus groups', localStorage.getItem('interviews') === 'true', yPosition);
+            yPosition = addCheckbox('Surveys/questionnaires', localStorage.getItem('surveys') === 'true', yPosition);
+            yPosition = addCheckbox('Audio/video recordings', localStorage.getItem('recordings') === 'true', yPosition);
+            yPosition = addCheckbox('Public observations', localStorage.getItem('observations') === 'true', yPosition);
+            yPosition = addCheckbox('Persons in public office', localStorage.getItem('public-office') === 'true', yPosition);
+            yPosition = addCheckbox('Using existing data (including secondary data)', localStorage.getItem('existing-data') === 'true', yPosition);
+            yPosition = addCheckbox('Using human derived material (biological samples)', localStorage.getItem('biological-samples') === 'true', yPosition);
+            yPosition = addCheckbox('Standard tests (educational/personality, etc.)', localStorage.getItem('standard-tests') === 'true', yPosition);
+            yPosition = addCheckbox('Standard educational practices', localStorage.getItem('educational-practices') === 'true', yPosition);
+            yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-data-collection') === 'true', yPosition);
 
-            addSectionContent('2.6a', 'Participant Details', [
-                ['participants-group', 'Select who are the participants in your study:']
-            ]);
+            const otherDataCollectionDetails = localStorage.getItem('other-data-collection-details');
+            if (otherDataCollectionDetails) {
+                yPosition = addSubsection('Other Data Collection Details:', otherDataCollectionDetails, yPosition);
+            }
 
-            addSectionContent('2.6b', 'Age range for your participants', [
-                ['participants-age', 'What will be the age range for your participants:']
-            ]);
+            yPosition = addSectionHeader('2.6a Participants Group', yPosition);
+            yPosition = addCheckbox('DCU students', localStorage.getItem('dcu-students') === 'true', yPosition);
+            yPosition = addCheckbox('Friends', localStorage.getItem('friends') === 'true', yPosition);
+            yPosition = addCheckbox('Family', localStorage.getItem('family') === 'true', yPosition);
+            yPosition = addCheckbox('Anyone', localStorage.getItem('anyone') === 'true', yPosition);
 
-            addSectionContent('2.6c', 'Demographics and characteristics for choosing participants', [
-                ['choosing-demographics', 'What demographics and characteristics will you use when choosing your participants?']
-            ]);
+            yPosition = addSectionHeader('2.6b Age Range', yPosition);
+            yPosition = addCheckbox('18-60 i.e. Adults', localStorage.getItem('18-60') === 'true', yPosition);
+            yPosition = addCheckbox('60+ i.e. Older Adults', localStorage.getItem('60+') === 'true', yPosition);
+            yPosition = addCheckbox('16-18', localStorage.getItem('16-18') === 'true', yPosition);
+            yPosition = addCheckbox('12-16', localStorage.getItem('12-16') === 'true', yPosition);
+            yPosition = addCheckbox('less than 12', localStorage.getItem('less-than-12') === 'true', yPosition);
+
+            yPosition = addSectionHeader('2.6c Demographics for Choosing Participants', yPosition);
+            yPosition = addCheckbox('Male', localStorage.getItem('male') === 'true', yPosition);
+            yPosition = addCheckbox('Female', localStorage.getItem('female') === 'true', yPosition);
+            yPosition = addCheckbox('Other', localStorage.getItem('other') === 'true', yPosition);
+            yPosition = addCheckbox('Any', localStorage.getItem('any') === 'true', yPosition);
+            yPosition = addCheckbox('Race e.g. Caucasian', localStorage.getItem('race') === 'true', yPosition);
+            yPosition = addCheckbox('Physical Characteristics e.g. height, blood type, eye colour', localStorage.getItem('physical-characteristics') === 'true', yPosition);
+            yPosition = addCheckbox('No particular demographics and characteristics are required i.e. anybody can participate', localStorage.getItem('no-demographics') === 'true', yPosition);
 
             addSectionContent('2.6d', 'Demographics and characteristics for excluding participants', [
                 ['excluding-demographics', 'What demographics and characteristics will you use when excluding potential participants?']
@@ -215,17 +289,39 @@
                 ['recruitment-method', 'How will you recruit participants?']
             ]);
 
-            addSectionContent('2.8', 'Addressing participant vulnerability', [
-                ['vulnerability', 'Addressing participant vulnerability:']
-            ]);
+            yPosition = addSectionHeader('2.8 Addressing Participant Vulnerability', yPosition);
+            yPosition = addCheckbox('N/A', localStorage.getItem('n/a') === 'true', yPosition);
+            yPosition = addCheckbox('Children under 18 years of age', localStorage.getItem('children') === 'true', yPosition);
+            yPosition = addCheckbox('Persons in unequal relationships with the researcher (e.g. lecturer-student, therapist-client, employer-employee)', localStorage.getItem('unequal-relationships') === 'true', yPosition);
+            yPosition = addCheckbox('People with a recognized or diagnosed intellectual, physical, or mental impairment', localStorage.getItem('impairment') === 'true', yPosition);
+            yPosition = addCheckbox('People confined to institutions (e.g. prisoners, residents in 24 hr nursing facilities)', localStorage.getItem('institutions') === 'true', yPosition);
+            yPosition = addCheckbox('People who have undergone traumatic or adverse emotional events', localStorage.getItem('traumatic-events') === 'true', yPosition);
+            yPosition = addCheckbox('People with diminished cognitive ability', localStorage.getItem('cognitive-ability') === 'true', yPosition);
+            yPosition = addCheckbox('Marginalized sections of society', localStorage.getItem('marginalized') === 'true', yPosition);
+            yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-vulnerability') === 'true', yPosition);
 
-            addSectionContent('2.9', 'Involvement of Children under 18', [
-                ['children-compliance', 'Involvement of Children under 18 years of age:']
-            ]);
+            const otherVulnerabilityDetails = localStorage.getItem('other-vulnerability-details');
+            if (otherVulnerabilityDetails) {
+                yPosition = addSubsection('Other Vulnerability Details:', otherVulnerabilityDetails, yPosition);
+            }
 
-            addSectionContent('2.10', 'Dissemination of Results', [
-                ['dissemination-method', 'Please confirm how the results of the research will be disseminated:']
-            ]);
+            yPosition = addSectionHeader('2.9 Involvement of Children under 18', yPosition);
+            yPosition = addCheckbox('N/A', localStorage.getItem('children-na') === 'true', yPosition);
+            yPosition = addCheckbox('We confirm that we have read and agree to act in accordance with the DCU Child Protection policy and procedures', localStorage.getItem('child-protection-policy') === 'true', yPosition);
+            yPosition = addCheckbox('We confirm that we have put in place safeguards for the children participating in the research.', localStorage.getItem('safeguards') === 'true', yPosition);
+            yPosition = addCheckbox('We confirm that we have supports in place for children who may disclose current or historical abuse', localStorage.getItem('supports') === 'true', yPosition);
+            yPosition = addCheckbox('We confirm that all requirements will be met prior to commencing the research', localStorage.getItem('requirements') === 'true', yPosition);
+
+            yPosition = addSectionHeader('2.10 Dissemination of Results', yPosition);
+            yPosition = addCheckbox('Posted on a website', localStorage.getItem('dissemination-website') === 'true', yPosition);
+            yPosition = addCheckbox('Shared on social media', localStorage.getItem('dissemination-social-media') === 'true', yPosition);
+            yPosition = addCheckbox('Will not be shared', localStorage.getItem('dissemination-not-shared') === 'true', yPosition);
+            yPosition = addCheckbox('Other (please specify)', localStorage.getItem('dissemination-other') === 'true', yPosition);
+
+            const otherDisseminationDetails = localStorage.getItem('dissemination-other-details');
+            if (otherDisseminationDetails) {
+                yPosition = addSubsection('Other Dissemination Details:', otherDisseminationDetails, yPosition);
+            }
 
             // Add Section 3 content
             yPosition = addSectionHeader('SECTION 3 – ETHICAL ISSUES AND RISK MANAGEMENT', yPosition);
@@ -299,22 +395,14 @@
                 ['dataAccessNoDetails', 'Data access details for No:']
             ]);
 
-            const dataStorageOptions = [
-                { id: 'mobileDevicesSecurity', title: 'Data collected on mobile devices will be protected with a strong password/passphrase at a minimum, and/or encrypted if the device supports it' },
-                { id: 'dataRemoval', title: 'Data will be removed from mobile devices as soon as practicable and stored in a secured location in DCU (on server or institutional Google Drive)' },
-                { id: 'paperBasedSecurity', title: 'Paper-based data will be held securely in locked cabinets in DCU, with access restricted to the named researchers' }
-            ];
-
             yPosition = addSectionHeader('4.3 Data Storage', yPosition);
+            yPosition = addCheckbox('Data collected on mobile devices will be protected with a strong password/passphrase at a minimum, and/or encrypted if the device supports it', localStorage.getItem('mobileDevicesSecurity') === 'true', yPosition);
+            yPosition = addCheckbox('Data will be removed from mobile devices as soon as practicable and stored in a secured location in DCU (on server or institutional Google Drive)', localStorage.getItem('dataRemoval') === 'true', yPosition);
+            yPosition = addCheckbox('Paper-based data will be held securely in locked cabinets in DCU, with access restricted to the named researchers', localStorage.getItem('paperBasedSecurity') === 'true', yPosition);
 
-            dataStorageOptions.forEach(option => {
-                const value = localStorage.getItem(option.id);
-                if (value === 'true') {
-                    yPosition = addSubsection(option.title, '', yPosition);
-                    yPosition = addNewPageIfNeeded(yPosition);
-                }
-            });
+            yPosition = addNewPageIfNeeded(yPosition);
 
+            // Add Section 4.4 checkboxes
             addSectionContent('4.4', 'Data Responsibility', [
                 ['dataResponsibility', 'Responsible for secure storage of data:']
             ]);
@@ -323,6 +411,9 @@
                 ['dataRetention', 'How long will the data be held for?'],
                 ['otherRetentionDetails', 'Specify other retention period:']
             ]);
+
+            // Add Section 4.6 checkboxes
+            yPosition = addSectionHeader('4.6 Data Disposition', yPosition);
 
             addSectionContent('4.6', 'Data Disposition', [
                 ['dataDisposition', 'What will happen at the end of the period mentioned in 4.5?'],
@@ -337,30 +428,41 @@
                 ['otherDataDetailsText', 'Explain what will happen to the data if not being archived or destroyed:']
             ]);
 
+            if (localStorage.getItem('dataDisposition') === 'Destroyed') {
+                yPosition = addCheckbox('Electronic data will be overwritten/securely deleted', localStorage.getItem('electronicDataDestruction') === 'true', yPosition);
+                yPosition = addCheckbox('Paper-based data will be confidentially shredded', localStorage.getItem('paperDataDestruction') === 'true', yPosition);
+                yPosition = addCheckbox('Medical samples will be disposed in accordance with the relevant DCU approved SOP', localStorage.getItem('medicalSamplesDestruction') === 'true', yPosition);
+            }
+
             // Add Section 5 content
             yPosition = addSectionHeader('SECTION 5 – INFORMATION AND INFORMED CONSENT PROCEDURES', yPosition);
-            addSectionContent('5.1', 'Items have been addressed in your Participant Information Sheet', [
-                ['intro_statement', 'Introductory Statement:'],
-                ['research_topic', 'What is this research about?'],
-                ['purpose', 'Why is this research being conducted?'],
-                ['invitation', 'Why have you been invited to take part?'],
-                ['participation', 'What will happen if you decide to take part in this research study?'],
-                ['data_usage', 'How will your data be used?'],
-                ['privacy', 'How will your privacy be protected?'],
-                ['benefits', 'What are the benefits of taking part?'],
-                ['risks', 'What are the risks of taking part?'],
-                ['withdrawal', 'Can you change your mind and withdraw?'],
-                ['project_outcomes', 'How will you find out what happens with this project?'],
-                ['contact_info', 'Contact details for further information:']
-            ]);
+            const items5_1 = [
+                'intro_statement',
+                'research_topic',
+                'purpose',
+                'invitation',
+                'participation',
+                'data_usage',
+                'privacy',
+                'benefits',
+                'risks',
+                'withdrawal',
+                'project_outcomes',
+                'contact_info'
+            ];
 
+            items5_1.forEach(item => {
+                const value = localStorage.getItem(item);
+                const yesSelected = value === 'yes' ? true : (value === 'no' ? false : null);
+                yPosition = addYesNoOptions(item.replace(/_/g, ' '), yesSelected, yPosition);
+                yPosition = addNewPageIfNeeded(yPosition);
+            });
 
             // Add explanation for "No" responses in Section 5.1
             const noExplanation = localStorage.getItem('location');
             if (noExplanation) {
                 yPosition = addSubsection('Explanation for No responses:', noExplanation, yPosition);
             }
-
 
             yPosition = addSectionHeader('5.2 Informed Consent Procedures', yPosition);
             const consentRequired = localStorage.getItem('consentRequired');
@@ -374,6 +476,50 @@
                 }
             }
 
+            // Add Section 6 content
+            yPosition = addSectionHeader('SECTION 6 – SUBMISSION CHECKLIST AND RESEARCHER DECLARATION', yPosition);
+            const items6_1 = [
+                'infoSheet',
+                'consentForms',
+                'assentForms',
+                'recruitmentAd',
+                'questionnaire',
+                'interviewQuestions',
+                'debriefingMaterial',
+                'bibliography',
+                'ethicsApproval',
+                'externalApprovals',
+                'internalApprovals',
+                'other'
+            ];
+
+            items6_1.forEach(item => {
+                const value = localStorage.getItem(item);
+                const yesSelected = value === 'yes' ? true : (value === 'no' ? false : null);
+                yPosition = addYesNoOptions(item.replace(/_/g, ' '), yesSelected, yPosition);
+                yPosition = addNewPageIfNeeded(yPosition);
+            });
+
+            // Add "Other" details if present
+            const otherDetails = localStorage.getItem('otherDetails');
+            if (otherDetails) {
+                yPosition = addSubsection('Other Details:', otherDetails, yPosition);
+            }
+
+            yPosition = addSectionHeader('6.2 Signed Declaration', yPosition);
+            const declarationItems = [
+                ['supervisorSignature', 'Supervisor(s) Signature'],
+                ['supervisorName', 'Supervisor Name(s)'],
+                ['supervisorDateSigned', 'Date']
+            ];
+
+            declarationItems.forEach(([id, label]) => {
+                const value = localStorage.getItem(id);
+                if (value) {
+                    yPosition = addSubsection(label, value, yPosition);
+                }
+            });
+
             // Save PDF
             doc.save('research_submission.pdf');
         }
@@ -385,8 +531,7 @@
             window.location.href = 'page_1.html'; // Redirect to the first page of the form
         }
 
-
-        // Load the saved data for checkboxes in 4.1 and 4.6
+        // Load the saved data for checkboxes in 4.1, 4.3, and 4.4
         document.addEventListener('DOMContentLoaded', (event) => {
             const formElements = document.querySelectorAll('input[type="checkbox"], input[type="radio"], textarea');
             formElements.forEach(element => {
@@ -413,7 +558,6 @@
             });
             document.getElementById('noExplanation').style.display = noSelected ? 'block' : 'none';
         }
-
 
         // Save form data to localStorage
         function saveFormData() {

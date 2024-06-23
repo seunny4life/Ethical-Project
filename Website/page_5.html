@@ -185,21 +185,21 @@
                         </div>
                     </div>
 
-                </div>
-
-                </fieldset>
-                <br>
-
-                <!-- Button to Previous and Next step -->
-                <div class="buttons">
-                    <!-- Previous Button -->
-                    <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
-
-                    <!-- Next Page Button -->
-                    <button type="submit" class="btn btn-primary">Next Page</button>
-                </div>
-            </form>
         </div>
+
+        </fieldset>
+        <br>
+
+        <!-- Button to Previous and Next step -->
+        <div class="buttons">
+            <!-- Previous Button -->
+            <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+
+            <!-- Next Page Button -->
+            <button type="submit" class="btn btn-primary">Next Page</button>
+        </div>
+        </form>
+    </div>
     </div>
     <br /><br />
 
@@ -207,9 +207,28 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
+            // Check if the page was reloaded
+            if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+                localStorage.clear(); // Clear localStorage on page reload
+
+                // Clear all textareas
+                const textareas = document.querySelectorAll('textarea');
+                textareas.forEach(textarea => {
+                    textarea.value = '';
+                });
+
+                // Clear all radio buttons and checkboxes
+                const inputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                inputs.forEach(input => {
+                    input.checked = false;
+                });
+
+                // Reset the select element
+                document.getElementById('consentRequired').value = '';
+            }
+
             // Check if personal data is involved from localStorage
             const personalDataInvolved = localStorage.getItem('personalDataInvolved') === 'true';
             if (personalDataInvolved) {
@@ -217,9 +236,9 @@
                 document.getElementById('consentNote').style.display = 'block';
             }
 
+            populateFormData(); // Ensure form data is populated from localStorage
             toggleConsentDetails();
             toggleTextarea();
-            populateFormData(); // Ensure form data is populated from localStorage
         });
 
         // Function to toggle display of consent details based on user selection
@@ -321,7 +340,7 @@
 
             for (const key in savedData) {
                 if (savedData.hasOwnProperty(key)) {
-                    const element = document.getElementsByName(key)[0];
+                    const element = document.querySelector(`[name="${key}"]`);
                     if (element) {
                         if (element.type === 'checkbox' || element.type === 'radio') {
                             element.checked = savedData[key] === element.value;
@@ -333,6 +352,8 @@
             }
         }
     </script>
+
+
 </body>
 
 </html>
