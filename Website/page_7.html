@@ -200,16 +200,15 @@
             ]);
 
             yPosition = addSectionHeader('1.6 Locations', yPosition);
-            yPosition = addCheckbox('DCU campus', localStorage.getItem('location-DCU campus') === 'true', yPosition);
-            yPosition = addCheckbox('Dublin City', localStorage.getItem('location-Dublin City') === 'true', yPosition);
-            yPosition = addCheckbox('Republic of Ireland', localStorage.getItem('location-Republic of Ireland') === 'true', yPosition);
-            yPosition = addCheckbox('Online / On the Internet', localStorage.getItem('location-Online / On the Internet') === 'true', yPosition);
-            yPosition = addCheckbox('Other', localStorage.getItem('location-Other') === 'true', yPosition);
-
-            const otherLocation = localStorage.getItem('otherLocation');
-            if (otherLocation) {
-                yPosition = addSubsection('Other Location Details:', otherLocation, yPosition);
+            const locations = JSON.parse(localStorage.getItem('locations') || '[]');
+            locations.forEach(location => {
+                yPosition = addCheckbox(location, true, yPosition);
+            });
+            const otherLocationDetails = localStorage.getItem('otherLocation');
+            if (otherLocationDetails) {
+                yPosition = addSubsection('Other Location Details:', otherLocationDetails, yPosition);
             }
+
 
             addSectionContent('SECTION 1.7', 'Permissions Required to Access Locations', [
                 ['permissions', '1.7 Permissions Required to Access Locations:']
@@ -413,8 +412,6 @@
             ]);
 
             // Add Section 4.6 checkboxes
-            yPosition = addSectionHeader('4.6 Data Disposition', yPosition);
-
             addSectionContent('4.6', 'Data Disposition', [
                 ['dataDisposition', 'What will happen at the end of the period mentioned in 4.5?'],
                 ['archivedDataStaff', 'Name the DCU staff member responsible for archival and future use of data:'],
