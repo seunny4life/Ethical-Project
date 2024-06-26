@@ -32,6 +32,7 @@
         <!-- Buttons -->
         <div class="buttons">
             <button type="button" class="btn btn-primary" onclick="generatePDF()">Generate PDF</button>
+            <button type="button" class="btn btn-success" onclick="generateJSON()">Generate JSON</button>
             <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset Form</button>
         </div>
     </div>
@@ -519,6 +520,27 @@
 
             // Save PDF
             doc.save('research_submission.pdf');
+        }
+
+        function generateJSON() {
+            const formData = {};
+
+            // Collect all data from localStorage
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                formData[key] = localStorage.getItem(key);
+            }
+
+            // Convert to JSON and trigger download
+            const jsonString = JSON.stringify(formData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'form_data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
         function resetForm() {
