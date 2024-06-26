@@ -71,9 +71,6 @@ What Did Not Work or Needs Improvement:
 Recommendations for Future Development
 
     Implement detailed input validation to ensure data accuracy and format correctness.
-    Enhance error handling and user feedback to improve user experience and guide users through correct form completion.
-    Develop user authentication to secure access to the form and protect user data.
-    Expand data export capabilities to include formats like CSV, XML, and JSON, ensuring they are integrated and tested.
    
 Here's a detailed note on the validation aspects implemented and suggestions for improvements in the research ethics application form:
 Implemented Validation Details
