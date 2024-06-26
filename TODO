@@ -50,12 +50,7 @@ What Worked:
 
 What Did Not Work or Needs Improvement:
 
-    Advanced Validation: Currently, the form validation mainly checks for field completion but does not validate the format (e.g., email fields, dates). This could lead to incorrect data being entered.
-    Error Handling: There is limited feedback for users when errors occur in data entry or form processing.
-    User Authentication: There is no user authentication mechanism to secure user data and restrict access to authorized users only.
-    Data Export Options: Initially, only PDF export was implemented. Additional options like JSON export were later suggested but need proper integration.
-    Dynamic Content Generation: There's potential for more dynamic interactions, such as auto-filling fields based on previous inputs or providing real-time suggestions.
-    Accessibility Features: Additional accessibility features could be implemented to better support users with disabilities, such as screen reader support and keyboard navigation 
+    PDF pages cutting off unnecessary  
     Section 6.1 Functionality: On page_7.html, the implementation for Section 6.1 is not functioning as expected. It is intended to ensure that users confirm all required supplementary documentation, but it appears that the associated radio buttons or checklist interactions are not working correctly.
 
     Completed Aspects
