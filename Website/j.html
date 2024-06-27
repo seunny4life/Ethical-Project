@@ -184,7 +184,6 @@
                 yPosition = addInvestigatorDetails('DCU Principal Investigator Schools/Units:', [piSchools[i]], yPosition);
                 yPosition = addInvestigatorDetails('DCU Principal Investigator Emails:', [piEmails[i]], yPosition);
             }
-            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSubsection('1.2.2 Other Investigators', '', yPosition);
             for (let i = 0; i < otherNames.length; i++) {
@@ -192,15 +191,12 @@
                 yPosition = addInvestigatorDetails('Other Investigator Schools/Units:', [otherUnits[i]], yPosition);
                 yPosition = addInvestigatorDetails('Other Investigator Emails:', [otherEmails[i]], yPosition);
             }
-            yPosition = addNewPageIfNeeded(yPosition);
 
             addSectionContent('SECTION 1.3', 'Key Project Dates', [
-                ['startDate', 'Proposed start date for data collection:'],
-                ['endDate', 'Proposed end date for data collection:'],
-                ['completionDate', 'Proposed project completion date:']
+                ['startDate', '1.3 Proposed start date for data collection:'],
+                ['endDate', '1.3 Proposed end date for data collection:'],
+                ['completionDate', '1.3 Proposed project completion date:']
             ]);
-            yPosition = addNewPageIfNeeded(yPosition);
-
 
             addSectionContent('SECTION 1.5', 'Academic Award', [
                 ['academicAward', '1.5 Academic Award:']
@@ -225,24 +221,16 @@
                 ['otherCommitteeReview', '1.8 Other Ethics Committee Review:'],
                 ['detailsOutcome', 'Details on the outcome:']
             ]);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             // Add Section 2 content
             yPosition = addSectionHeader('SECTION 2 – PROJECT DESIGN AND METHODOLOGY', yPosition);
 
             yPosition = addSectionHeader('2.1 Technologies Involved', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
             yPosition = addCheckbox('Smartphone app', localStorage.getItem('smartphone-app') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Website', localStorage.getItem('website') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Machine-learning', localStorage.getItem('machine-learning') === 'true', yPosition);
             yPosition = addCheckbox('NLP', localStorage.getItem('nlp') === 'true', yPosition);
             yPosition = addCheckbox('LLMs', localStorage.getItem('llms') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
 
             addSectionContent('2.2', 'Aims and Objectives', [
                 ['aims-objectives', 'Please state the aims and objectives of the research project (max 200 words):']
@@ -257,8 +245,6 @@
             ]);
 
             yPosition = addSectionHeader('2.5 Methods of Data Collection', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Interviews or focus groups', localStorage.getItem('interviews') === 'true', yPosition);
             yPosition = addCheckbox('Surveys/questionnaires', localStorage.getItem('surveys') === 'true', yPosition);
             yPosition = addCheckbox('Audio/video recordings', localStorage.getItem('recordings') === 'true', yPosition);
@@ -269,7 +255,6 @@
             yPosition = addCheckbox('Standard tests (educational/personality, etc.)', localStorage.getItem('standard-tests') === 'true', yPosition);
             yPosition = addCheckbox('Standard educational practices', localStorage.getItem('educational-practices') === 'true', yPosition);
             yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-data-collection') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             const otherDataCollectionDetails = localStorage.getItem('other-data-collection-details');
             if (otherDataCollectionDetails) {
@@ -289,7 +274,6 @@
             yPosition = addCheckbox('16-18', localStorage.getItem('16-18') === 'true', yPosition);
             yPosition = addCheckbox('12-16', localStorage.getItem('12-16') === 'true', yPosition);
             yPosition = addCheckbox('less than 12', localStorage.getItem('less-than-12') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('2.6c Demographics for Choosing Participants', yPosition);
             yPosition = addCheckbox('Male', localStorage.getItem('male') === 'true', yPosition);
@@ -299,17 +283,14 @@
             yPosition = addCheckbox('Race e.g. Caucasian', localStorage.getItem('race') === 'true', yPosition);
             yPosition = addCheckbox('Physical Characteristics e.g. height, blood type, eye colour', localStorage.getItem('physical-characteristics') === 'true', yPosition);
             yPosition = addCheckbox('No particular demographics and characteristics are required i.e. anybody can participate', localStorage.getItem('no-demographics') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             addSectionContent('2.6d', 'Demographics and characteristics for excluding participants', [
                 ['excluding-demographics', 'What demographics and characteristics will you use when excluding potential participants?']
             ]);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             addSectionContent('2.7', 'Recruitment Process', [
                 ['recruitment-method', 'How will you recruit participants?']
             ]);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('2.8 Addressing Participant Vulnerability', yPosition);
             yPosition = addCheckbox('N/A', localStorage.getItem('n/a') === 'true', yPosition);
@@ -331,20 +312,11 @@
 
 
             yPosition = addSectionHeader('2.9 Involvement of Children under 18', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('N/A', localStorage.getItem('children-na') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('We confirm that we have read and agree to act in accordance with the DCU Child Protection policy and procedures', localStorage.getItem('child-protection-policy') === 'true', yPosition);
             yPosition = addCheckbox('We confirm that we have put in place safeguards for the children participating in the research.', localStorage.getItem('safeguards') === 'true', yPosition);
             yPosition = addCheckbox('We confirm that we have supports in place for children who may disclose current or historical abuse', localStorage.getItem('supports') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('We confirm that all requirements will be met prior to commencing the research', localStorage.getItem('requirements') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
-
 
             yPosition = addSectionHeader('2.10 Dissemination of Results', yPosition);
             yPosition = addCheckbox('Posted on a website', localStorage.getItem('dissemination-website') === 'true', yPosition);
@@ -352,14 +324,11 @@
             yPosition = addCheckbox('Will not be shared', localStorage.getItem('dissemination-not-shared') === 'true', yPosition);
             yPosition = addCheckbox('Other (please specify)', localStorage.getItem('dissemination-other') === 'true', yPosition);
 
-
             const otherDisseminationDetails = localStorage.getItem('dissemination-other-details');
             if (otherDisseminationDetails) {
                 yPosition = addSubsection('Other Dissemination Details:', otherDisseminationDetails, yPosition);
             }
             yPosition = addNewPageIfNeeded(yPosition);
-
-
 
             // Add Section 3 content
             yPosition = addSectionHeader('SECTION 3 – ETHICAL ISSUES AND RISK MANAGEMENT', yPosition);
@@ -516,7 +485,6 @@
 
             // Add Section 6 content
             yPosition = addSectionHeader('SECTION 6 – SUBMISSION CHECKLIST AND RESEARCHER DECLARATION', yPosition);
-
             const items6_1 = [
                 'infoSheet',
                 'consentForms',
@@ -534,7 +502,7 @@
 
             items6_1.forEach(item => {
                 const value = localStorage.getItem(item);
-                const yesSelected = value === 'Yes' ? true : (value === 'N/A' ? false : null);
+                const yesSelected = value === 'yes' ? true : (value === 'no' ? false : null);
                 yPosition = addYesNoOptions(item.replace(/_/g, ' '), yesSelected, yPosition);
                 yPosition = addNewPageIfNeeded(yPosition);
             });
@@ -564,249 +532,12 @@
         }
 
         function generateJSON() {
-            const formData = {
-                section1: {
-                    projectTitle: localStorage.getItem('projectTitle'),
-                    applicantDetails: {
-                        principalInvestigators: [],
-                        otherInvestigators: []
-                    },
-                    keyProjectDates: {
-                        startDate: localStorage.getItem('startDate'),
-                        endDate: localStorage.getItem('endDate'),
-                        completionDate: localStorage.getItem('completionDate')
-                    },
-                    academicAward: localStorage.getItem('academicAward'),
-                    locations: JSON.parse(localStorage.getItem('locations') || '[]'),
-                    otherLocationDetails: localStorage.getItem('otherLocation'),
-                    permissions: localStorage.getItem('permissions'),
-                    otherCommitteeReview: {
-                        review: localStorage.getItem('otherCommitteeReview'),
-                        outcomeDetails: localStorage.getItem('detailsOutcome')
-                    }
-                },
-                section2: {
-                    technologiesInvolved: {
-                        smartphoneApp: localStorage.getItem('smartphone-app') === 'true',
-                        website: localStorage.getItem('website') === 'true',
-                        machineLearning: localStorage.getItem('machine-learning') === 'true',
-                        nlp: localStorage.getItem('nlp') === 'true',
-                        llms: localStorage.getItem('llms') === 'true'
-                    },
-                    aimsObjectives: localStorage.getItem('aims-objectives'),
-                    hypothesis: localStorage.getItem('hypothesis'),
-                    methodology: localStorage.getItem('methodology'),
-                    methodsOfDataCollection: {
-                        interviews: localStorage.getItem('interviews') === 'true',
-                        surveys: localStorage.getItem('surveys') === 'true',
-                        recordings: localStorage.getItem('recordings') === 'true',
-                        observations: localStorage.getItem('observations') === 'true',
-                        publicOffice: localStorage.getItem('public-office') === 'true',
-                        existingData: localStorage.getItem('existing-data') === 'true',
-                        biologicalSamples: localStorage.getItem('biological-samples') === 'true',
-                        standardTests: localStorage.getItem('standard-tests') === 'true',
-                        educationalPractices: localStorage.getItem('educational-practices') === 'true',
-                        other: localStorage.getItem('other-data-collection') === 'true',
-                        otherDetails: localStorage.getItem('other-data-collection-details')
-                    },
-                    participantGroups: {
-                        dcuStudents: localStorage.getItem('dcu-students') === 'true',
-                        friends: localStorage.getItem('friends') === 'true',
-                        family: localStorage.getItem('family') === 'true',
-                        anyone: localStorage.getItem('anyone') === 'true'
-                    },
-                    ageRange: {
-                        adults: localStorage.getItem('18-60') === 'true',
-                        olderAdults: localStorage.getItem('60+') === 'true',
-                        teens16to18: localStorage.getItem('16-18') === 'true',
-                        teens12to16: localStorage.getItem('12-16') === 'true',
-                        childrenUnder12: localStorage.getItem('less-than-12') === 'true'
-                    },
-                    demographics: {
-                        male: localStorage.getItem('male') === 'true',
-                        female: localStorage.getItem('female') === 'true',
-                        other: localStorage.getItem('other') === 'true',
-                        any: localStorage.getItem('any') === 'true',
-                        race: localStorage.getItem('race') === 'true',
-                        physicalCharacteristics: localStorage.getItem('physical-characteristics') === 'true',
-                        noDemographics: localStorage.getItem('no-demographics') === 'true'
-                    },
-                    excludingDemographics: localStorage.getItem('excluding-demographics'),
-                    recruitmentProcess: localStorage.getItem('recruitment-method'),
-                    addressingVulnerability: {
-                        na: localStorage.getItem('n/a') === 'true',
-                        children: localStorage.getItem('children') === 'true',
-                        unequalRelationships: localStorage.getItem('unequal-relationships') === 'true',
-                        impairment: localStorage.getItem('impairment') === 'true',
-                        institutions: localStorage.getItem('institutions') === 'true',
-                        traumaticEvents: localStorage.getItem('traumatic-events') === 'true',
-                        cognitiveAbility: localStorage.getItem('cognitive-ability') === 'true',
-                        marginalized: localStorage.getItem('marginalized') === 'true',
-                        other: localStorage.getItem('other-vulnerability') === 'true',
-                        otherDetails: localStorage.getItem('other-vulnerability-details')
-                    },
-                    involvementOfChildren: {
-                        na: localStorage.getItem('children-na') === 'true',
-                        childProtectionPolicy: localStorage.getItem('child-protection-policy') === 'true',
-                        safeguards: localStorage.getItem('safeguards') === 'true',
-                        supports: localStorage.getItem('supports') === 'true',
-                        requirements: localStorage.getItem('requirements') === 'true'
-                    },
-                    dissemination: {
-                        website: localStorage.getItem('dissemination-website') === 'true',
-                        socialMedia: localStorage.getItem('dissemination-social-media') === 'true',
-                        notShared: localStorage.getItem('dissemination-not-shared') === 'true',
-                        other: localStorage.getItem('dissemination-other') === 'true',
-                        otherDetails: localStorage.getItem('dissemination-other-details')
-                    }
-                },
-                section3: {
-                    ethicalIssues: {
-                        genderBalance: localStorage.getItem('genderBalanceText'),
-                        confidentiality: localStorage.getItem('confidentialityText'),
-                        informedConsent: localStorage.getItem('informedConsentText'),
-                        riskMinimization: localStorage.getItem('riskMinimizationText'),
-                        dataProtection: localStorage.getItem('dataProtectionText')
-                    },
-                    potentialBenefits: {
-                        benefits: localStorage.getItem('benefits'),
-                        otherDetails: localStorage.getItem('benefitsOtherText')
-                    },
-                    unexpectedOutcomes: {
-                        supervisorCommunication: localStorage.getItem('unexpectedOutcomesOtherText1'),
-                        participantNotification: localStorage.getItem('unexpectedOutcomesOtherText2'),
-                        otherOutcomes: localStorage.getItem('unexpectedOutcomesOtherText3')
-                    },
-                    risksToResearchers: {
-                        noRisk: localStorage.getItem('risksResearchersOtherText1'),
-                        defamation: localStorage.getItem('risksResearchersOtherText2'),
-                        legalLiability: localStorage.getItem('risksResearchersOtherText3'),
-                        physicalHarm: localStorage.getItem('risksResearchersOtherText4'),
-                        otherRisks: localStorage.getItem('risksResearchersOtherText5')
-                    },
-                    funding: {
-                        required: localStorage.getItem('fundingType'),
-                        details: localStorage.getItem('fundingDetailsText')
-                    },
-                    conflictOfInterest: {
-                        raised: localStorage.getItem('conflictInterest'),
-                        details: localStorage.getItem('conflictDetailsText')
-                    },
-                    monitoring: {
-                        conductMonitoring: localStorage.getItem('monitoringDetails'),
-                        otherDetails: localStorage.getItem('monitoringOtherText')
-                    }
-                },
-                section4: {
-                    personalData: {
-                        involved: localStorage.getItem('personalData'),
-                        dataProtectionTraining: localStorage.getItem('dataProtectionTraining'),
-                        dataProtectionGuidance: localStorage.getItem('dataProtectionGuidance'),
-                        gdprRequirements: localStorage.getItem('gdprRequirements'),
-                        noPersonalDataJustification: localStorage.getItem('personalDataNotInvolvedJustificationText')
-                    },
-                    dataAccess: {
-                        confined: localStorage.getItem('dataAccess') === 'true',
-                        yesDetails: localStorage.getItem('dataAccessYesDetails'),
-                        noDetails: localStorage.getItem('dataAccessNoDetails')
-                    },
-                    dataStorage: {
-                        mobileDevicesSecurity: localStorage.getItem('mobileDevicesSecurity') === 'true',
-                        dataRemoval: localStorage.getItem('dataRemoval') === 'true',
-                        paperBasedSecurity: localStorage.getItem('paperBasedSecurity') === 'true'
-                    },
-                    dataResponsibility: localStorage.getItem('dataResponsibility'),
-                    dataRetention: {
-                        duration: localStorage.getItem('dataRetention'),
-                        otherDetails: localStorage.getItem('otherRetentionDetails')
-                    },
-                    dataDisposition: {
-                        method: localStorage.getItem('dataDisposition'),
-                        archiveResponsible: localStorage.getItem('archivedDataStaff'),
-                        availability: localStorage.getItem('dataAvailability'),
-                        preparation: localStorage.getItem('dataPreparation'),
-                        archiveLocation: localStorage.getItem('dataAccess'),
-                        destructionJustification: localStorage.getItem('dataDestructionReason'),
-                        destructionResponsible: localStorage.getItem('dataDestructionResponsibility'),
-                        destructionDate: localStorage.getItem('dataDestructionDate'),
-                        destructionMethod: localStorage.getItem('dataDestructionMethod'),
-                        otherDataDetails: localStorage.getItem('otherDataDetailsText')
-                    },
-                    dataDestruction: {
-                        electronicDataDestruction: localStorage.getItem('electronicDataDestruction') === 'true',
-                        paperDataDestruction: localStorage.getItem('paperDataDestruction') === 'true',
-                        medicalSamplesDestruction: localStorage.getItem('medicalSamplesDestruction') === 'true'
-                    }
-                },
-                section5: {
-                    informedConsent: {
-                        introStatement: localStorage.getItem('intro_statement') === 'yes',
-                        researchTopic: localStorage.getItem('research_topic') === 'yes',
-                        purpose: localStorage.getItem('purpose') === 'yes',
-                        invitation: localStorage.getItem('invitation') === 'yes',
-                        participation: localStorage.getItem('participation') === 'yes',
-                        dataUsage: localStorage.getItem('data_usage') === 'yes',
-                        privacy: localStorage.getItem('privacy') === 'yes',
-                        benefits: localStorage.getItem('benefits') === 'yes',
-                        risks: localStorage.getItem('risks') === 'yes',
-                        withdrawal: localStorage.getItem('withdrawal') === 'yes',
-                        projectOutcomes: localStorage.getItem('project_outcomes') === 'yes',
-                        contactInfo: localStorage.getItem('contact_info') === 'yes',
-                        noExplanation: localStorage.getItem('location')
-                    },
-                    consentProcedures: {
-                        writtenConsent: localStorage.getItem('consentRequired') === 'yes',
-                        consentDescription: localStorage.getItem('consentDescription'),
-                        noConsentDescription: localStorage.getItem('noConsentDescription'),
-                        noConsentJustification: localStorage.getItem('noConsentJustificationText')
-                    }
-                },
-                section6: {
-                    submissionChecklist: {
-                        infoSheet: localStorage.getItem('infoSheet') === 'Yes',
-                        consentForms: localStorage.getItem('consentForms') === 'Yes',
-                        assentForms: localStorage.getItem('assentForms') === 'Yes',
-                        recruitmentAd: localStorage.getItem('recruitmentAd') === 'Yes',
-                        questionnaire: localStorage.getItem('questionnaire') === 'Yes',
-                        interviewQuestions: localStorage.getItem('interviewQuestions') === 'Yes',
-                        debriefingMaterial: localStorage.getItem('debriefingMaterial') === 'Yes',
-                        bibliography: localStorage.getItem('bibliography') === 'Yes',
-                        ethicsApproval: localStorage.getItem('ethicsApproval') === 'Yes',
-                        externalApprovals: localStorage.getItem('externalApprovals') === 'Yes',
-                        internalApprovals: localStorage.getItem('internalApprovals') === 'Yes',
-                        other: localStorage.getItem('other') === 'Yes',
-                        otherDetails: localStorage.getItem('otherDetails')
-                    },
-                    signedDeclaration: {
-                        supervisorSignature: localStorage.getItem('supervisorSignature'),
-                        supervisorName: localStorage.getItem('supervisorName'),
-                        supervisorDateSigned: localStorage.getItem('supervisorDateSigned')
-                    }
-                }
-            };
+            const formData = {};
 
-            // Collect data for Principal Investigators
-            const piNames = JSON.parse(localStorage.getItem('piNames') || '[]');
-            const piSchools = JSON.parse(localStorage.getItem('piSchools') || '[]');
-            const piEmails = JSON.parse(localStorage.getItem('piEmails') || '[]');
-            for (let i = 0; i < piNames.length; i++) {
-                formData.section1.applicantDetails.principalInvestigators.push({
-                    name: piNames[i],
-                    school: piSchools[i],
-                    email: piEmails[i]
-                });
-            }
-
-            // Collect data for Other Investigators
-            const otherNames = JSON.parse(localStorage.getItem('otherNames') || '[]');
-            const otherUnits = JSON.parse(localStorage.getItem('otherUnits') || '[]');
-            const otherEmails = JSON.parse(localStorage.getItem('otherEmails') || '[]');
-            for (let i = 0; i < otherNames.length; i++) {
-                formData.section1.applicantDetails.otherInvestigators.push({
-                    name: otherNames[i],
-                    unit: otherUnits[i],
-                    email: otherEmails[i]
-                });
+            // Collect all data from localStorage
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                formData[key] = localStorage.getItem(key);
             }
 
             // Convert to JSON and trigger download
@@ -868,7 +599,6 @@
                 }
             });
         }
-
     </script>
 </body>
 
