@@ -1,43 +1,47 @@
 Let’s summarize and explain the structure and content of the HTML documents from `index.html` to `page_7.html` as part of a comprehensive research ethics application form:
+Overview
 
-# index.html - Welcome and Introduction
-- **Introduction**: Sets the context for the ethics application process.
-- **Navigation**: Provides links to various sections of the form and general instructions.
-- **Login/Registration**: Option for users to log in or register to save their progress.
+    Form Purpose: These HTML documents comprise a multi-page form designed for the submission of research ethics applications.
+    User Navigation: Users are guided through various sections, each collecting specific details necessary for ethics review.
+    Functionality: The form includes data validation, session storage, and dynamic content manipulation to enhance usability and data integrity.
 
-# page_1.html - General Information
-- **Project Details**: Collects the title, description, and objective of the research.
-- **Principal Investigator Information**: Gathers details about the lead researcher(s), including affiliations.
-- **Project Duration**: Specifies start and end dates for the research.
+page_1.html - General Information
 
-# page_2.html - Research Context and Methodology
-- **Study Background**: Explanation of the study's background, significance, and expected contributions.
-- **Methodology**: Detailed description of the research methods, tools, and techniques to be used.
-- **Participants**: Information about participant recruitment, selection criteria, and any compensation offered.
+    Project Details: Captures the main information about the research, including title and objectives.
+    Principal Investigator Information: Collects details about the research leader(s) and their affiliations.
+    Project Duration: Allows input of start and end dates.
 
-# page_3.html - Ethical Considerations
-- **Potential Risks**: Identifies potential risks to participants and mitigation strategies.
-- **Consent Process**: Details on how informed consent will be obtained from participants.
-- **Data Privacy**: Ensures compliance with data protection regulations and describes how participant data will be handled and stored.
+page_2.html - Research Context and Methodology
 
-# page_4.html - Confidentiality and Data Management
-- **Personal Data**: Queries about the collection and processing of personal data.
-- **Data Access**: Management of access to participant data.
-- **Data Storage**: Options for secure data storage.
-- **Data Responsibility and Retention**: Defines who is responsible for data and how long it will be retained.
-- **Data Disposition**: Outlines the fate of the data post-study (e.g., archiving, destruction).
+    Research Background: Explains the study's significance and methodological approach.
+    Participants: Details on participant recruitment, selection criteria, and any compensations.
 
-# page_5.html - Participant Information and Informed Consent Procedures
-- **Participant Information Sheet**: Ensures that all necessary information is provided to participants.
-- **Informed Consent Procedures**: Checks if written consent is obtained, with provisions for different scenarios based on whether consent is needed.
+page_3.html - Ethical Considerations
 
-# page_6.html - Submission Checklist and Researcher Declaration
-- **Documentation Checklist**: Ensures all required documents are included in the submission.
-- **Researcher Declaration**: Collects affirmations from the researchers regarding adherence to ethical guidelines.
+    Risks and Mitigation: Identifies potential risks and describes mitigation strategies.
+    Consent Process: Details the procedure for obtaining informed consent.
+    Data Privacy: Describes data handling, storage, and protection measures.
 
-# page_7.html - Supplementary Documentation
-- **Final Steps**: Allows for the generation of the application form as a PDF or JSON file, provides an option to reset the form, and offers a submission gateway for attaching supplementary documents.
+page_4.html - Confidentiality and Data Management
 
+    Data Handling: Queries about personal data collection and processing.
+    Data Access and Storage: Details access restrictions and storage security measures.
+    Data Responsibility and Retention: Specifies data custodianship and retention timelines.
+
+page_5.html - Participant Information and Informed Consent Procedures
+
+    Information Sheet: Ensures detailed participant information is provided.
+    Consent Verification: Checks the acquisition of written consent where necessary.
+
+page_6.html - Submission Checklist and Researcher Declaration
+
+    Checklist: Confirms inclusion of all necessary documentation.
+    Declaration: Captures researcher commitments to adhere to ethical standards.
+
+page_7.html - Supplementary Documentation
+
+    Document Submission: Facilitates the attachment of supplementary documents and form submission.
+    PDF/JSON Generation: Allows users to generate a PDF or JSON file of their application.
 
 What Worked:
 
@@ -50,7 +54,7 @@ What Worked:
 
 What Did Not Work or Needs Improvement:
 
-    PDF pages cutting off unnecessary  
+    PDF pages cutting off unnecessary
     Section 6.1 Functionality: On page_7.html, the implementation for Section 6.1 is not functioning as expected. It is intended to ensure that users confirm all required supplementary documentation, but it appears that the associated radio buttons or checklist interactions are not working correctly.
 
     Completed Aspects
@@ -61,7 +65,7 @@ What Did Not Work or Needs Improvement:
     Local Storage Utilization: Uses localStorage to save and retrieve user input across different form sections, preventing data loss during navigation.
     Responsive Design: The form is responsive, working effectively across different devices and screen sizes.
     GDPR Compliance Elements: Includes GDPR-related checkboxes and information to ensure users are aware of data protection practices.
-    
+
     Advanced Input Validation: The form lacks advanced input validation for formats like emails and dates, which could prevent incorrect data submissions.
     Error Handling and User Feedback: Needs more detailed feedback mechanisms for errors during form submission or incorrect data entry.
     User Authentication: No user authentication mechanism is in place to protect user data or restrict access.
@@ -71,7 +75,7 @@ What Did Not Work or Needs Improvement:
 Recommendations for Future Development
 
     Implement detailed input validation to ensure data accuracy and format correctness.
-   
+
 Here's a detailed note on the validation aspects implemented and suggestions for improvements in the research ethics application form:
 Implemented Validation Details
 

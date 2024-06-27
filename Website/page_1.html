@@ -11,11 +11,12 @@
 </head>
 
 <body>
+    <!-- General Details Section -->
     <div class="container">
         <h2 class="section-heading">
             SECTION 1 – GENERAL DETAILS
         </h2>
-        <form id="applicationForm">
+        <form id="applicationForm" onsubmit="return validateForm()">
             <!-- Section 1.1 - Project Title -->
             <fieldset class="fieldset">
                 <legend><strong>1.1 Project Title:</strong></legend>
@@ -165,10 +166,12 @@
             <div class="buttons">
                 <!-- Previous Button -->
                 <button type="button" class="btn btn-secondary" onclick="history.back();">Previous</button>
+
                 <!-- Next Page Button -->
                 <button type="submit" class="btn btn-primary">Next Page</button>
             </div>
-        </form>
+    </div>
+    </form>
     </div>
     <br><br>
 
@@ -178,9 +181,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        function validateForm(event) {
-            event.preventDefault();
-
+        function validateForm() {
             // Validate Section 1.1 - Project Title
             const projectTitle = document.getElementById("projectTitle").value.trim();
             if (projectTitle === "") {
@@ -386,13 +387,9 @@
             const otherLocation = document.getElementById('otherLocation');
             otherLocation.style.display = checkbox.checked ? 'block' : 'none';
         }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // Ensure the event listener for form submission is attached correctly
-            const form = document.getElementById('applicationForm');
-            form.addEventListener('submit', validateForm);
-        });
     </script>
+
+
 </body>
 
 </html>

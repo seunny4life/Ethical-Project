@@ -10,7 +10,7 @@ body {
 /* Container styling for proper alignment and padding */
 .container {
     background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-top: 20px;
 }
@@ -27,7 +27,9 @@ h2.section-heading {
 }
 
 /* Input and Label styling */
-textarea, input[type="text"], input[type="date"] {
+textarea,
+input[type="text"],
+input[type="date"] {
     width: 100%;
     padding: 8px;
     margin: 8px 0;
@@ -87,7 +89,8 @@ legend {
 
 /* Improve spacing and appearance of sections and paragraphs */
 p {
-    line-height: 1.6; /* Improves readability by spacing lines apart */
+    line-height: 1.6;
+    /* Improves readability by spacing lines apart */
 }
 
 /* Link styling for better visibility */
@@ -102,4 +105,9 @@ a:hover {
 
 p i {
     font-size: 14px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
 }
