@@ -184,7 +184,6 @@
                 yPosition = addInvestigatorDetails('DCU Principal Investigator Schools/Units:', [piSchools[i]], yPosition);
                 yPosition = addInvestigatorDetails('DCU Principal Investigator Emails:', [piEmails[i]], yPosition);
             }
-            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSubsection('1.2.2 Other Investigators', '', yPosition);
             for (let i = 0; i < otherNames.length; i++) {
@@ -192,21 +191,21 @@
                 yPosition = addInvestigatorDetails('Other Investigator Schools/Units:', [otherUnits[i]], yPosition);
                 yPosition = addInvestigatorDetails('Other Investigator Emails:', [otherEmails[i]], yPosition);
             }
-            yPosition = addNewPageIfNeeded(yPosition);
 
             addSectionContent('SECTION 1.3', 'Key Project Dates', [
                 ['startDate', 'Proposed start date for data collection:'],
                 ['endDate', 'Proposed end date for data collection:'],
                 ['completionDate', 'Proposed project completion date:']
             ]);
-            yPosition = addNewPageIfNeeded(yPosition);
-
 
             addSectionContent('SECTION 1.5', 'Academic Award', [
                 ['academicAward', '1.5 Academic Award:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('1.6 Locations', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
+
             const locations = JSON.parse(localStorage.getItem('locations') || '[]');
             locations.forEach(location => {
                 yPosition = addCheckbox(location, true, yPosition);
@@ -215,7 +214,6 @@
             if (otherLocationDetails) {
                 yPosition = addSubsection('Other Location Details:', otherLocationDetails, yPosition);
             }
-
 
             addSectionContent('SECTION 1.7', 'Permissions Required to Access Locations', [
                 ['permissions', '1.7 Permissions Required to Access Locations:']
@@ -231,18 +229,12 @@
             yPosition = addSectionHeader('SECTION 2 – PROJECT DESIGN AND METHODOLOGY', yPosition);
 
             yPosition = addSectionHeader('2.1 Technologies Involved', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
             yPosition = addCheckbox('Smartphone app', localStorage.getItem('smartphone-app') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Website', localStorage.getItem('website') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Machine-learning', localStorage.getItem('machine-learning') === 'true', yPosition);
             yPosition = addCheckbox('NLP', localStorage.getItem('nlp') === 'true', yPosition);
             yPosition = addCheckbox('LLMs', localStorage.getItem('llms') === 'true', yPosition);
             yPosition = addNewPageIfNeeded(yPosition);
-
 
             addSectionContent('2.2', 'Aims and Objectives', [
                 ['aims-objectives', 'Please state the aims and objectives of the research project (max 200 words):']
@@ -257,8 +249,6 @@
             ]);
 
             yPosition = addSectionHeader('2.5 Methods of Data Collection', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Interviews or focus groups', localStorage.getItem('interviews') === 'true', yPosition);
             yPosition = addCheckbox('Surveys/questionnaires', localStorage.getItem('surveys') === 'true', yPosition);
             yPosition = addCheckbox('Audio/video recordings', localStorage.getItem('recordings') === 'true', yPosition);
@@ -269,7 +259,6 @@
             yPosition = addCheckbox('Standard tests (educational/personality, etc.)', localStorage.getItem('standard-tests') === 'true', yPosition);
             yPosition = addCheckbox('Standard educational practices', localStorage.getItem('educational-practices') === 'true', yPosition);
             yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-data-collection') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             const otherDataCollectionDetails = localStorage.getItem('other-data-collection-details');
             if (otherDataCollectionDetails) {
@@ -306,12 +295,39 @@
             ]);
             yPosition = addNewPageIfNeeded(yPosition);
 
-            addSectionContent('2.7', 'Recruitment Process', [
-                ['recruitment-method', 'How will you recruit participants?']
-            ]);
+            // Section 2.7 checkboxes and details
+            yPosition = addSectionHeader('2.7 How will you recruit participants', yPosition);
             yPosition = addNewPageIfNeeded(yPosition);
 
+            yPosition = addCheckbox('Word of mouth e.g. tell friends, family, colleagues', localStorage.getItem('word-of-mouth') === 'true', yPosition);
+            const wordOfMouthDetails = localStorage.getItem('word-of-mouth-details');
+            if (wordOfMouthDetails) {
+                yPosition = addSubsection('Word of mouth Details:', wordOfMouthDetails, yPosition);
+            }
+            yPosition = addNewPageIfNeeded(yPosition);
+            yPosition = addCheckbox('Post it online e.g. on LinkedIn', localStorage.getItem('online') === 'true', yPosition);
+            const onlineDetails = localStorage.getItem('online-details');
+            if (onlineDetails) {
+                yPosition = addSubsection('Online Details:', onlineDetails, yPosition);
+            }
+            yPosition = addCheckbox('Post it in a physical location e.g. campus notice board', localStorage.getItem('physical-location') === 'true', yPosition);
+            const physicalLocationDetails = localStorage.getItem('physical-location-details');
+
+            if (physicalLocationDetails) {
+                yPosition = addSubsection('Location Details:', physicalLocationDetails, yPosition);
+            }
+            yPosition = addNewPageIfNeeded(yPosition);
+
+            yPosition = addCheckbox('Other', localStorage.getItem('other') === 'true', yPosition);
+            const otherRecruitmentDetails = localStorage.getItem('other-details');
+            if (otherRecruitmentDetails) {
+                yPosition = addSubsection('Other Recruitment Details:', otherRecruitmentDetails, yPosition);
+            }
+            yPosition = addNewPageIfNeeded(yPosition);
+
+            // Section 2.8
             yPosition = addSectionHeader('2.8 Addressing Participant Vulnerability', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
             yPosition = addCheckbox('N/A', localStorage.getItem('n/a') === 'true', yPosition);
             yPosition = addCheckbox('Children under 18 years of age', localStorage.getItem('children') === 'true', yPosition);
             yPosition = addCheckbox('Persons in unequal relationships with the researcher (e.g. lecturer-student, therapist-client, employer-employee)', localStorage.getItem('unequal-relationships') === 'true', yPosition);
@@ -328,8 +344,7 @@
             }
             yPosition = addNewPageIfNeeded(yPosition);
 
-
-
+            // Section 2.9
             yPosition = addSectionHeader('2.9 Involvement of Children under 18', yPosition);
             yPosition = addNewPageIfNeeded(yPosition);
 
@@ -344,22 +359,31 @@
             yPosition = addCheckbox('We confirm that all requirements will be met prior to commencing the research', localStorage.getItem('requirements') === 'true', yPosition);
             yPosition = addNewPageIfNeeded(yPosition);
 
+            // Section 2.10 checkboxes and details
+            yPosition = addSectionHeader('2.10 Please confirm how the results of the research will be disseminated:', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
 
-
-            yPosition = addSectionHeader('2.10 Dissemination of Results', yPosition);
-            yPosition = addCheckbox('Posted on a website', localStorage.getItem('dissemination-website') === 'true', yPosition);
-            yPosition = addCheckbox('Shared on social media', localStorage.getItem('dissemination-social-media') === 'true', yPosition);
-            yPosition = addCheckbox('Will not be shared', localStorage.getItem('dissemination-not-shared') === 'true', yPosition);
-            yPosition = addCheckbox('Other (please specify)', localStorage.getItem('dissemination-other') === 'true', yPosition);
-
-
-            const otherDisseminationDetails = localStorage.getItem('dissemination-other-details');
-            if (otherDisseminationDetails) {
-                yPosition = addSubsection('Other Dissemination Details:', otherDisseminationDetails, yPosition);
+            yPosition = addCheckbox('Posted on a website', localStorage.getItem("website-dissemination") === 'true', yPosition);
+            const websiteDetails = localStorage.getItem('website-details');
+            if (websiteDetails) {
+                yPosition = addSubsection('Website Details:', websiteDetails, yPosition);
             }
             yPosition = addNewPageIfNeeded(yPosition);
 
+            yPosition = addCheckbox('Shared on social media', localStorage.getItem('social-media') === 'true', yPosition);
+            const socialMediaDetails = localStorage.getItem('social-media-details');
+            if (socialMediaDetails) {
+                yPosition = addSubsection('Social Media Details:', socialMediaDetails, yPosition);
+            }
+            yPosition = addCheckbox('Will not be shared', localStorage.getItem('not-shared') === 'true', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
 
+            yPosition = addCheckbox('Other', localStorage.getItem('dissemination-other') === 'true', yPosition);
+            const disseminationOtherDetails = localStorage.getItem('dissemination-other-details');
+            if (disseminationOtherDetails) {
+                yPosition = addSubsection('Other Recruitment Details:', disseminationOtherDetails, yPosition);
+            }
+            yPosition = addNewPageIfNeeded(yPosition);
 
             // Add Section 3 content
             yPosition = addSectionHeader('SECTION 3 – ETHICAL ISSUES AND RISK MANAGEMENT', yPosition);
@@ -382,7 +406,6 @@
                 }
             }
             yPosition = addNewPageIfNeeded(yPosition);
-
 
             addSectionContent('3.2', 'Potential Benefits', [
                 ['benefits', 'Please identify the potential benefits (direct and/or indirect) to those participating in this research:'],
@@ -821,7 +844,6 @@
             document.body.removeChild(a);
         }
 
-
         function resetForm() {
             // Clear all localStorage items
             localStorage.clear();
@@ -868,7 +890,6 @@
                 }
             });
         }
-
     </script>
 </body>
 

@@ -141,7 +141,7 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="data-collection" value="other"
-                                id="other-data-collection" onclick="toggleOtherDetails()">
+                                id="other-data-collection" onclick="toggleTextarea('other-data-collection-details')">
                             <label class="form-check-label" for="other-data-collection">Other (please specify)</label>
                             <textarea class="form-control mt-2" id="other-data-collection-details"
                                 name="other-data-collection-details" style="display: none;"></textarea>
@@ -304,8 +304,8 @@
 
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="recruitment-method" value="other"
-                                id="other" onclick="toggleTextarea('other-details')">
-                            <label class="form-check-label" for="other">Other</label>
+                                id="other-recruitment" onclick="toggleTextarea('other-details')">
+                            <label class="form-check-label" for="other-recruitment">Other</label>
                             <textarea class="form-control mt-2" id="other-details" name="other-details" rows="2"
                                 placeholder="Specify details here..." style="display: none;"></textarea>
                         </div>
@@ -432,9 +432,9 @@
                                 include a statement on whether the participants will be provided with any information as
                                 to the findings or outcomes of the project</i></label>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="website"
-                                id="website" onclick="toggleTextarea('website-details')">
-                            <label class="form-check-label" for="website">Posted on a website</label>
+                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="website-dissemination"
+                                id="website-dissemination" onclick="toggleTextarea('website-details')">
+                            <label class="form-check-label" for="website-dissemination">Posted on a website</label>
                             <textarea class="form-control mt-2" id="website-details" name="website-details" rows="2"
                                 placeholder="Specify details here..." style="display: none;"></textarea>
                         </div>
@@ -454,7 +454,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="other"
+                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="dissemination-other"
                                 id="dissemination-other" onclick="toggleTextarea('dissemination-other-details')">
                             <label class="form-check-label" for="dissemination-other">Other</label>
                             <textarea class="form-control mt-2" id="dissemination-other-details"
@@ -667,17 +667,6 @@
         }
 
         // Function to toggle display of other data collection details based on checkbox status
-        function toggleOtherDetails() {
-            const otherCheckbox = document.getElementById('other-data-collection');
-            const otherDetails = document.getElementById('other-data-collection-details');
-            if (otherCheckbox.checked) {
-                otherDetails.style.display = 'block';
-            } else {
-                otherDetails.style.display = 'none';
-            }
-        }
-
-        // Function to toggle display of textareas based on checkbox status
         function toggleTextarea(textareaId) {
             const textarea = document.getElementById(textareaId);
             if (textarea) {
@@ -692,22 +681,6 @@
         // Load saved data from localStorage when the page loads
         window.onload = function () {
             populateFormData();
-
-            // Load textareas
-            const textareas = document.querySelectorAll("textarea");
-            textareas.forEach(textarea => {
-                if (localStorage.getItem(textarea.id)) {
-                    textarea.value = localStorage.getItem(textarea.id);
-                }
-            });
-
-            // Load checkboxes
-            const checkboxes = document.querySelectorAll("input[type='checkbox']");
-            checkboxes.forEach(checkbox => {
-                if (localStorage.getItem(checkbox.id) === 'true') {
-                    checkbox.checked = true;
-                }
-            });
         };
 
         // Function to save form data to localStorage
@@ -715,15 +688,7 @@
             const formData = new FormData(document.getElementById('designMethodologyForm'));
             // Save each value to localStorage
             formData.forEach((value, key) => {
-                if (localStorage.getItem(key)) {
-                    let storedValues = localStorage.getItem(key).split(',');
-                    if (!storedValues.includes(value)) {
-                        storedValues.push(value);
-                        localStorage.setItem(key, storedValues.join(','));
-                    }
-                } else {
-                    localStorage.setItem(key, value);
-                }
+                localStorage.setItem(key, value);
             });
         }
 
@@ -736,16 +701,10 @@
 
             for (const key in savedData) {
                 if (savedData.hasOwnProperty(key)) {
-                    const element = document.getElementsByName(key)[0];
+                    const element = document.querySelector(`[name="${key}"]`);
                     if (element) {
                         if (element.type === 'checkbox' || element.type === 'radio') {
-                            const values = savedData[key].split(',');
-                            values.forEach(value => {
-                                const checkbox = document.querySelector(`input[name="${key}"][value="${value}"]`);
-                                if (checkbox) {
-                                    checkbox.checked = true;
-                                }
-                            });
+                            element.checked = savedData[key] === 'true';
                         } else {
                             element.value = savedData[key];
                         }
@@ -753,7 +712,6 @@
                 }
             }
         }
-
     </script>
 
 </body>
