@@ -263,7 +263,6 @@
             yPosition = addCheckbox('Standard tests (educational/personality, etc.)', localStorage.getItem('standard-tests') === 'true', yPosition);
             yPosition = addCheckbox('Standard educational practices', localStorage.getItem('educational-practices') === 'true', yPosition);
             yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-data-collection') === 'true', yPosition);
-            yPosition = addNewPageIfNeeded(yPosition);
 
             const otherDataCollectionDetails = localStorage.getItem('other-data-collection-details');
             if (otherDataCollectionDetails) {
