@@ -303,7 +303,22 @@
                     localStorage.setItem(key, value);
                 }
             });
+
+            // Save signature and date fields
+            const piNames = JSON.parse(localStorage.getItem('piNames')) || [];
+            const otherNames = JSON.parse(localStorage.getItem('otherNames')) || [];
+            const allNames = [...new Set([...piNames, ...otherNames])];
+
+            allNames.forEach(name => {
+                const signatureField = document.getElementById(`signature_${name.replace(/\s+/g, '_')}`);
+                const dateSignedField = document.getElementById(`dateSigned_${name.replace(/\s+/g, '_')}`);
+                if (signatureField && dateSignedField) {
+                    localStorage.setItem(`signature_${name.replace(/\s+/g, '_')}`, signatureField.value);
+                    localStorage.setItem(`dateSigned_${name.replace(/\s+/g, '_')}`, dateSignedField.value);
+                }
+            });
         }
+
         // Function to populate form with data from localStorage
         function populateFormData() {
             const savedData = Object.keys(localStorage).reduce((data, key) => {

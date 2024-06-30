@@ -55,7 +55,7 @@ What Worked:
 What Did Not Work or Needs Improvement:
 
     PDF pages cutting off unnecessary
-    Section 6.1 Functionality: On page_7.html, the implementation for Section 6.1 is not functioning as expected. It is intended to ensure that users confirm all required supplementary documentation, but it appears that the associated radio buttons or checklist interactions are not working correctly.
+    Section 6.2 Functionality: On page_7.html, the implementation for Section 6.2 is not functioning as expected. It is intended to ensure that users confirm all required supplementary documentation are not working correctly.
 
     Completed Aspects
 

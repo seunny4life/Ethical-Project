@@ -239,14 +239,18 @@
             addSectionContent('2.2', 'Aims and Objectives', [
                 ['aims-objectives', 'Please state the aims and objectives of the research project (max 200 words):']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('2.3', 'Hypothesis/Research Question', [
                 ['hypothesis', 'Please state the hypothesis and/or research question (in bullet points – max 100 words):']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             addSectionContent('2.4', 'Methodology', [
                 ['methodology', 'Please state your overall methodology (max 400 words):']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('2.5 Methods of Data Collection', yPosition);
             yPosition = addCheckbox('Interviews or focus groups', localStorage.getItem('interviews') === 'true', yPosition);
@@ -259,6 +263,7 @@
             yPosition = addCheckbox('Standard tests (educational/personality, etc.)', localStorage.getItem('standard-tests') === 'true', yPosition);
             yPosition = addCheckbox('Standard educational practices', localStorage.getItem('educational-practices') === 'true', yPosition);
             yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-data-collection') === 'true', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             const otherDataCollectionDetails = localStorage.getItem('other-data-collection-details');
             if (otherDataCollectionDetails) {
