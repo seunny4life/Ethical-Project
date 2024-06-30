@@ -9,6 +9,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Link to custom CSS -->
     <link href="/Design/styles.css" rel="stylesheet" />
+    <style>
+        .error {
+            color: red;
+        }
+
+        .error textarea, .error input[type="radio"] {
+            border-color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -208,8 +217,11 @@
                 var yesChecked = checkboxes[0].checked;
                 var naChecked = checkboxes[1].checked;
 
+                row.classList.remove('error'); // Remove error class at the beginning
+
                 if (!yesChecked && !naChecked) {
                     allValid = false;
+                    row.classList.add('error'); // Add error class if validation fails
                 }
             });
 
@@ -217,6 +229,9 @@
             if (otherYesRadio.checked && !otherDetails.value.trim()) {
                 allValid = false;
                 errorMessage = "Please provide details for 'Other'.";
+                document.getElementById('otherDetailsRow').classList.add('error');
+            } else {
+                document.getElementById('otherDetailsRow').classList.remove('error');
             }
 
             if (!allValid) {
@@ -277,7 +292,6 @@
                 }
             });
         }
-
 
         // Function to save form data to localStorage
         function saveFormData() {

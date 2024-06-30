@@ -264,6 +264,8 @@
             if (otherDataCollectionDetails) {
                 yPosition = addSubsection('Other Data Collection Details:', otherDataCollectionDetails, yPosition);
             }
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             yPosition = addSectionHeader('2.6a Participants Group', yPosition);
             yPosition = addCheckbox('DCU students', localStorage.getItem('dcu-students') === 'true', yPosition);
@@ -273,6 +275,7 @@
             yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('2.6b Age Range', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
             yPosition = addCheckbox('18-60 i.e. Adults', localStorage.getItem('18-60') === 'true', yPosition);
             yPosition = addCheckbox('60+ i.e. Older Adults', localStorage.getItem('60+') === 'true', yPosition);
             yPosition = addCheckbox('16-18', localStorage.getItem('16-18') === 'true', yPosition);
@@ -280,13 +283,29 @@
             yPosition = addCheckbox('less than 12', localStorage.getItem('less-than-12') === 'true', yPosition);
             yPosition = addNewPageIfNeeded(yPosition);
 
+            //section 2.6c
             yPosition = addSectionHeader('2.6c Demographics for Choosing Participants', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
+
             yPosition = addCheckbox('Male', localStorage.getItem('male') === 'true', yPosition);
             yPosition = addCheckbox('Female', localStorage.getItem('female') === 'true', yPosition);
             yPosition = addCheckbox('Other', localStorage.getItem('other') === 'true', yPosition);
             yPosition = addCheckbox('Any', localStorage.getItem('any') === 'true', yPosition);
+            const genderDetails = localStorage.getItem('gender-details');
+            if (genderDetails) {
+                yPosition = addSubsection('Specify gender details here:', genderDetails, yPosition);
+            }
             yPosition = addCheckbox('Race e.g. Caucasian', localStorage.getItem('race') === 'true', yPosition);
+            const raceDetails = localStorage.getItem('race-details');
+            if (raceDetails) {
+                yPosition = addSubsection('Specify race details here...', raceDetails, yPosition);
+            }
             yPosition = addCheckbox('Physical Characteristics e.g. height, blood type, eye colour', localStorage.getItem('physical-characteristics') === 'true', yPosition);
+            const physicalCharacteristicsDetails = localStorage.getItem('physical-characteristics-details');
+            if (physicalCharacteristicsDetails) {
+                yPosition = addSubsection('Specify physical characteristics here:', physicalCharacteristicsDetails, yPosition);
+            }
+
             yPosition = addCheckbox('No particular demographics and characteristics are required i.e. anybody can participate', localStorage.getItem('no-demographics') === 'true', yPosition);
             yPosition = addNewPageIfNeeded(yPosition);
 
@@ -310,6 +329,7 @@
             if (onlineDetails) {
                 yPosition = addSubsection('Online Details:', onlineDetails, yPosition);
             }
+            yPosition = addNewPageIfNeeded(yPosition);
             yPosition = addCheckbox('Post it in a physical location e.g. campus notice board', localStorage.getItem('physical-location') === 'true', yPosition);
             const physicalLocationDetails = localStorage.getItem('physical-location-details');
 
@@ -317,7 +337,6 @@
                 yPosition = addSubsection('Location Details:', physicalLocationDetails, yPosition);
             }
             yPosition = addNewPageIfNeeded(yPosition);
-
             yPosition = addCheckbox('Other', localStorage.getItem('other') === 'true', yPosition);
             const otherRecruitmentDetails = localStorage.getItem('other-details');
             if (otherRecruitmentDetails) {
@@ -411,12 +430,16 @@
                 ['benefits', 'Please identify the potential benefits (direct and/or indirect) to those participating in this research:'],
                 ['benefitsOtherText', 'Other benefits details:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('3.3', 'Unexpected Outcomes', [
                 ['unexpectedOutcomesOtherText1', 'Communication channel with the supervisor:'],
                 ['unexpectedOutcomesOtherText2', 'Notify participants:'],
                 ['unexpectedOutcomesOtherText3', 'Other unexpected outcomes:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('3.4', 'Risks to Researchers', [
                 ['risksResearchersOtherText1', 'No risk details:'],
@@ -425,16 +448,22 @@
                 ['risksResearchersOtherText4', 'Harm to physical safety details:'],
                 ['risksResearchersOtherText5', 'Other risks:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('3.5', 'Funding', [
                 ['fundingType', 'Does this project require funding?'],
                 ['fundingDetailsText', 'Funding details:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('3.6', 'Conflict of Interest', [
                 ['conflictInterest', 'Does this research raise any of the following conflicts of interest?'],
                 ['conflictDetailsText', 'Conflict details:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('3.7', 'Monitoring', [
                 ['monitoringDetails', 'Please describe how the conduct of the research will be monitored:'],
@@ -451,12 +480,15 @@
                 ['gdprRequirements', 'GDPR requirements met:'],
                 ['personalDataNotInvolvedJustificationText', 'Justification for no personal data involved:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
+
 
             addSectionContent('4.2', 'Data Access', [
                 ['dataAccess', 'Is access to participant data confined to the investigators named on this application?'],
                 ['dataAccessYesDetails', 'Data access details for Yes:'],
                 ['dataAccessNoDetails', 'Data access details for No:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('4.3 Data Storage', yPosition);
             yPosition = addCheckbox('Data collected on mobile devices will be protected with a strong password/passphrase at a minimum, and/or encrypted if the device supports it', localStorage.getItem('mobileDevicesSecurity') === 'true', yPosition);
@@ -488,12 +520,14 @@
                 ['dataDestructionMethod', 'Method of data destruction:'],
                 ['otherDataDetailsText', 'Explain what will happen to the data if not being archived or destroyed:']
             ]);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             if (localStorage.getItem('dataDisposition') === 'Destroyed') {
                 yPosition = addCheckbox('Electronic data will be overwritten/securely deleted', localStorage.getItem('electronicDataDestruction') === 'true', yPosition);
                 yPosition = addCheckbox('Paper-based data will be confidentially shredded', localStorage.getItem('paperDataDestruction') === 'true', yPosition);
                 yPosition = addCheckbox('Medical samples will be disposed in accordance with the relevant DCU approved SOP', localStorage.getItem('medicalSamplesDestruction') === 'true', yPosition);
             }
+            yPosition = addNewPageIfNeeded(yPosition);
 
             // Add Section 5 content
             yPosition = addSectionHeader('SECTION 5 – INFORMATION AND INFORMED CONSENT PROCEDURES', yPosition);
@@ -511,6 +545,7 @@
                 'project_outcomes',
                 'contact_info'
             ];
+            yPosition = addNewPageIfNeeded(yPosition);
 
             items5_1.forEach(item => {
                 const value = localStorage.getItem(item);
@@ -518,12 +553,14 @@
                 yPosition = addYesNoOptions(item.replace(/_/g, ' '), yesSelected, yPosition);
                 yPosition = addNewPageIfNeeded(yPosition);
             });
+            yPosition = addNewPageIfNeeded(yPosition);
 
             // Add explanation for "No" responses in Section 5.1
             const noExplanation = localStorage.getItem('location');
             if (noExplanation) {
                 yPosition = addSubsection('Explanation for No responses:', noExplanation, yPosition);
             }
+            yPosition = addNewPageIfNeeded(yPosition);
 
             yPosition = addSectionHeader('5.2 Informed Consent Procedures', yPosition);
             const consentRequired = localStorage.getItem('consentRequired');
@@ -536,6 +573,7 @@
                     yPosition = addSubsection('Consent Not Needed Justification:', localStorage.getItem('noConsentJustificationText'), yPosition);
                 }
             }
+            yPosition = addNewPageIfNeeded(yPosition);
 
             // Add Section 6 content
             yPosition = addSectionHeader('SECTION 6 – SUBMISSION CHECKLIST AND RESEARCHER DECLARATION', yPosition);

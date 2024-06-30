@@ -230,27 +230,32 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="choosing-demographics" value="any"
-                                id="any">
+                                id="any" onclick="toggleTextarea('gender-details')">
                             <label class="form-check-label" for="any">Any</label>
+                            <textarea class="form-control mt-2" id="gender-details" name="gender-details" rows="2"
+                                style="display: none;" placeholder="Specify gender details here..."></textarea>
                         </div>
-                        <textarea class="form-control mt-2" id="gender-details" name="gender-details" rows="2"
-                            placeholder="Specify gender details here..."></textarea>
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="choosing-demographics" value="race"
-                                id="race">
+                                id="race" onclick="toggleTextarea('race-details')">
                             <label class="form-check-label" for="race">Race e.g. Caucasian</label>
+                            <textarea class="form-control mt-2" id="race-details" name="race-details" rows="2"
+                                style="display: none;" placeholder="Specify race details here..."></textarea>
                         </div>
-                        <textarea class="form-control mt-2" id="race-details" name="race-details" rows="2"
-                            placeholder="Specify race details here..."></textarea>
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="choosing-demographics"
-                                value="physical-characteristics" id="physical-characteristics">
+                                value="physical-characteristics" id="physical-characteristics"
+                                onclick="toggleTextarea('physical-characteristics-details')">
                             <label class="form-check-label" for="physical-characteristics">Physical Characteristics e.g.
                                 height, blood type, eye colour</label>
+                            <textarea class="form-control mt-2" id="physical-characteristics-details"
+                                name="physical-characteristics-details" rows="2" style="display: none;"
+                                placeholder="Specify physical characteristics here..."></textarea>
                         </div>
-                        <textarea class="form-control mt-2" id="physical-characteristics-details"
-                            name="physical-characteristics-details" rows="2"
-                            placeholder="Specify physical characteristics here..."></textarea>
+
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="choosing-demographics"
                                 value="no-demographics" id="no-demographics">
@@ -432,7 +437,7 @@
                                 include a statement on whether the participants will be provided with any information as
                                 to the findings or outcomes of the project</i></label>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="website-dissemination"
+                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="website"
                                 id="website-dissemination" onclick="toggleTextarea('website-details')">
                             <label class="form-check-label" for="website-dissemination">Posted on a website</label>
                             <textarea class="form-control mt-2" id="website-details" name="website-details" rows="2"
@@ -454,7 +459,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="dissemination-other"
+                            <input class="form-check-input" type="checkbox" name="dissemination-method" value="other"
                                 id="dissemination-other" onclick="toggleTextarea('dissemination-other-details')">
                             <label class="form-check-label" for="dissemination-other">Other</label>
                             <textarea class="form-control mt-2" id="dissemination-other-details"
