@@ -1,0 +1,241 @@
+{
+  "section1": {
+    "projectTitle": "DJFJDFGHNDFGHN",
+    "applicantDetails": {
+      "principalInvestigators": [
+        {
+          "name": "DFGNDFGNDFGNFDG",
+          "school": "FDGNDFGNFDG",
+          "email": "uieqpvyuqe@efvh.com"
+        },
+        {
+          "name": "dfgnhhndfg",
+          "school": "hlyfedvblhef",
+          "email": "fdgnfgn@FDGn.com"
+        }
+      ],
+      "otherInvestigators": [
+        {
+          "name": "",
+          "unit": "",
+          "email": ""
+        }
+      ]
+    },
+    "keyProjectDates": {
+      "startDate": "2024-06-30",
+      "endDate": "2024-07-03",
+      "completionDate": "2024-07-12"
+    },
+    "academicAward": "CA691",
+    "locations": [
+      "DCU campus",
+      "Online / On the Internet",
+      "Other"
+    ],
+    "otherLocationDetails": "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "permissions": "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "otherCommitteeReview": {
+      "review": "No",
+      "outcomeDetails": ""
+    }
+  },
+  "section2": {
+    "technologiesInvolved": {
+      "smartphoneApp": true,
+      "website": true,
+      "machineLearning": true,
+      "nlp": false,
+      "llms": false
+    },
+    "aimsObjectives": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "hypothesis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "methodology": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "methodsOfDataCollection": {
+      "interviews": true,
+      "surveys": true,
+      "recordings": false,
+      "observations": false,
+      "publicOffice": false,
+      "existingData": false,
+      "biologicalSamples": false,
+      "standardTests": false,
+      "educationalPractices": false,
+      "other": true,
+      "otherDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "participantGroups": {
+      "dcuStudents": true,
+      "friends": true,
+      "family": false,
+      "anyone": false
+    },
+    "ageRange": {
+      "adults": true,
+      "olderAdults": true,
+      "teens16to18": false,
+      "teens12to16": false,
+      "childrenUnder12": false
+    },
+    "demographics": {
+      "male": false,
+      "female": false,
+      "other": false,
+      "any": true,
+      "race": false,
+      "physicalCharacteristics": true,
+      "noDemographics": false
+    },
+    "excludingDemographics": "",
+    "recruitmentProcess": "physical-location",
+    "addressingVulnerability": {
+      "na": false,
+      "children": true,
+      "unequalRelationships": true,
+      "impairment": false,
+      "institutions": false,
+      "traumaticEvents": false,
+      "cognitiveAbility": false,
+      "marginalized": false,
+      "other": true,
+      "otherDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "involvementOfChildren": {
+      "na": false,
+      "childProtectionPolicy": true,
+      "safeguards": true,
+      "supports": true,
+      "requirements": false
+    },
+    "dissemination": {
+      "website": false,
+      "socialMedia": false,
+      "notShared": false,
+      "other": true,
+      "otherDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+  },
+  "section3": {
+    "ethicalIssues": {
+      "genderBalance": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "confidentiality": "",
+      "informedConsent": "",
+      "riskMinimization": "",
+      "dataProtection": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "potentialBenefits": {
+      "benefits": "yes",
+      "otherDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "unexpectedOutcomes": {
+      "supervisorCommunication": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "participantNotification": "",
+      "otherOutcomes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "risksToResearchers": {
+      "noRisk": "",
+      "defamation": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "legalLiability": "",
+      "physicalHarm": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "otherRisks": ""
+    },
+    "funding": {
+      "required": "External funding",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "conflictOfInterest": {
+      "raised": "Participants involve students which are assessed by involved researchers",
+      "details": ""
+    },
+    "monitoring": {
+      "conductMonitoring": "Meetings with the PI / supervisor",
+      "otherDetails": ""
+    }
+  },
+  "section4": {
+    "personalData": {
+      "involved": "Yes",
+      "dataProtectionTraining": "true",
+      "dataProtectionGuidance": "true",
+      "gdprRequirements": "true",
+      "noPersonalDataJustification": ""
+    },
+    "dataAccess": {
+      "confined": false,
+      "yesDetails": "",
+      "noDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "dataStorage": {
+      "mobileDevicesSecurity": true,
+      "dataRemoval": false,
+      "paperBasedSecurity": true
+    },
+    "dataResponsibility": "[\"DFGNDFGNDFGNFDG\"]",
+    "dataRetention": {
+      "duration": "6 Months",
+      "otherDetails": ""
+    },
+    "dataDisposition": {
+      "method": "Destroyed",
+      "archiveResponsible": "",
+      "availability": "",
+      "preparation": "",
+      "archiveLocation": "",
+      "destructionJustification": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "destructionResponsible": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "destructionDate": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "destructionMethod": "true",
+      "otherDataDetails": ""
+    },
+    "dataDestruction": {
+      "electronicDataDestruction": true,
+      "paperDataDestruction": false,
+      "medicalSamplesDestruction": true
+    }
+  },
+  "section5": {
+    "informedConsent": {
+      "introStatement": true,
+      "researchTopic": false,
+      "purpose": true,
+      "invitation": false,
+      "participation": true,
+      "dataUsage": false,
+      "privacy": true,
+      "benefits": true,
+      "risks": false,
+      "withdrawal": true,
+      "projectOutcomes": false,
+      "contactInfo": true,
+      "noExplanation": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "consentProcedures": {
+      "writtenConsent": true,
+      "consentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "noConsentDescription": "",
+      "noConsentJustification": ""
+    }
+  },
+  "section6": {
+    "submissionChecklist": {
+      "infoSheet": true,
+      "consentForms": false,
+      "assentForms": true,
+      "recruitmentAd": true,
+      "questionnaire": false,
+      "interviewQuestions": true,
+      "debriefingMaterial": true,
+      "bibliography": false,
+      "ethicsApproval": true,
+      "externalApprovals": true,
+      "internalApprovals": true,
+      "other": true,
+      "otherDetails": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "signedDeclaration": {
+      "supervisorSignature": "",
+      "supervisorName": "dfgdsfgdsfgbsdfgbdsfb",
+      "supervisorDateSigned": "2024-06-30"
+    }
+  }
+}
