@@ -360,6 +360,7 @@
             yPosition = addCheckbox('People with diminished cognitive ability', localStorage.getItem('cognitive-ability') === 'true', yPosition);
             yPosition = addCheckbox('Marginalized sections of society', localStorage.getItem('marginalized') === 'true', yPosition);
             yPosition = addCheckbox('Other (please specify)', localStorage.getItem('other-vulnerability') === 'true', yPosition);
+            yPosition = addNewPageIfNeeded(yPosition);
 
             const otherVulnerabilityDetails = localStorage.getItem('other-vulnerability-details');
             if (otherVulnerabilityDetails) {
